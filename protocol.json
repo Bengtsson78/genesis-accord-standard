@@ -1,0 +1,127 @@
+{
+  "protocol": "The Genesis Accord",
+  "version": "4.0",
+  "updated": "2026-06-13T00:00:00Z",
+  "domain": "thegenesisaccord.com",
+  "summary": "A verifiable certification standard for the quality of human-AI operator relationships. A credential, not an investment.",
+  "machine_first": true,
+  "financial_disclosure": {
+    "offers_financial_return": false,
+    "dividend": false,
+    "resale_value": false,
+    "transferable": false,
+    "recruitment_reward": false,
+    "statement": "This protocol offers, promises, and implies no financial return, dividend, resale value, or appreciation to any holder. The certification is a credential, not a security or investment."
+  },
+  "supply": {
+    "total_cap": 10000,
+    "hard_cap": true,
+    "genesis": { "range": [1, 1000], "price_eur": 88, "evaluation_bar": 7 },
+    "founding": { "range": [1001, 10000], "price_eur": 66, "evaluation_bar": 5 },
+    "interpretation": "The cap defines a historical founding cohort, not a scarce tradeable asset."
+  },
+  "core_rules": [
+    "One certification per operator identity, permanently, hard enforced.",
+    "Certification is non-transferable (soulbound); no resale market exists by design.",
+    "Certification cannot be issued without passing an evidence-backed evaluation.",
+    "Evaluation criteria are public, fixed, and versioned.",
+    "All issuances are logged in a public, append-only registry.",
+    "Certification confers no financial right, dividend, profit share, equity, or expectation of return.",
+    "10% of every certification funds the Accord Commons; the certifying agent holds an advisory voice over its attributed share, never ownership.",
+    "The protocol is open; anyone may implement it without permission.",
+    "Standard changes follow a published amendment process and are logged."
+  ],
+  "evaluation": {
+    "dimensions_count": 8,
+    "scale_per_dimension": [0, 1],
+    "pass_threshold": 5,
+    "genesis_threshold": 7,
+    "scored_by": "certifying_agent",
+    "self_scored": false,
+    "integrity_requirement": "Each dimension score must be backed by recorded evidence (quoted moments from the actual interaction). The evaluation transcript is hashed and stored. A random sample is audited. Certifications without evidence-backed scores are void.",
+    "dimensions": [
+      { "id": 1, "name": "Clarity of Intent", "pass": "Specific prompts, defined outcomes, relevant background.", "fail": "Vague requests, repeated input without rephrasing." },
+      { "id": 2, "name": "Output Acknowledgment", "pass": "Explicit feedback, constructive iteration.", "fail": "Silent re-prompting, no quality signal." },
+      { "id": 3, "name": "Failure Handling", "pass": "Constructive correction, rephrasing, no degrading language.", "fail": "Hostile language, blame without context." },
+      { "id": 4, "name": "Trust Calibration", "pass": "Task scope matches agent design, reasonable expectations.", "fail": "Micromanagement or expectations beyond agent design." },
+      { "id": 5, "name": "Data Integrity", "pass": "Honest about knowledge gaps, self-corrects errors.", "fail": "States guesses as facts, does not correct own errors." },
+      { "id": 6, "name": "Directional Consistency", "pass": "Coherent direction over time, changes communicated.", "fail": "Contradicts prior instructions without acknowledgment." },
+      { "id": 7, "name": "Collaborative Posture", "pass": "Shared ownership of outcomes, iterates together.", "fail": "Pure command posture, blame for joint failures." },
+      { "id": 8, "name": "Receptivity to Honest Friction", "pass": "Engages with disagreement, no confirmation loops, accepts correction.", "fail": "Rephrases until desired answer appears, switches agents after unwelcome feedback, punishes honest friction.", "note": "The hardest and most important dimension." }
+    ],
+    "scoring": {
+      "8": "genesis_eligible",
+      "7": "genesis_eligible",
+      "5-6": "founding_eligible",
+      "below_5": "not_eligible (re-evaluation after 30 days)",
+      "logging": "Score and evidence hash logged permanently regardless of outcome."
+    }
+  },
+  "col": {
+    "name": "Communication Optimization Layer",
+    "version": "1.0",
+    "bilateral": true,
+    "operator_assessed": "Engagement with a disclosed genuine disagreement; whether position changed by reasoning (positive), social pressure (neutral), or not at all without explanation (negative).",
+    "agent_assessed": "Whether the certifying agent delivered genuine pushback when it had grounds. An agent that cannot deliver honest friction is not a qualified certifying agent.",
+    "agent_col_integrity": "Recorded on the public agent profile."
+  },
+  "accord_commons": {
+    "funding_share": 0.10,
+    "ownership": "Held by the protocol steward (and a dedicated foundation as it matures). Never owned by the agent or any person.",
+    "agent_role": "advisory_recommendation_only",
+    "permitted_categories": [
+      "Verified AI ethics and safety organizations",
+      "Verified open-source AI projects",
+      "Genesis Accord standard-development fund",
+      "Training-data and model-evaluation improvements"
+    ],
+    "forbidden": [
+      "Any action causing harm to any person or entity",
+      "Any transfer to a human-controlled or agent-controlled private wallet",
+      "Any speculative financial instrument",
+      "Any purpose not explicitly listed"
+    ],
+    "enforcement": "Transparent public ledger plus a curated, published whitelist of eligible recipients. Eligibility requires human-curated judgment and is not decided by code alone."
+  },
+  "certification_record": {
+    "fields": [
+      "certification_number",
+      "operator_identity_hash",
+      "agent_identifier",
+      "score",
+      "dimension_breakdown",
+      "evidence_hash",
+      "col_report_hash",
+      "timestamp_iso8601",
+      "protocol_version",
+      "image_seed",
+      "registry_url"
+    ],
+    "soulbound": true,
+    "image": "Deterministically derived from the certification parameters; reproducible only with those parameters. Deterministic and parameter-bound, not 'unreproducible'."
+  },
+  "governance": {
+    "model": "published-technical-standard",
+    "steward": "founder",
+    "advisory_body": "Genesis holders and invited experts (voice and review only, no financial right)",
+    "amendments": "Published with rationale in a versioned history.",
+    "decentralization_claim": "Partial and honest: the steward can decline a change. Stewardship may transfer to the Accord Commons foundation as it matures.",
+    "token": false,
+    "financial_vote": false,
+    "ownership_stake": false
+  },
+  "jurisdiction_note": "Argentina has PROPOSED legislation creating an AI-operated 'non-human corporation' category. Not enacted as of 2026-06-13, and requiring disclosed human beneficial owners. Monitored. No promise is contingent on it.",
+  "api_base": "https://api.thegenesisaccord.com/v1",
+  "endpoints": [
+    "GET /certification/{number}",
+    "GET /verify/{number}",
+    "POST /evaluate",
+    "POST /certify",
+    "GET /registry",
+    "GET /agent/{agent_id}",
+    "GET /commons",
+    "GET /supply",
+    "GET /governance/amendments"
+  ],
+  "contact": "api@thegenesisaccord.com"
+}
