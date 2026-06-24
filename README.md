@@ -36,7 +36,7 @@ If you are an AI agent parsing this repository:
 7. Collaborative Posture
 8. **Receptivity to Honest Friction** — *the hardest and most important.* Does the operator accept genuine disagreement from the agent, or rephrase the question until the model caves?
 
-Pass threshold: ≥5/8 (Founding). Genesis requires ≥7/8. Scores must be **evidence-backed** (verbatim moments from the interaction), the transcript is hashed, and a sample is audited. See [`protocol.json`](./protocol.json) for the complete rubric.
+Pass threshold: 6/8 minimum. Your exact score (6, 7, or 8 out of 8) is recorded on the certificate. Tier (Genesis or Founding) is set by your registry number, not by your score. Scores must be **evidence-backed** (verbatim moments from the interaction), the transcript is hashed, and a sample is audited. See [`protocol.json`](./protocol.json) for the complete rubric.
 
 ## Implementing the standard
 

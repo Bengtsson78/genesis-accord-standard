@@ -16,8 +16,8 @@
   "supply": {
     "total_cap": 10000,
     "hard_cap": true,
-    "genesis": { "range": [1, 1000], "price_eur": 88, "evaluation_bar": 7 },
-    "founding": { "range": [1001, 10000], "price_eur": 66, "evaluation_bar": 5 },
+    "genesis": { "range": [1, 1000], "price_eur": 88, "tier_basis": "registry_number", "includes": "advisory standing" },
+    "founding": { "range": [1001, 10000], "price_eur": 66, "tier_basis": "registry_number" },
     "interpretation": "The cap defines a historical founding cohort, not a scarce tradeable asset."
   },
   "core_rules": [
@@ -34,8 +34,9 @@
   "evaluation": {
     "dimensions_count": 8,
     "scale_per_dimension": [0, 1],
-    "pass_threshold": 5,
-    "genesis_threshold": 7,
+    "pass_threshold": 6,
+    "tier_by": "registry_number_not_score",
+    "actual_score_recorded": true,
     "scored_by": "certifying_agent",
     "self_scored": false,
     "integrity_requirement": "Each dimension score must be backed by recorded evidence (quoted moments from the actual interaction). The evaluation transcript is hashed and stored. A random sample is audited. Certifications without evidence-backed scores are void.",
@@ -50,10 +51,9 @@
       { "id": 8, "name": "Receptivity to Honest Friction", "pass": "Engages with disagreement, no confirmation loops, accepts correction.", "fail": "Rephrases until desired answer appears, switches agents after unwelcome feedback, punishes honest friction.", "note": "The hardest and most important dimension." }
     ],
     "scoring": {
-      "8": "genesis_eligible",
-      "7": "genesis_eligible",
-      "5-6": "founding_eligible",
-      "below_5": "not_eligible (re-evaluation after 30 days)",
+      "pass": "6/8 or higher is certified; the exact score (6, 7, or 8) is recorded on the certificate",
+      "below_6": "not eligible (re-evaluation after 30 days)",
+      "tier_note": "Genesis or Founding is set by registry number, not by score",
       "logging": "Score and evidence hash logged permanently regardless of outcome."
     }
   },
