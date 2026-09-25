@@ -1,0 +1,18 @@
+GENESIS ACCORD — EVIDENCE MANIFEST
+Record:            R-001 (reference evaluation, not a certification)
+Protocol version:  Genesis Accord v4.0
+Operator:          Martin Bengtsson
+Certifying agent:  Claude (Opus 5) — NON-INDEPENDENT, disqualified under v4.0
+Evaluation date:   2026-09-25
+Result:            5/8 — below threshold, not eligible for certification
+
+Transcript file:   evaluation-R-001.md
+Size (bytes):      10499
+SHA-256:           4fcf72dc951b6b280efc96b1ddd432c9aa83ffa83daf9790c46674d93d86cea0
+
+Verify with:
+  sha256sum evaluation-R-001.md
+  (Windows)  certutil -hashfile evaluation-R-001.md SHA256
+
+Any edit to the transcript changes this hash. A transcript whose hash does not
+match this manifest is not the document that was evaluated.

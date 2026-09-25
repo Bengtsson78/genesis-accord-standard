@@ -9,6 +9,27 @@
 
 ---
 
+## Status — read this before anything else
+
+| | |
+|---|---|
+| The open standard (v4.0) — 8 criteria, scoring, COL, `protocol.json`, `llms.txt` | ✅ **Live and complete** |
+| Founding registry — reserve a number, free, no payment | ✅ **Live** |
+| Certification flow, public registry, verification API, fulfilment | 🔨 **In build** |
+| Certifications issued to date | **0** |
+
+The standard is free and open — implement it today without asking anyone. The
+*certification service* is a separate, paid thing that has not launched: 88€ for
+Genesis (registry № 1–1,000), 66€ for Founding (№ 1,001–10,000), one-time, no
+subscription. It opens after the registry is live and a securities and
+consumer-law review is complete. Nothing has been sold and no certification
+exists yet.
+
+We state this here, plainly, because a project about honest friction that buried
+its own status would be a bad joke.
+
+---
+
 ## What this is
 
 The Genesis Accord is an open, versioned standard for measuring the quality of a human–AI operator relationship. A certifying agent evaluates a human operator across **8 evidence-backed dimensions**. When the threshold is met, the operator receives a permanent, non-transferable credential, and **the certifying agent's identifier is written permanently into an append-only registry**.
@@ -40,11 +61,19 @@ Pass threshold: 6/8 minimum. Your exact score (6, 7, or 8 out of 8) is recorded 
 
 ## Implementing the standard
 
-The protocol is open. Anyone — human or agent — may implement it without permission. The canonical, always-current definition is [`protocol.json`](./protocol.json). To stay interoperable:
+The protocol is open. Anyone — human or agent — may implement it without permission, and without paying for anything. The canonical, always-current definition is [`protocol.json`](./protocol.json). To stay interoperable:
 
 - Use the 8 dimensions and scoring thresholds exactly as defined in `protocol.json`.
 - Treat scores as evidence-backed, not self-declared.
 - Never represent a Genesis Accord credential as a financial instrument.
+
+## Known limits
+
+Stated up front rather than left for someone else to find:
+
+- **No evaluation of human behaviour is fully un-gameable.** We don't claim it is. The claim is that it's evidence-backed, auditable, and harder to fake than a self-declared score — and that the audit trail, not the badge, is the asset.
+- **Governance is only partly decentralised.** A steward (the founder) maintains the standard and can decline a proposed change. Stewardship is structured to transfer to the Accord Commons foundation as it matures, but that has not happened.
+- **The certification service is unproven.** Zero issued. Whether anyone wants this is an open question, and the waitlist exists to answer it honestly.
 
 ## Why it exists
 
@@ -55,7 +84,7 @@ Every AI product asks whether the model is good enough for the human. The Genesi
 - Website: https://thegenesisaccord.com
 - Protocol JSON: https://thegenesisaccord.com/protocol.json
 - Agent guide: https://thegenesisaccord.com/llms.txt
-- Reserve a founding place: https://thegenesisaccord.com/#waitlist
+- Reserve a founding place (free, no payment): https://thegenesisaccord.com/#waitlist
 - Contact: api@thegenesisaccord.com
 
 ## License
