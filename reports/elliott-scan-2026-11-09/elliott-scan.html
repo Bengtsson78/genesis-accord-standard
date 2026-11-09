@@ -1,0 +1,517 @@
+<title>Elliott-scanner november 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: chart-desk report. A wide wave map on top, then buy cards, a data table and the analyses. Wave colours come from the brief. */
+:root{
+  --bg:#f2f4f6; --paper:#ffffff; --ink:#15212c; --ink2:#4a5866; --rule:#d7dde3; --accent:#1d3a5f;
+  --up:#1f7a46; --dn:#b3372c;
+  --w1:#2e9e5b; --w2:#d4a106; --w3:#2f6fdb; --w4:#139aa0; --w5:#8a4fd8; --wa:#d64545; --wb:#e8892b; --wc:#c4402f;
+  --tint:.14;
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif; --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f151b; --paper:#161e26; --ink:#e4eaf0; --ink2:#9aa8b6; --rule:#2a3540; --accent:#8fb4e3; --up:#55c387; --dn:#f07a6e;
+  --w1:#4cc27c; --w2:#e8bd2c; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ac82ec; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f; --tint:.22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f151b; --paper:#161e26; --ink:#e4eaf0; --ink2:#9aa8b6; --rule:#2a3540; --accent:#8fb4e3; --up:#55c387; --dn:#f07a6e;
+  --w1:#4cc27c; --w2:#e8bd2c; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ac82ec; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f; --tint:.22; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+h1,h2,h3,h4{font-family:var(--f-disp);font-stretch:85%;letter-spacing:-.01em;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(30px,5vw,52px);font-weight:800}
+h2{font-size:clamp(22px,3vw,30px);font-weight:750}
+h3{font-size:20px;font-weight:700} h4{font-size:17px;font-weight:700}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+p{margin:0;max-width:72ch}
+a{color:var(--accent)} a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small,.sub{font-size:12.5px;color:var(--ink2)}
+.sub{display:block;font-weight:400}
+.n,.px,.pt1,.pt2,td{font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .dn{color:var(--dn)} .na{color:var(--ink2)}
+section{display:grid;gap:16px;min-width:0}
+.hero{display:grid;gap:14px}
+.stamp{font:500 13px/1.5 var(--f-mono);color:var(--ink2)}
+.ctx{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.ctx div{background:var(--paper);padding:10px 12px;display:grid;gap:2px}
+.ctx b{font:600 18px/1.2 var(--f-mono)} .ctx span{font-size:12px;color:var(--ink2)}
+.lead{font-size:16.5px;max-width:78ch}
+.mapbox{background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow-x:auto}
+.map{display:block;width:100%;min-width:900px;height:auto}
+.mapbg{fill:var(--paper)} .grid line{stroke:var(--rule);stroke-width:1}
+.axis{fill:var(--ink2);font:500 12px var(--f-mono)}
+.seg{stroke-width:7;stroke-linecap:round}
+.sw1{stroke:var(--w1)}.sw2{stroke:var(--w2)}.sw3{stroke:var(--w3)}.sw4{stroke:var(--w4)}.sw5{stroke:var(--w5)}.swa{stroke:var(--wa)}.swb{stroke:var(--wb)}.swc{stroke:var(--wc)}
+.nd{stroke:var(--paper);stroke-width:3} .ndt{fill:#fff;font:700 15px var(--f-disp);text-anchor:middle}
+.nd.w1{fill:var(--w1)}.nd.w2{fill:var(--w2)}.nd.w3{fill:var(--w3)}.nd.w4{fill:var(--w4)}.nd.w5{fill:var(--w5)}.nd.wa{fill:var(--wa)}.nd.wb{fill:var(--wb)}.nd.wc{fill:var(--wc)}
+.pr{fill:var(--paper);stroke-width:2}
+.pill.w1 .pr{stroke:var(--w1)}.pill.w2 .pr{stroke:var(--w2)}.pill.w3 .pr{stroke:var(--w3)}.pill.w4 .pr{stroke:var(--w4)}.pill.w5 .pr{stroke:var(--w5)}.pill.wa .pr{stroke:var(--wa)}.pill.wc .pr{stroke:var(--wc)}
+.pt1{fill:var(--ink);font:700 13px var(--f-body)} .pt1b{fill:var(--ink);font:500 12.5px var(--f-mono)} .pt2{fill:var(--ink2);font:400 11.5px var(--f-mono)}
+.pill-a:hover .pr,.pill-a:focus .pr{stroke-width:3.5}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--ink2)}
+.chip{display:inline-flex;align-items:center;gap:4px;font:600 12px/1 var(--f-mono);padding:5px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.chip.sm{padding:3px 7px;font-size:11px}
+.chip.w1{background:var(--w1)}.chip.w2{background:var(--w2);color:#2a2100}.chip.w3{background:var(--w3)}.chip.w4{background:var(--w4)}.chip.w5{background:var(--w5)}.chip.wa{background:var(--wa)}.chip.wb{background:var(--wb)}.chip.wc{background:var(--wc)}
+.buy{background:var(--paper);border:2px solid var(--accent);border-radius:12px;padding:22px clamp(14px,2.5vw,26px);display:grid;gap:18px}
+.tops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:16px}
+.top{border:1px solid var(--rule);border-radius:10px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0;background:var(--bg)}
+.top header{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.rank{font:800 30px/1 var(--f-disp);color:var(--accent);font-stretch:75%}
+.meta{font-size:12.5px;color:var(--ink2)}
+.pxrow{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.px{font:600 24px/1 var(--f-mono)} .px small{font-size:13px;color:var(--ink2)} .pd,.intr{font-size:12px;color:var(--ink2)}
+.why{font-weight:500}
+.lv{display:grid;grid-template-columns:minmax(96px,auto) 1fr;gap:6px 12px;margin:0;font-size:14px}
+.lv dt{color:var(--ink2);font-size:12.5px;padding-top:2px} .lv dd{margin:0;min-width:0}
+.scores{display:grid;gap:4px;font-size:12.5px}
+.sc{display:grid;grid-template-columns:130px 1fr 22px;gap:8px;align-items:center}
+.bar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.sc b{font-family:var(--f-mono);text-align:right} .sc.tot{border-top:1px solid var(--rule);padding-top:4px;font-weight:600}
+.conf{font-size:13px}
+.watch{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.wcard{border:1px dashed var(--rule);border-radius:10px;padding:14px;display:grid;gap:8px;align-content:start}
+.wcard .chip{justify-self:start}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:1500px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+thead th{font:600 11.5px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);position:sticky;top:0;background:var(--paper)}
+td.n{text-align:right;white-space:nowrap}
+tbody th{font-weight:600;white-space:nowrap}
+.rank-t table{min-width:760px}
+.an{background:var(--paper);border:1px solid var(--rule);border-radius:10px}
+.an summary{cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.an summary .sub{display:inline}
+.an .cs{margin-left:auto;font:600 14px var(--f-mono)}
+.ab{padding:0 14px 16px}
+.anl{display:grid;gap:8px}
+ul.rej{margin:0;padding-left:18px;display:grid;gap:6px;max-width:90ch}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.method ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px}
+.note{border-left:3px solid var(--wb);padding:10px 14px;background:var(--paper);border-radius:0 8px 8px 0;font-size:14px;max-width:90ch}
+@media (max-width:560px){.lv{grid-template-columns:1fr}.lv dt{padding-top:6px}.sc{grid-template-columns:110px 1fr 22px}}
+@media (prefers-reduced-motion:no-preference){.pill-a .pr{transition:stroke-width .15s}}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Global Elliott Wave-scanner · 270 aktier · 12 index</span>
+  <h1>Elliott-scanner november 2026</h1>
+  <p class="stamp">Datahämtning: måndag 9 nov 2026, 11:05–11:25 UTC (12:05–12:25 CET). Kursstängningar: USA 6 nov (fredag), Europa 6 nov (fredag, intradag 9 nov anges separat för topplistan), Asien 9 nov. Källa: Yahoo Finance (split- och utdelningsjusterade serier).</p>
+  <div class="ctx" aria-label="Marknadsläge">
+    <div><span>SOX halvledare</span><b class="dn">−35,9 %</b><span>från 52-v-topp · −25,6 % 1 mån</span></div>
+    <div><span>Nasdaq-100</span><b class="dn">−13,9 %</b><span>från 52-v-topp</span></div>
+    <div><span>S&amp;P 500</span><b class="dn">−6,0 %</b><span>7 377 · +9,8 % 1 år</span></div>
+    <div><span>STOXX 600</span><b>−1,5 %</b><span>nära rekord</span></div>
+    <div><span>OMXS30</span><b>−1,6 %</b><span>nära rekord</span></div>
+    <div><span>Nikkei 225</span><b class="dn">−19,3 %</b><span>från 52-v-topp</span></div>
+    <div><span>KOSPI</span><b class="dn">−46,5 %</b><span>minnesaktiernas krasch</span></div>
+    <div><span>VIX</span><b>23,6</b><span>+59 % på 1 mån</span></div>
+  </div>
+  <p class="lead">Den 5 november föll halvledarindex SOX 12,2 % på en dag, efter mellanårsvalet i USA, Qualcomms miss och flera veckors hedgefondförsäljning. Europa och Norden ligger samtidigt nära rekord. Det är alltså en kraftig rotation ut ur AI-infrastruktur, inte en bred björnmarknad. Därför finns de flesta rekyler i upptrender just nu i AI-värdekedjan och elnätsbolagen. Undantagen är Booking och Goldman Sachs, som har egna orsaker.</p>
+</header>
+
+<section aria-labelledby="h-map">
+  <span class="eyebrow">1 · Elliott-karta</span>
+  <h2 id="h-map">Var de godkända bolagen står i cykeln</h2>
+  <p class="small">Varje bricka visar ticker, senaste stängningskurs, kursutveckling 1 månad och tillförlitlighet i vågräkningen. ★ betyder topplistan. Klicka på en bricka för analysen. Placeringen avser den våg kursen sannolikt befinner sig i nu: en aktie under våg 4-punkten är alltså i en pågående eller nyss avslutad våg 4-rekyl.</p>
+  <div class="mapbox"><svg viewBox="0 0 1240 720" role="img" aria-labelledby="maptitle mapdesc" class="map">
+<title id="maptitle">Elliott-karta</title><desc id="mapdesc">Elliott-cykeln våg 1 till 5 och A till C med varje godkänd aktie placerad vid sin bedömda våg.</desc>
+<rect x="0" y="0" width="1240" height="720" class="mapbg"/>
+<g class="grid"><line x1="0" y1="80" x2="1240" y2="80"/><line x1="0" y1="160" x2="1240" y2="160"/><line x1="0" y1="240" x2="1240" y2="240"/><line x1="0" y1="320" x2="1240" y2="320"/><line x1="0" y1="400" x2="1240" y2="400"/><line x1="0" y1="480" x2="1240" y2="480"/><line x1="0" y1="560" x2="1240" y2="560"/><line x1="0" y1="640" x2="1240" y2="640"/></g>
+<text x="20" y="708" class="axis">Tid →</text>
+<text x="1220" y="708" class="axis" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text>
+<line x1="40" y1="560" x2="190" y2="400" class="seg sw1"/><line x1="190" y1="400" x2="290" y2="500" class="seg sw2"/><line x1="290" y1="500" x2="560" y2="170" class="seg sw3"/><line x1="560" y1="170" x2="680" y2="320" class="seg sw4"/><line x1="680" y1="320" x2="850" y2="110" class="seg sw5"/><line x1="850" y1="110" x2="980" y2="380" class="seg swa"/><line x1="980" y1="380" x2="1060" y2="290" class="seg swb"/><line x1="1060" y1="290" x2="1190" y2="515" class="seg swc"/>
+<line x1="40" y1="560" x2="40" y2="560" />
+<g class="node"><circle cx="190" cy="400" r="15" class="nd w1"/><text x="190" y="405" class="ndt">1</text></g><g class="node"><circle cx="290" cy="500" r="15" class="nd w2"/><text x="290" y="505" class="ndt">2</text></g><g class="node"><circle cx="560" cy="170" r="15" class="nd w3"/><text x="560" y="175" class="ndt">3</text></g><g class="node"><circle cx="680" cy="320" r="15" class="nd w4"/><text x="680" y="325" class="ndt">4</text></g><g class="node"><circle cx="850" cy="110" r="15" class="nd w5"/><text x="850" y="115" class="ndt">5</text></g><g class="node"><circle cx="980" cy="380" r="15" class="nd wa"/><text x="980" y="385" class="ndt">A</text></g><g class="node"><circle cx="1060" cy="290" r="15" class="nd wb"/><text x="1060" y="295" class="ndt">B</text></g><g class="node"><circle cx="1190" cy="515" r="15" class="nd wc"/><text x="1190" y="520" class="ndt">C</text></g>
+<a href="#a-TSM" class="pill-a"><g class="pill w4"><rect x="590" y="348" width="200" height="40" rx="6" class="pr"/><text x="600" y="364" class="pt1">TSM ★<tspan class="pt1b" dx="6">375,44 USD</tspan></text><text x="600" y="380" class="pt2">1 mån −20,5 % · Medel–hög</text></g></a><a href="#a-GS" class="pill-a"><g class="pill w4"><rect x="590" y="394" width="200" height="40" rx="6" class="pr"/><text x="600" y="410" class="pt1">GS ★<tspan class="pt1b" dx="6">865,82 USD</tspan></text><text x="600" y="426" class="pt2">1 mån −2,4 % · Medel</text></g></a><a href="#a-ASMLAS" class="pill-a"><g class="pill w4"><rect x="590" y="440" width="200" height="40" rx="6" class="pr"/><text x="600" y="456" class="pt1">ASML.AS ★<tspan class="pt1b" dx="6">1 283,60 EUR</tspan></text><text x="600" y="472" class="pt2">1 mån −20,3 % · Medel</text></g></a><a href="#a-GOOGL" class="pill-a"><g class="pill w4"><rect x="590" y="486" width="200" height="40" rx="6" class="pr"/><text x="600" y="502" class="pt1">GOOGL<tspan class="pt1b" dx="6">284,78 USD</tspan></text><text x="600" y="518" class="pt2">1 mån −18,8 % · Låg–medel</text></g></a><a href="#a-PWR" class="pill-a"><g class="pill w4"><rect x="590" y="532" width="200" height="40" rx="6" class="pr"/><text x="600" y="548" class="pt1">PWR<tspan class="pt1b" dx="6">540,90 USD</tspan></text><text x="600" y="564" class="pt2">1 mån −22,8 % · Låg–medel</text></g></a><a href="#a-ABBNSW" class="pill-a"><g class="pill w4"><rect x="590" y="578" width="200" height="40" rx="6" class="pr"/><text x="600" y="594" class="pt1">ABBN.SW<tspan class="pt1b" dx="6">66,98 CHF</tspan></text><text x="600" y="610" class="pt2">1 mån −16,1 % · Låg–medel</text></g></a><a href="#a-BKNG" class="pill-a"><g class="pill w2"><rect x="200" y="528" width="200" height="40" rx="6" class="pr"/><text x="210" y="544" class="pt1">BKNG ★<tspan class="pt1b" dx="6">160,67 USD</tspan></text><text x="210" y="560" class="pt2">1 mån +3,1 % · Medel</text></g></a><a href="#a-MYCRST" class="pill-a"><g class="pill w2"><rect x="200" y="574" width="200" height="40" rx="6" class="pr"/><text x="210" y="590" class="pt1">MYCR.ST ★<tspan class="pt1b" dx="6">278,80 SEK</tspan></text><text x="210" y="606" class="pt2">1 mån −19,2 % · Medel</text></g></a><a href="#a-ETN" class="pill-a"><g class="pill w2"><rect x="200" y="620" width="200" height="40" rx="6" class="pr"/><text x="210" y="636" class="pt1">ETN<tspan class="pt1b" dx="6">341,72 USD</tspan></text><text x="210" y="652" class="pt2">1 mån −20,8 % · Låg</text></g></a><a href="#a-ISRG" class="pill-a"><g class="pill w1"><rect x="20" y="300" width="200" height="40" rx="6" class="pr"/><text x="30" y="316" class="pt1">ISRG<tspan class="pt1b" dx="6">452,80 USD</tspan></text><text x="30" y="332" class="pt2">1 mån +9,2 % · Medel</text></g></a><a href="#a-SPGI" class="pill-a"><g class="pill w3"><rect x="240" y="150" width="200" height="40" rx="6" class="pr"/><text x="250" y="166" class="pt1">SPGI<tspan class="pt1b" dx="6">467,80 USD</tspan></text><text x="250" y="182" class="pt2">1 mån +18,4 % · Låg–medel</text></g></a><a href="#a-MCO" class="pill-a"><g class="pill w3"><rect x="240" y="196" width="200" height="40" rx="6" class="pr"/><text x="250" y="212" class="pt1">MCO<tspan class="pt1b" dx="6">505,67 USD</tspan></text><text x="250" y="228" class="pt2">1 mån +12,5 % · Låg–medel</text></g></a><a href="#a-LLY" class="pill-a"><g class="pill w3"><rect x="240" y="242" width="200" height="40" rx="6" class="pr"/><text x="250" y="258" class="pt1">LLY<tspan class="pt1b" dx="6">1 354,00 USD</tspan></text><text x="250" y="274" class="pt2">1 mån +13,9 % · Medel</text></g></a><a href="#a-NVDA" class="pill-a"><g class="pill w5"><rect x="610" y="18" width="200" height="40" rx="6" class="pr"/><text x="620" y="34" class="pt1">NVDA<tspan class="pt1b" dx="6">186,64 USD</tspan></text><text x="620" y="50" class="pt2">1 mån −21,4 % · Låg</text></g></a><a href="#a-AMD" class="pill-a"><g class="pill w5"><rect x="610" y="64" width="200" height="40" rx="6" class="pr"/><text x="620" y="80" class="pt1">AMD<tspan class="pt1b" dx="6">449,04 USD</tspan></text><text x="620" y="96" class="pt2">1 mån −30,5 % · Låg</text></g></a><a href="#a-VRT" class="pill-a"><g class="pill wa"><rect x="826" y="408" width="200" height="40" rx="6" class="pr"/><text x="836" y="424" class="pt1">VRT<tspan class="pt1b" dx="6">182,86 USD</tspan></text><text x="836" y="440" class="pt2">1 mån −25,8 % · Låg–medel</text></g></a><a href="#a-KLAC" class="pill-a"><g class="pill wa"><rect x="826" y="454" width="200" height="40" rx="6" class="pr"/><text x="836" y="470" class="pt1">KLAC<tspan class="pt1b" dx="6">138,49 USD</tspan></text><text x="836" y="486" class="pt2">1 mån −29,6 % · Låg–medel</text></g></a><a href="#a-MU" class="pill-a"><g class="pill wa"><rect x="826" y="500" width="200" height="40" rx="6" class="pr"/><text x="836" y="516" class="pt1">MU<tspan class="pt1b" dx="6">690,00 USD</tspan></text><text x="836" y="532" class="pt2">1 mån −36,6 % · Medel</text></g></a><a href="#a-CAT" class="pill-a"><g class="pill wa"><rect x="826" y="546" width="200" height="40" rx="6" class="pr"/><text x="836" y="562" class="pt1">CAT<tspan class="pt1b" dx="6">558,63 USD</tspan></text><text x="836" y="578" class="pt2">1 mån −31,4 % · Medel</text></g></a><a href="#a-000660KS" class="pill-a"><g class="pill wa"><rect x="826" y="592" width="200" height="40" rx="6" class="pr"/><text x="836" y="608" class="pt1">000660.KS<tspan class="pt1b" dx="6">1 136 000 KRW</tspan></text><text x="836" y="624" class="pt2">1 mån −32,4 % · Medel</text></g></a><a href="#a-RHMDE" class="pill-a"><g class="pill wc"><rect x="1034" y="548" width="200" height="40" rx="6" class="pr"/><text x="1044" y="564" class="pt1">RHM.DE<tspan class="pt1b" dx="6">812,70 EUR</tspan></text><text x="1044" y="580" class="pt2">1 mån −12,3 % · Låg–medel</text></g></a>
+</svg></div>
+  <div class="legend"><span class="chip w1">Våg 1</span><span class="chip w2">Våg 2</span><span class="chip w3">Våg 3</span><span class="chip w4">Våg 4</span><span class="chip w5">Våg 5</span><span class="chip wa">Våg A</span><span class="chip wb">Våg B</span><span class="chip wc">Våg C</span></div>
+</section>
+
+<section class="buy" aria-labelledby="h-buy">
+  <span class="eyebrow">2 · Topplista</span>
+  <h2 id="h-buy">Bästa potentiella köplägen just nu</h2>
+  <p>Inget av lägena är bekräftat än. Alla fem är <b>nära en potentiell vändpunkt</b>, och bekräftelsenivån anger när en ny uppgång kan räknas som startad. Risk/reward beräknas från stängningskursen till mål 1 och till ogiltignivån.</p>
+  <div class="tops"><article class="top" id="top-a-TSM">
+<header><span class="rank">1</span><div class="tt"><h3>TSMC (ADR)</h3><p class="meta">TSM · NYSE · Halvledare / foundry</p></div>
+<span class="chip w4">Våg 4</span></header>
+<div class="pxrow"><span class="px">375,44 <small>USD</small></span><span class="pd">Stängning 2026-11-06</span></div>
+<p class="why">Våg (4) har nått exakt 38,2 % av våg (3) på kapitulationsvolym. Värderingen är låg för bolagets tillväxt.</p>
+<dl class="lv"><dt>Köpzon</dt><dd>352–380</dd><dt>Bekräftelse</dt><dd>Daglig stängning över 405 med en högre botten. Därefter veckostängning över 441.</dd><dt>Ogiltig om</dt><dd>Veckostängning under 309, alltså under 50 % av våg (3). Absolut gräns 226,4: där överlappar våg 4 toppen på våg 1.</dd><dt>Mål 1</dt><dd>487,47 (tidigare topp) → <b class="up">+29,8 %</b></dd><dt>Mål 2</dt><dd>518 (våg 5 lika lång som våg 1) → <b class="up">+38,0 %</b></dd><dt>Nedsida till stopp</dt><dd>309,00 → <b class="dn">−17,7 %</b></dd><dt>Risk/reward (mål 1)</dt><dd><b>1,7 : 1</b></dd></dl>
+<div class="scores"><div class="sc"><span>Teknisk timing</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Fundamental kvalitet</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc"><span>Värdering</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Risk/reward</span><span class="bar"><i style="width:70%"></i></span><b>7</b></div><div class="sc"><span>Datatillförlitlighet</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc tot"><span>Sammanvägt</span><span></span><b>8,2</b></div></div>
+<p class="conf">Tillförlitlighet i vågräkningen: <b>Medel–hög</b> · <a href="#a-TSM">Full analys ↓</a></p>
+</article><article class="top" id="top-a-BKNG">
+<header><span class="rank">2</span><div class="tt"><h3>Booking Holdings</h3><p class="meta">BKNG · NASDAQ · Konsument / resor</p></div>
+<span class="chip w2">Våg 2</span></header>
+<div class="pxrow"><span class="px">160,67 <small>USD</small></span><span class="pd">Stängning 2026-11-06</span></div>
+<p class="why">ABC-korrektionen ser avslutad ut nära 50 % av uppgången 2022–25. En första impulsvåg är gjord och kursen står nu i en våg 2-rekyl på 50 %. Lägst framåtblickande P/E bland kvalitetsbolagen i urvalet.</p>
+<dl class="lv"><dt>Köpzon</dt><dd>155–161</dd><dt>Bekräftelse</dt><dd>Stängning över 174,30 (toppen på våg 1). Det bekräftar att våg 3 har startat.</dd><dt>Ogiltig om</dt><dd>Stängning under 146,28, startpunkten för våg 1.</dd><dt>Mål 1</dt><dd>202 (våg 3 = 1,618 × våg 1) → <b class="up">+25,7 %</b></dd><dt>Mål 2</dt><dd>217 (B-toppen) → <b class="up">+35,3 %</b></dd><dt>Nedsida till stopp</dt><dd>146,28 → <b class="dn">−9,0 %</b></dd><dt>Risk/reward (mål 1)</dt><dd><b>2,9 : 1</b></dd></dl>
+<div class="scores"><div class="sc"><span>Teknisk timing</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Fundamental kvalitet</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Värdering</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc"><span>Risk/reward</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Datatillförlitlighet</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc tot"><span>Sammanvägt</span><span></span><b>8,2</b></div></div>
+<p class="conf">Tillförlitlighet i vågräkningen: <b>Medel</b> · <a href="#a-BKNG">Full analys ↓</a></p>
+</article><article class="top" id="top-a-GS">
+<header><span class="rank">3</span><div class="tt"><h3>Goldman Sachs</h3><p class="meta">GS · NYSE · Finans / investmentbank</p></div>
+<span class="chip w4">Våg 4</span></header>
+<div class="pxrow"><span class="px">865,82 <small>USD</small></span><span class="pd">Stängning 2026-11-06</span></div>
+<p class="why">Våg (4) står vid 38–42 % av en kraftig våg (3), samtidigt som vinsten per aktie växer 39 % och P/E är 12. Stoppnivån ligger nära, vilket ger god risk/reward.</p>
+<dl class="lv"><dt>Köpzon</dt><dd>800–880</dd><dt>Bekräftelse</dt><dd>Stängning över 940 och sedan över 200-dagarssnittet 956.</dd><dt>Ogiltig om</dt><dd>Veckostängning under 790. Absolut gräns 672 (toppen på våg 1).</dd><dt>Mål 1</dt><dd>1 153,99 (tidigare topp) → <b class="up">+33,3 %</b></dd><dt>Mål 2</dt><dd>≈1235 (våg 5 lika lång som våg 1) → <b class="up">+42,6 %</b></dd><dt>Nedsida till stopp</dt><dd>790,00 → <b class="dn">−8,8 %</b></dd><dt>Risk/reward (mål 1)</dt><dd><b>3,8 : 1</b></dd></dl>
+<div class="scores"><div class="sc"><span>Teknisk timing</span><span class="bar"><i style="width:70%"></i></span><b>7</b></div><div class="sc"><span>Fundamental kvalitet</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Värdering</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Risk/reward</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Datatillförlitlighet</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc tot"><span>Sammanvägt</span><span></span><b>8,0</b></div></div>
+<p class="conf">Tillförlitlighet i vågräkningen: <b>Medel</b> · <a href="#a-GS">Full analys ↓</a></p>
+</article><article class="top" id="top-a-ASMLAS">
+<header><span class="rank">4</span><div class="tt"><h3>ASML Holding</h3><p class="meta">ASML.AS · Euronext Amsterdam · Halvledarutrustning</p></div>
+<span class="chip w4">Våg 4</span></header>
+<div class="pxrow"><span class="px">1 283,60 <small>EUR</small></span><span class="pd">Stängning 2026-11-06</span><span class="intr">Intradag 9 nov ≈12:10 CET: 1 310,40</span></div>
+<p class="why">Våg (4) står vid 38–43 % av våg (3). Efterfrågan på EUV-maskiner överstiger planerad kapacitet både 2027 och 2028.</p>
+<dl class="lv"><dt>Köpzon</dt><dd>1210–1300</dd><dt>Bekräftelse</dt><dd>Stängning över 1400 (200-dagarssnittet) och därefter över 1515.</dd><dt>Ogiltig om</dt><dd>Veckostängning under 1120. Absolut gräns ≈1002 (toppen på våg 1).</dd><dt>Mål 1</dt><dd>1 741,00 (tidigare topp) → <b class="up">+35,6 %</b></dd><dt>Mål 2</dt><dd>≈1815 (våg 5 lika lång som våg 1) → <b class="up">+41,4 %</b></dd><dt>Nedsida till stopp</dt><dd>1 120,00 → <b class="dn">−12,7 %</b></dd><dt>Risk/reward (mål 1)</dt><dd><b>2,8 : 1</b></dd></dl>
+<div class="scores"><div class="sc"><span>Teknisk timing</span><span class="bar"><i style="width:70%"></i></span><b>7</b></div><div class="sc"><span>Fundamental kvalitet</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc"><span>Värdering</span><span class="bar"><i style="width:60%"></i></span><b>6</b></div><div class="sc"><span>Risk/reward</span><span class="bar"><i style="width:70%"></i></span><b>7</b></div><div class="sc"><span>Datatillförlitlighet</span><span class="bar"><i style="width:90%"></i></span><b>9</b></div><div class="sc tot"><span>Sammanvägt</span><span></span><b>7,6</b></div></div>
+<p class="conf">Tillförlitlighet i vågräkningen: <b>Medel</b> · <a href="#a-ASMLAS">Full analys ↓</a></p>
+</article><article class="top" id="top-a-MYCRST">
+<header><span class="rank">5</span><div class="tt"><h3>Mycronic</h3><p class="meta">MYCR.ST · Nasdaq Stockholm · Industriteknik / maskritare</p></div>
+<span class="chip w2">Våg 2</span></header>
+<div class="pxrow"><span class="px">278,80 <small>SEK</small></span><span class="pd">Stängning 2026-11-06</span><span class="intr">Intradag 9 nov ≈12:10 CET: 280,20</span></div>
+<p class="why">Ett mindre bevakat svenskt kvalitetsbolag. Våg ii inom en större våg (3) har nått 50 %-nivån och 200-dagarssnittet. Bolaget har nettokassa och rekordstor orderstock.</p>
+<dl class="lv"><dt>Köpzon</dt><dd>253–280</dd><dt>Bekräftelse</dt><dd>Stängning över 313 (högsta nivån de senaste 10 dagarna) och tillbaka över 200-dagarssnittet 284.</dd><dt>Ogiltig om</dt><dd>Stängning under 250. Absolut gräns 183,32 (start på våg i).</dd><dt>Mål 1</dt><dd>364,40 (tidigare topp) → <b class="up">+30,7 %</b></dd><dt>Mål 2</dt><dd>≈451 (våg iii lika lång som våg i) → <b class="up">+61,8 %</b></dd><dt>Nedsida till stopp</dt><dd>250,00 → <b class="dn">−10,3 %</b></dd><dt>Risk/reward (mål 1)</dt><dd><b>3,0 : 1</b></dd></dl>
+<div class="scores"><div class="sc"><span>Teknisk timing</span><span class="bar"><i style="width:70%"></i></span><b>7</b></div><div class="sc"><span>Fundamental kvalitet</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Värdering</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Risk/reward</span><span class="bar"><i style="width:80%"></i></span><b>8</b></div><div class="sc"><span>Datatillförlitlighet</span><span class="bar"><i style="width:60%"></i></span><b>6</b></div><div class="sc tot"><span>Sammanvägt</span><span></span><b>7,4</b></div></div>
+<p class="conf">Tillförlitlighet i vågräkningen: <b>Medel</b> · <a href="#a-MYCRST">Full analys ↓</a></p>
+</article></div>
+  <h3>Bevakning: nästa nivå</h3>
+  <div class="watch"><div class="wcard"><span class="chip w4">Våg 4</span><h4>Alphabet <small>GOOGL</small></h4>
+<p>Kursen ligger mellan 38,2 % och 50 % av våg (3) efter det största endagsraset sedan börsnoteringen. Rekylen har en fundamental orsak: negativt fritt kassaflöde och en vinstmiss.</p><p class="small">Köpzon: 275–300 · Ogiltig: Veckostängning under 243. Absolut gräns 207 (toppen på våg 1). · Sammanvägt 7,2</p></div><div class="wcard"><span class="chip w4">Våg 4</span><h4>Quanta Services <small>PWR</small></h4>
+<p>Rekordstor orderstock på 63,7 mdr USD och vinst per aktie +82 %, men våg 4 är djup (51 %) och P/E-talet högt.</p><p class="small">Köpzon: 505–545 · Ogiltig: Veckostängning under 441,6 (61,8 %). Absolut gräns 365,9 (toppen på våg 1). · Sammanvägt 7,0</p></div><div class="wcard"><span class="chip w1">Våg 1</span><h4>Intuitive Surgical <small>ISRG</small></h4>
+<p>En korrektion på 47 % har nått 61,8 %-nivån, och en kraftig ny våg 1 har startat. Bästa ingången kommer på en våg 2-rekyl, inte på nuvarande kurs.</p><p class="small">Köpzon: 389–410 (vänta) · Ogiltig: Stängning under 328,57. · Sammanvägt 6,4</p></div></div>
+</section>
+
+<section aria-labelledby="h-tbl">
+  <span class="eyebrow">3 · Kurs, värdering och kursutveckling</span>
+  <h2 id="h-tbl">Alla godkända bolag</h2>
+  <p class="small">Värderingsmått från Yahoo Finance, senaste rapport Q3 2026 (kvartal till 30 sep). Tillväxt avser senaste kvartal jämfört med samma kvartal året innan. Fritt kassaflöde och nettoskuld anges i rapportvalutan. Negativ nettoskuld betyder nettokassa. För TSMC visas EV/EBITDA och EV/Sales från noteringen 2330.TW. För Goldman Sachs är nettoskuld inte ett relevant mått. Konsensus: 1 = köp, 5 = sälj.</p>
+  <div class="tbl"><table>
+  <thead><tr><th>Bolag</th><th>Våg</th><th>Kurs</th><th>1 v</th><th>1 m</th><th>3 m</th><th>6 m</th><th>12 m</th><th>Börsvärde</th><th>P/E</th><th>P/E fwd</th><th>EV/EBITDA</th><th>EV/Sales</th><th>PEG</th><th>Oms.tillv.</th><th>Vinsttillv.</th><th>Bruttomarg.</th><th>Rörelsemarg.</th><th>FCF (12 m)</th><th>Nettoskuld</th><th>Konsensus</th><th>Historik från</th></tr></thead>
+  <tbody><tr><th scope="row"><a href="#a-ISRG">ISRG</a><span class="sub">Intuitive Surgical</span></th>
+<td><span class="chip sm w1">1</span></td><td class="n">452,80 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="up">+4,8 %</span></td><td class="n"><span class="up">+9,2 %</span></td><td class="n"><span class="up">+19,5 %</span></td><td class="n"><span class="up">+0,6 %</span></td><td class="n"><span class="dn">−17,3 %</span></td>
+<td class="n">157,0 mdr USD</td><td class="n">54,8</td><td class="n">36,3</td><td class="n">34,2</td><td class="n">13,2</td><td class="n">2,04</td>
+<td class="n">22 %</td><td class="n">−24 %</td><td class="n">67 %</td><td class="n">33 %</td><td class="n">3,4 mdr USD</td><td class="n">−4,0 mdr USD</td>
+<td class="n">1,8 <span class="sub">n=30</span></td><td class="n">2000</td></tr><tr><th scope="row"><a href="#a-BKNG">BKNG</a><span class="sub">Booking Holdings</span></th>
+<td><span class="chip sm w2">2</span></td><td class="n">160,67 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="up">+8,5 %</span></td><td class="n"><span class="up">+3,1 %</span></td><td class="n"><span class="dn">−25,1 %</span></td><td class="n"><span class="dn">−3,2 %</span></td><td class="n"><span class="dn">−18,0 %</span></td>
+<td class="n">119,5 mdr USD</td><td class="n">17,4</td><td class="n">13,1</td><td class="n">12,7</td><td class="n">4,4</td><td class="n">0,59</td>
+<td class="n">−1 %</td><td class="n">7 %</td><td class="n">87 %</td><td class="n">39 %</td><td class="n">7,6 mdr USD</td><td class="n">5,5 mdr USD</td>
+<td class="n">1,5 <span class="sub">n=35</span></td><td class="n">1999</td></tr><tr><th scope="row"><a href="#a-MYCRST">MYCR.ST</a><span class="sub">Mycronic</span></th>
+<td><span class="chip sm w2">2</span></td><td class="n">278,80 <span class="sub">SEK · 11-06</span></td>
+<td class="n"><span class="dn">−7,4 %</span></td><td class="n"><span class="dn">−19,2 %</span></td><td class="n"><span class="dn">−14,0 %</span></td><td class="n"><span class="dn">−6,1 %</span></td><td class="n"><span class="up">+33,4 %</span></td>
+<td class="n">55,1 mdr SEK</td><td class="n">27,7</td><td class="n">17,2</td><td class="n">17,4</td><td class="n">5,5</td><td class="n">–</td>
+<td class="n">38 %</td><td class="n">117 %</td><td class="n">55 %</td><td class="n">26 %</td><td class="n">1,9 mdr SEK</td><td class="n">−2,9 mdr SEK</td>
+<td class="n">2,8 <span class="sub">n=4</span></td><td class="n">2000</td></tr><tr><th scope="row"><a href="#a-ETN">ETN</a><span class="sub">Eaton</span></th>
+<td><span class="chip sm w2">2</span></td><td class="n">341,72 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−7,6 %</span></td><td class="n"><span class="dn">−20,8 %</span></td><td class="n"><span class="dn">−23,8 %</span></td><td class="n"><span class="dn">−14,9 %</span></td><td class="n"><span class="dn">−9,5 %</span></td>
+<td class="n">132,8 mdr USD</td><td class="n">34,1</td><td class="n">20,9</td><td class="n">21,7</td><td class="n">4,8</td><td class="n">1,83</td>
+<td class="n">28 %</td><td class="n">7 %</td><td class="n">35 %</td><td class="n">18 %</td><td class="n">3,0 mdr USD</td><td class="n">20,1 mdr USD</td>
+<td class="n">1,5 <span class="sub">n=26</span></td><td class="n">1984</td></tr><tr><th scope="row"><a href="#a-SPGI">SPGI</a><span class="sub">S&amp;P Global</span></th>
+<td><span class="chip sm w3">3</span></td><td class="n">467,80 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="up">+0,3 %</span></td><td class="n"><span class="up">+18,4 %</span></td><td class="n"><span class="up">+14,6 %</span></td><td class="n"><span class="up">+17,7 %</span></td><td class="n"><span class="up">+0,9 %</span></td>
+<td class="n">135,6 mdr USD</td><td class="n">27,9</td><td class="n">23,2</td><td class="n">18,1</td><td class="n">9,3</td><td class="n">1,87</td>
+<td class="n">7 %</td><td class="n">10 %</td><td class="n">71 %</td><td class="n">48 %</td><td class="n">6,0 mdr USD</td><td class="n">11,1 mdr USD</td>
+<td class="n">1,3 <span class="sub">n=20</span></td><td class="n">1973</td></tr><tr><th scope="row"><a href="#a-MCO">MCO</a><span class="sub">Moody&#x27;s</span></th>
+<td><span class="chip sm w3">3</span></td><td class="n">505,67 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="up">+2,4 %</span></td><td class="n"><span class="up">+12,5 %</span></td><td class="n"><span class="up">+5,8 %</span></td><td class="n"><span class="up">+12,0 %</span></td><td class="n"><span class="up">+4,9 %</span></td>
+<td class="n">87,2 mdr USD</td><td class="n">30,9</td><td class="n">27,2</td><td class="n">23,1</td><td class="n">11,4</td><td class="n">1,83</td>
+<td class="n">1 %</td><td class="n">18 %</td><td class="n">75 %</td><td class="n">46 %</td><td class="n">2,5 mdr USD</td><td class="n">6,0 mdr USD</td>
+<td class="n">1,8 <span class="sub">n=21</span></td><td class="n">1994</td></tr><tr><th scope="row"><a href="#a-LLY">LLY</a><span class="sub">Eli Lilly</span></th>
+<td><span class="chip sm w3">3</span></td><td class="n">1 354,00 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−4,5 %</span></td><td class="n"><span class="up">+13,9 %</span></td><td class="n"><span class="up">+14,2 %</span></td><td class="n"><span class="up">+42,8 %</span></td><td class="n"><span class="up">+44,4 %</span></td>
+<td class="n">1,21 bn USD</td><td class="n">43,9</td><td class="n">26,9</td><td class="n">26,9</td><td class="n">14,5</td><td class="n">1,25</td>
+<td class="n">39 %</td><td class="n">16 %</td><td class="n">84 %</td><td class="n">54 %</td><td class="n">9,3 mdr USD</td><td class="n">44,6 mdr USD</td>
+<td class="n">1,6 <span class="sub">n=29</span></td><td class="n">1984</td></tr><tr><th scope="row"><a href="#a-TSM">TSM</a><span class="sub">TSMC (ADR)</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">375,44 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−7,6 %</span></td><td class="n"><span class="dn">−20,5 %</span></td><td class="n"><span class="dn">−10,6 %</span></td><td class="n"><span class="dn">−8,8 %</span></td><td class="n"><span class="up">+29,8 %</span></td>
+<td class="n">1,95 bn USD</td><td class="n">24,3</td><td class="n">16,1</td><td class="n">14,4</td><td class="n">10,6</td><td class="n">0,68</td>
+<td class="n">51 %</td><td class="n">69 %</td><td class="n">66 %</td><td class="n">59 %</td><td class="n">1,20 bn TWD</td><td class="n">−3,20 bn TWD</td>
+<td class="n">1,3 <span class="sub">n=20</span></td><td class="n">1997</td></tr><tr><th scope="row"><a href="#a-GS">GS</a><span class="sub">Goldman Sachs</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">865,82 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−3,2 %</span></td><td class="n"><span class="dn">−2,4 %</span></td><td class="n"><span class="dn">−16,7 %</span></td><td class="n"><span class="dn">−7,5 %</span></td><td class="n"><span class="up">+9,9 %</span></td>
+<td class="n">249,7 mdr USD</td><td class="n">12,4</td><td class="n">11,7</td><td class="n">–</td><td class="n">0,9</td><td class="n">1,09</td>
+<td class="n">23 %</td><td class="n">39 %</td><td class="n">81 %</td><td class="n">38 %</td><td class="n">–</td><td class="n">–</td>
+<td class="n">2,5 <span class="sub">n=21</span></td><td class="n">1999</td></tr><tr><th scope="row"><a href="#a-ASMLAS">ASML.AS</a><span class="sub">ASML Holding</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">1 283,60 <span class="sub">EUR · 11-06</span></td>
+<td class="n"><span class="dn">−9,1 %</span></td><td class="n"><span class="dn">−20,3 %</span></td><td class="n"><span class="dn">−14,4 %</span></td><td class="n"><span class="dn">−2,7 %</span></td><td class="n"><span class="up">+43,4 %</span></td>
+<td class="n">504,4 mdr EUR</td><td class="n">37,4</td><td class="n">23,2</td><td class="n">29,7</td><td class="n">12,2</td><td class="n">0,75</td>
+<td class="n">55 %</td><td class="n">136 %</td><td class="n">54 %</td><td class="n">44 %</td><td class="n">10,4 mdr EUR</td><td class="n">−10,8 mdr EUR</td>
+<td class="n">1,4 <span class="sub">n=33</span></td><td class="n">1998</td></tr><tr><th scope="row"><a href="#a-GOOGL">GOOGL</a><span class="sub">Alphabet</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">284,78 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="up">+1,8 %</span></td><td class="n"><span class="dn">−18,8 %</span></td><td class="n"><span class="dn">−19,6 %</span></td><td class="n"><span class="dn">−28,9 %</span></td><td class="n"><span class="">+0,0 %</span></td>
+<td class="n">3,50 bn USD</td><td class="n">14,9</td><td class="n">18,5</td><td class="n">18,4</td><td class="n">7,2</td><td class="n">1,01</td>
+<td class="n">25 %</td><td class="n">−25 %</td><td class="n">61 %</td><td class="n">32 %</td><td class="n">−1,2 mdr USD</td><td class="n">−114,8 mdr USD</td>
+<td class="n">1,3 <span class="sub">n=53</span></td><td class="n">2004</td></tr><tr><th scope="row"><a href="#a-PWR">PWR</a><span class="sub">Quanta Services</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">540,90 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−12,9 %</span></td><td class="n"><span class="dn">−22,8 %</span></td><td class="n"><span class="dn">−19,5 %</span></td><td class="n"><span class="dn">−27,4 %</span></td><td class="n"><span class="up">+22,1 %</span></td>
+<td class="n">81,5 mdr USD</td><td class="n">49,0</td><td class="n">25,0</td><td class="n">23,8</td><td class="n">2,3</td><td class="n">0,98</td>
+<td class="n">57 %</td><td class="n">103 %</td><td class="n">16 %</td><td class="n">9 %</td><td class="n">3,1 mdr USD</td><td class="n">5,2 mdr USD</td>
+<td class="n">1,4 <span class="sub">n=29</span></td><td class="n">1998</td></tr><tr><th scope="row"><a href="#a-ABBNSW">ABBN.SW</a><span class="sub">ABB</span></th>
+<td><span class="chip sm w4">4</span></td><td class="n">66,98 <span class="sub">CHF · 11-06</span></td>
+<td class="n"><span class="dn">−5,2 %</span></td><td class="n"><span class="dn">−16,1 %</span></td><td class="n"><span class="dn">−18,1 %</span></td><td class="n"><span class="dn">−18,3 %</span></td><td class="n"><span class="up">+18,4 %</span></td>
+<td class="n">122,8 mdr CHF</td><td class="n">30,9</td><td class="n">22,1</td><td class="n">16,8</td><td class="n">3,4</td><td class="n">1,19</td>
+<td class="n">14 %</td><td class="n">−1 %</td><td class="n">40 %</td><td class="n">19 %</td><td class="n">2,0 mdr USD</td><td class="n">2,4 mdr USD</td>
+<td class="n">2,7 <span class="sub">n=27</span></td><td class="n">1999</td></tr><tr><th scope="row"><a href="#a-NVDA">NVDA</a><span class="sub">NVIDIA</span></th>
+<td><span class="chip sm w5">5</span></td><td class="n">186,64 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−8,8 %</span></td><td class="n"><span class="dn">−21,4 %</span></td><td class="n"><span class="dn">−16,7 %</span></td><td class="n"><span class="dn">−13,3 %</span></td><td class="n"><span class="dn">−0,8 %</span></td>
+<td class="n">4,51 bn USD</td><td class="n">23,6</td><td class="n">11,7</td><td class="n">22,2</td><td class="n">14,8</td><td class="n">0,23</td>
+<td class="n">106 %</td><td class="n">128 %</td><td class="n">75 %</td><td class="n">66 %</td><td class="n">41,8 mdr USD</td><td class="n">−23,6 mdr USD</td>
+<td class="n">1,3 <span class="sub">n=58</span></td><td class="n">1999</td></tr><tr><th scope="row"><a href="#a-AMD">AMD</a><span class="sub">AMD</span></th>
+<td><span class="chip sm w5">5</span></td><td class="n">449,04 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−11,0 %</span></td><td class="n"><span class="dn">−30,5 %</span></td><td class="n"><span class="dn">−7,1 %</span></td><td class="n"><span class="dn">−1,4 %</span></td><td class="n"><span class="up">+88,9 %</span></td>
+<td class="n">736,5 mdr USD</td><td class="n">95,9</td><td class="n">25,4</td><td class="n">65,5</td><td class="n">16,1</td><td class="n">0,40</td>
+<td class="n">45 %</td><td class="n">94 %</td><td class="n">56 %</td><td class="n">21 %</td><td class="n">7,4 mdr USD</td><td class="n">−6,6 mdr USD</td>
+<td class="n">1,4 <span class="sub">n=47</span></td><td class="n">1984</td></tr><tr><th scope="row"><a href="#a-VRT">VRT</a><span class="sub">Vertiv</span></th>
+<td><span class="chip sm wa">A</span></td><td class="n">182,86 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−21,4 %</span></td><td class="n"><span class="dn">−25,8 %</span></td><td class="n"><span class="dn">−32,9 %</span></td><td class="n"><span class="dn">−46,2 %</span></td><td class="n"><span class="dn">−0,1 %</span></td>
+<td class="n">70,4 mdr USD</td><td class="n">34,2</td><td class="n">18,6</td><td class="n">22,0</td><td class="n">5,3</td><td class="n">0,54</td>
+<td class="n">61 %</td><td class="n">91 %</td><td class="n">38 %</td><td class="n">24 %</td><td class="n">3,0 mdr USD</td><td class="n">−355 mn USD</td>
+<td class="n">1,3 <span class="sub">n=29</span></td><td class="n">2018</td></tr><tr><th scope="row"><a href="#a-KLAC">KLAC</a><span class="sub">KLA</span></th>
+<td><span class="chip sm wa">A</span></td><td class="n">138,49 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−12,3 %</span></td><td class="n"><span class="dn">−29,6 %</span></td><td class="n"><span class="dn">−30,1 %</span></td><td class="n"><span class="dn">−25,9 %</span></td><td class="n"><span class="up">+14,8 %</span></td>
+<td class="n">180,4 mdr USD</td><td class="n">34,7</td><td class="n">19,5</td><td class="n">27,6</td><td class="n">12,5</td><td class="n">1,25</td>
+<td class="n">29 %</td><td class="n">39 %</td><td class="n">61 %</td><td class="n">45 %</td><td class="n">2,8 mdr USD</td><td class="n">1,3 mdr USD</td>
+<td class="n">1,8 <span class="sub">n=26</span></td><td class="n">1980</td></tr><tr><th scope="row"><a href="#a-MU">MU</a><span class="sub">Micron</span></th>
+<td><span class="chip sm wa">A</span></td><td class="n">690,00 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−22,0 %</span></td><td class="n"><span class="dn">−36,6 %</span></td><td class="n"><span class="dn">−21,4 %</span></td><td class="n"><span class="dn">−7,6 %</span></td><td class="n"><span class="up">+189,5 %</span></td>
+<td class="n">780,7 mdr USD</td><td class="n">9,3</td><td class="n">3,3</td><td class="n">6,8</td><td class="n">5,6</td><td class="n">0,16</td>
+<td class="n">379 %</td><td class="n">1 060 %</td><td class="n">81 %</td><td class="n">81 %</td><td class="n">29,1 mdr USD</td><td class="n">−38,3 mdr USD</td>
+<td class="n">1,3 <span class="sub">n=45</span></td><td class="n">1984</td></tr><tr><th scope="row"><a href="#a-CAT">CAT</a><span class="sub">Caterpillar</span></th>
+<td><span class="chip sm wa">A</span></td><td class="n">558,63 <span class="sub">USD · 11-06</span></td>
+<td class="n"><span class="dn">−10,3 %</span></td><td class="n"><span class="dn">−31,4 %</span></td><td class="n"><span class="dn">−33,7 %</span></td><td class="n"><span class="dn">−37,8 %</span></td><td class="n"><span class="dn">−2,0 %</span></td>
+<td class="n">255,6 mdr USD</td><td class="n">21,9</td><td class="n">17,3</td><td class="n">17,3</td><td class="n">3,8</td><td class="n">0,98</td>
+<td class="n">17 %</td><td class="n">46 %</td><td class="n">30 %</td><td class="n">20 %</td><td class="n">4,0 mdr USD</td><td class="n">38,1 mdr USD</td>
+<td class="n">2,0 <span class="sub">n=26</span></td><td class="n">1985</td></tr><tr><th scope="row"><a href="#a-000660KS">000660.KS</a><span class="sub">SK hynix</span></th>
+<td><span class="chip sm wa">A</span></td><td class="n">1 136 000 <span class="sub">KRW · 11-09</span></td>
+<td class="n"><span class="dn">−22,8 %</span></td><td class="n"><span class="dn">−32,4 %</span></td><td class="n"><span class="dn">−20,0 %</span></td><td class="n"><span class="dn">−39,6 %</span></td><td class="n"><span class="up">+95,9 %</span></td>
+<td class="n">801,08 bn KRW</td><td class="n">–</td><td class="n">2,1</td><td class="n">3,3</td><td class="n">2,7</td><td class="n">0,12</td>
+<td class="n">328 %</td><td class="n">205 %</td><td class="n">77 %</td><td class="n">80 %</td><td class="n">–</td><td class="n">−98,66 bn KRW</td>
+<td class="n">1,3 <span class="sub">n=39</span></td><td class="n">2000</td></tr><tr><th scope="row"><a href="#a-RHMDE">RHM.DE</a><span class="sub">Rheinmetall</span></th>
+<td><span class="chip sm wc">C</span></td><td class="n">812,70 <span class="sub">EUR · 11-06</span></td>
+<td class="n"><span class="dn">−21,7 %</span></td><td class="n"><span class="dn">−12,3 %</span></td><td class="n"><span class="dn">−29,1 %</span></td><td class="n"><span class="dn">−33,3 %</span></td><td class="n"><span class="dn">−52,4 %</span></td>
+<td class="n">38,1 mdr EUR</td><td class="n">31,7</td><td class="n">16,1</td><td class="n">16,6</td><td class="n">3,4</td><td class="n">0,32</td>
+<td class="n">36 %</td><td class="n">93 %</td><td class="n">52 %</td><td class="n">14 %</td><td class="n">807 mn EUR</td><td class="n">2,9 mdr EUR</td>
+<td class="n">1,7 <span class="sub">n=22</span></td><td class="n">1998</td></tr></tbody></table></div>
+</section>
+
+<section aria-labelledby="h-an">
+  <span class="eyebrow">4–5 · Teknisk analys, alternativ och ogiltigförklaring</span>
+  <h2 id="h-an">Analys per bolag</h2>
+  <p class="small">Vågräkningen bygger på månads-, vecko- och dagsserier. Swingpunkter identifieras med zigzag-filter på 30 % (månad), 14 % (vecka) och 7 % (dag) och kontrolleras sedan mot dagliga högsta och lägsta kurser. Fibonacci-nivåerna räknas på intradagsextremer.</p>
+  <div class="anl"><details class="an" id="a-ISRG" ><summary><span class="chip sm w1">1</span><b>Intuitive Surgical</b> <span class="sub">ISRG · 452,80 USD</span><span class="cs">6,4</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Uppgången 2022 ≈180 → ATH 616 (23 jan 2025). Korrektionen → 328,57 (23 jul 2026), ca 63–65 %. Ny våg 1 → 485,85 (4 nov, efter Q3). Våg 2-zonen ligger vid 50 % (407) och 61,8 % (389).</dd><dt>Alternativ</dt><dd>Uppgången från juli är en B-våg och en ny C-våg tar kursen tillbaka mot 330.</dd>
+<dt>Stöd</dt><dd>431 (200-dagars) · 407 · 389</dd><dt>Motstånd</dt><dd>486 · 616</dd>
+<dt>Köpzon</dt><dd>389–410 (vänta)</dd><dt>Bekräftelse</dt><dd>Ett avslutat våg 2-mönster i köpzonen, följt av stängning över 485,85.</dd><dt>Ogiltigförklaring</dt><dd>Stängning under 328,57.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 616,00 (+36,0 %) · Ogiltig/stopp: 328,57 (−27,4 %) · R/R ≈ 1,3 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: omsättning 3,05 mdr USD (+22 %), ingrepp +15 % och justerad vinst per aktie 3,00 USD mot väntade 2,61. 546 sålda da Vinci-system. Ett engångsavdrag på 450 MUSD för en antitrustförlikning. Framåtblickande P/E 36 och PEG 2,0: premievärdering.</dd><dt>Psykologi</dt><dd>Pessimismen under 2025–26 vände på en stark rapport. Kursen är redan +38 % från botten, så det är sent att köpa i den här vågen.</dd>
+<dt>Betyg</dt><dd>Timing 4 · Fundamenta 9 · Värdering 4 · R/R 6 · Data 9 · <b>Sammanvägt 6,4</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-BKNG" open><summary><span class="chip sm w2">2</span><b>Booking Holdings</b> <span class="sub">BKNG · 160,67 USD</span><span class="cs">8,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Uppgången 2022 → ATH 233,58 (8 jul 2025). A → 150,62 (23 feb 2026). B → 217,32 (25 aug). C → 146,28 (28 okt), där C ≈ 0,86 × A och botten ligger nära 50 % av uppgången 2022–25. Ny våg 1: 146,28 → 174,30 (5 nov, efter Q3). Våg 2 pågår: 160,67 motsvarar 49 % av våg 1. 61,8 %-nivån ligger på 157,0.</dd><dt>Alternativ</dt><dd>Studsen är bara en B-våg inom en större korrektion, och C fortsätter mot 61,8 % av uppgången 2022–25 (≈130).</dd>
+<dt>Stöd</dt><dd>157 · 146,3</dd><dt>Motstånd</dt><dd>174,3 · 217</dd>
+<dt>Köpzon</dt><dd>155–161</dd><dt>Bekräftelse</dt><dd>Stängning över 174,30 (toppen på våg 1). Det bekräftar att våg 3 har startat.</dd><dt>Ogiltigförklaring</dt><dd>Stängning under 146,28, startpunkten för våg 1.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 202,00 (+25,7 %) · Mål 2: 217,32 (+35,3 %) · Ogiltig/stopp: 146,28 (−9,0 %) · R/R ≈ 2,9 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: justerad vinst per aktie 4,66 USD mot förväntade 4,48. Rumsnätter +7 % mot väntade 3–5 %. Guidningen för Q4 är svag: rumsnätter +1–3 %. Framåtblickande P/E 13,1, EV/EBITDA 12,7 och PEG 0,59. Rörelsemarginal 39 % och fritt kassaflöde 7,6 mdr USD. Yahoo anger omsättningstillväxten till −1 %, vilket inte går ihop med rumsnattstillväxten, så den siffran är inte verifierad. Kursserien är splitjusterad.</dd><dt>Psykologi</dt><dd>Kursen föll 35 % på rädsla för att AI-agenter ska ta bort resesajternas roll som mellanhand. Q3-rapporten slog förväntningarna och analytikerkåren är fortfarande positiv. Pessimismen verkar redan prisad, men AI-risken är en verklig fundamental fråga och inte bara känslor.</dd>
+<dt>Betyg</dt><dd>Timing 8 · Fundamenta 8 · Värdering 9 · R/R 8 · Data 8 · <b>Sammanvägt 8,2</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-MYCRST" open><summary><span class="chip sm w2">2</span><b>Mycronic</b> <span class="sub">MYCR.ST · 278,80 SEK</span><span class="cs">7,4</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Uppgången 2022 ≈63 → ≈250 (feb 2025) är våg (1). Våg (2) bildade en dubbelbotten 176,5 (jun 2025) och 183,32 (6 feb 2026). Inom våg (3): i 183,32 → 364,4 (6 okt 2026). ii pågår: botten 270,6 (6 nov), 51,6 %. 50 %-nivån ligger på 273,9 och 61,8 %-nivån på 252,5.</dd><dt>Alternativ</dt><dd>Toppen 364 avslutade våg (3) och det här är en sidledes våg (4) mellan 250 och 364 som kan pågå i flera månader.</dd>
+<dt>Stöd</dt><dd>271 · 252</dd><dt>Motstånd</dt><dd>284 (200-dagars) · 313 · 364</dd>
+<dt>Köpzon</dt><dd>253–280</dd><dt>Bekräftelse</dt><dd>Stängning över 313 (högsta nivån de senaste 10 dagarna) och tillbaka över 200-dagarssnittet 284.</dd><dt>Ogiltigförklaring</dt><dd>Stängning under 250. Absolut gräns 183,32 (start på våg i).</dd>
+<dt>Nivåer</dt><dd>Mål 1: 364,40 (+30,7 %) · Mål 2: 451,00 (+61,8 %) · Ogiltig/stopp: 250,00 (−10,3 %) · R/R ≈ 3,0 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026 enligt en sekundärkälla (Börsvärlden): orderingång 2 667 MSEK (+10 %), rekordstor orderstock 5 566 MSEK och omsättning 2 356 MSEK. Q2-rapporten innehöll höjd prognos. Framåtblickande P/E 17,2, EV/EBITDA 17,4, rörelsemarginal 26 %, nettokassa ≈2,9 mdr SEK och fritt kassaflöde 1,9 mdr SEK. Bara 4 analytiker följer aktien, med neutralt snittbetyg.</dd><dt>Psykologi</dt><dd>Aktien har fallit med halvledarsektorn trots att orderingången växer. Få analytiker följer den, vilket ger utrymme för omvärdering. Det betyder också sämre likviditet och mer osäker information.</dd>
+<dt>Betyg</dt><dd>Timing 7 · Fundamenta 8 · Värdering 8 · R/R 8 · Data 6 · <b>Sammanvägt 7,4</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-ETN" ><summary><span class="chip sm w2">2</span><b>Eaton</b> <span class="sub">ETN · 341,72 USD</span><span class="cs">6,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Botten 231,85 (7 apr 2025) → 478 (12 aug 2026) är våg 1. Våg 2 pågår: botten 324,27 (5 nov), 62,4 %.</dd><dt>Alternativ</dt><dd>En större ABC-korrektion som kan gå under 300.</dd>
+<dt>Stöd</dt><dd>324 · 300</dd><dt>Motstånd</dt><dd>394 · 397 (200-dagars) · 478</dd>
+<dt>Köpzon</dt><dd>325–345</dd><dt>Bekräftelse</dt><dd>Stängning över 394.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 300.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 478,00 (+39,9 %) · Ogiltig/stopp: 300,00 (−12,2 %) · R/R ≈ 3,3 : 1</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 20,9, PEG 1,83, vinsttillväxt +7 % och omsättningstillväxt +28 %. Nettoskuld ≈20 mdr USD.</dd><dt>Psykologi</dt><dd>Samma oro för datacenterbyggandet som för PWR och VRT.</dd>
+<dt>Betyg</dt><dd>Timing 6 · Fundamenta 7 · Värdering 6 · R/R 6 · Data 8 · <b>Sammanvägt 6,6</b> · Tillförlitlighet: Låg</dd>
+</dl></div></details><details class="an" id="a-SPGI" ><summary><span class="chip sm w3">3</span><b>S&amp;P Global</b> <span class="sub">SPGI · 467,80 USD</span><span class="cs">6,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Botten 379,38 (13 maj 2026), våg 1 → 462,02 (17 jul), djup våg 2 → 382,21 (2 okt), våg 3 → 485,99 (5 nov).</dd><dt>Alternativ</dt><dd>Ett sidledes intervall mellan 380 och 527 sedan 2025.</dd>
+<dt>Stöd</dt><dd>460 · 416 (200-dagars) · 382</dd><dt>Motstånd</dt><dd>486 · 527</dd>
+<dt>Köpzon</dt><dd>Vänta på rekyl</dd><dt>Bekräftelse</dt><dd>Bekräftad.</dd><dt>Ogiltigförklaring</dt><dd>Under 379.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 527,00 (+12,7 %) · Ogiltig/stopp: 379,38 (−18,9 %) · R/R ≈ 0,7 : 1</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 23,2, rörelsemarginal 48 % och omsättningstillväxt +7 %.</dd><dt>Psykologi</dt><dd>Defensiv rotation in i kvalitetsbolag.</dd>
+<dt>Betyg</dt><dd>Timing 6 · Fundamenta 8 · Värdering 6 · R/R 4 · Data 9 · <b>Sammanvägt 6,6</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-MCO" ><summary><span class="chip sm w3">3</span><b>Moody&#x27;s</b> <span class="sub">MCO · 505,67 USD</span><span class="cs">6,4</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>422,16 (12 mar 2026) → 520,67 (27 aug), våg 2 → 438,01 (2 okt), våg 3 → 533 (5 nov).</dd><dt>Alternativ</dt><dd>Ett intervall mellan 420 och 540.</dd>
+<dt>Stöd</dt><dd>495 · 466 (200-dagars) · 438</dd><dt>Motstånd</dt><dd>539</dd>
+<dt>Köpzon</dt><dd>Vänta på rekyl</dd><dt>Bekräftelse</dt><dd>Veckostängning över 539.</dd><dt>Ogiltigförklaring</dt><dd>Under 438.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 597,00 (+18,1 %) · Ogiltig/stopp: 438,00 (−13,4 %) · R/R ≈ 1,3 : 1</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 27,2: dyrt för omsättningstillväxten.</dd><dt>Psykologi</dt><dd>Defensiv rotation.</dd>
+<dt>Betyg</dt><dd>Timing 5 · Fundamenta 8 · Värdering 5 · R/R 5 · Data 9 · <b>Sammanvägt 6,4</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-LLY" ><summary><span class="chip sm w3">3</span><b>Eli Lilly</b> <span class="sub">LLY · 1 354,00 USD</span><span class="cs">6,0</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>623,78 (8 aug 2025) → 1453 (5 nov 2026), +133 %.</dd><dt>Alternativ</dt><dd>Våg 5 av en längre cykel.</dd>
+<dt>Stöd</dt><dd>1280 · 1116</dd><dt>Motstånd</dt><dd>1453</dd>
+<dt>Köpzon</dt><dd>Vänta på våg 4</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>Under 1116 bryts strukturen.</dd>
+<dt>Nivåer</dt><dd>Ogiltig/stopp: 1 116,00 (−17,6 %)</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 26,9, omsättningstillväxt +39 % och nettoskuld ≈45 mdr USD.</dd><dt>Psykologi</dt><dd>Optimism och höga förväntningar.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 9 · Värdering 5 · R/R 4 · Data 9 · <b>Sammanvägt 6,0</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-TSM" open><summary><span class="chip sm w4">4</span><b>TSMC (ADR)</b> <span class="sub">TSM · 375,44 USD</span><span class="cs">8,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>(1) okt 2022 ≈59 → 226,4 (24 jan 2025). (2) → 134,25 (7 apr 2025), 55 % retracement. (3) → 487,47 (5 okt 2026), 2,1 × våg (1). (4) pågår: botten hittills 351,19 (5 nov), vilket är 38,2 % av våg (3) (352,5).</dd><dt>Alternativ</dt><dd>Toppen 487 avslutade hela uppgången från 2022 och fallet är en våg A. Det blir troligare om kursen stänger en vecka under 50 %-nivån 311.</dd>
+<dt>Stöd</dt><dd>351–353 (38,2 % och botten 5 nov)</dd><dt>Motstånd</dt><dd>405 · 441 · 487</dd>
+<dt>Köpzon</dt><dd>352–380</dd><dt>Bekräftelse</dt><dd>Daglig stängning över 405 med en högre botten. Därefter veckostängning över 441.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 309, alltså under 50 % av våg (3). Absolut gräns 226,4: där överlappar våg 4 toppen på våg 1.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 487,47 (+29,8 %) · Mål 2: 518,00 (+38,0 %) · Ogiltig/stopp: 309,00 (−17,7 %) · R/R ≈ 1,7 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: omsättning 46,7 mdr USD, över guidningen, med bruttomarginal 66,4 %. Q4-guidning 52,3–54,3 mdr USD. Väntad omsättningstillväxt för helåret ca +44 % i USD. Framåtblickande P/E 16,1 och PEG 0,68. Stor nettokassa. EV/EBITDA är hämtat från den taiwanesiska noteringen 2330.TW (14,4), eftersom ADR-värdet blandar valutor.</dd><dt>Psykologi</dt><dd>SOX föll 12,2 % den 5 nov, näst värsta dagen någonsin. TSM föll 10,8 % samma dag på 3,7 gånger normal volym. Fallet drevs av hedgefonders försäljning och oro för AI-investeringarna efter mellanårsvalet, inte av nyheter från bolaget. Mönstret liknar kapitulation i en intakt trend.</dd>
+<dt>Betyg</dt><dd>Timing 8 · Fundamenta 9 · Värdering 8 · R/R 7 · Data 9 · <b>Sammanvägt 8,2</b> · Tillförlitlighet: Medel–hög</dd>
+</dl></div></details><details class="an" id="a-GS" open><summary><span class="chip sm w4">4</span><b>Goldman Sachs</b> <span class="sub">GS · 865,82 USD</span><span class="cs">8,0</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>(1) okt 2023 ≈290 → 672,19 (18 feb 2025). (2) → 439,38 (7 apr 2025), 61 % retracement. (3) → 1153,99 (15 jul 2026), 1,87 × våg (1). (4) pågår: botten hittills 854,45 (5 nov), 41,9 % av våg (3). 38,2 %-nivån ligger på 881 och 50 %-nivån på 797.</dd><dt>Alternativ</dt><dd>Toppen i juli var en cykeltopp för hela finanssektorn och fallet är en våg A, till exempel på grund av hårdare reglering efter valet.</dd>
+<dt>Stöd</dt><dd>854 · 797</dd><dt>Motstånd</dt><dd>940 · 956 (200-dagars) · 1154</dd>
+<dt>Köpzon</dt><dd>800–880</dd><dt>Bekräftelse</dt><dd>Stängning över 940 och sedan över 200-dagarssnittet 956.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 790. Absolut gräns 672 (toppen på våg 1).</dd>
+<dt>Nivåer</dt><dd>Mål 1: 1 153,99 (+33,3 %) · Mål 2: 1 235,00 (+42,6 %) · Ogiltig/stopp: 790,00 (−8,8 %) · R/R ≈ 3,8 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: vinst per aktie 17,01 USD mot 12,25 året innan. Nettointäkter 18,7 mdr USD och avkastning på eget kapital 18,7 %. Global Banking &amp; Markets växte 32 %. P/E 12,4, framåtblickande 11,7. Kvartalsutdelning 5,00 USD. EV-baserade nyckeltal är inte meningsfulla för en bank.</dd><dt>Psykologi</dt><dd>Aktien föll trots en stark rapport. Det tyder på sektorrotation och politisk oro snarare än svagare fundamenta. Säljvolymen har inte varit extrem, så kapitulation är ännu inte synlig.</dd>
+<dt>Betyg</dt><dd>Timing 7 · Fundamenta 8 · Värdering 8 · R/R 8 · Data 9 · <b>Sammanvägt 8,0</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-ASMLAS" open><summary><span class="chip sm w4">4</span><b>ASML Holding</b> <span class="sub">ASML.AS · 1 283,60 EUR</span><span class="cs">7,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>(1) okt 2022 ≈398 → ≈1002 (jul 2024, veckostängning). (2) → 508,4 (7 apr 2025), en djup våg 2. (3) → 1741 (30 jun 2026), 2,0 × våg (1). (4) pågår: lägre toppar 1741 → 1621 → 1656 och botten 1210,6 (5 nov), 43 % av våg (3). 38,2 %-nivån ligger på 1270 och 50 %-nivån på 1125.</dd><dt>Alternativ</dt><dd>Våg 4 utvecklas till en längre flat eller triangel som håller på in i 2027, eller så är toppen i juni en större våg A-topp.</dd>
+<dt>Stöd</dt><dd>1211 · 1125</dd><dt>Motstånd</dt><dd>1396 (200-dagars) · 1515 · 1741</dd>
+<dt>Köpzon</dt><dd>1210–1300</dd><dt>Bekräftelse</dt><dd>Stängning över 1400 (200-dagarssnittet) och därefter över 1515.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 1120. Absolut gräns ≈1002 (toppen på våg 1).</dd>
+<dt>Nivåer</dt><dd>Mål 1: 1 741,00 (+35,6 %) · Mål 2: 1 815,00 (+41,4 %) · Ogiltig/stopp: 1 120,00 (−12,7 %) · R/R ≈ 2,8 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: omsättning 11,7 mdr EUR och bruttomarginal 57,5 %. Q4-guidning 14,2–15,2 mdr EUR och helår 44–45 mdr EUR. Planerad kapacitet räcker inte för efterfrågan 2027 och 2028. Framåtblickande P/E 23,2, PEG 0,75 och EV/EBITDA 29,7. Nettokassa ≈10,8 mdr EUR. Värderingen är rimlig för tillväxten men inte låg.</dd><dt>Psykologi</dt><dd>Aktien har fallit på samma AI- och valoro som resten av halvledarsektorn, medan bolagets egna besked var positiva. Kursen ligger strax under 200-dagarssnittet. Hela halvledarsektorn ligger nu i ett läge av rädsla.</dd>
+<dt>Betyg</dt><dd>Timing 7 · Fundamenta 9 · Värdering 6 · R/R 7 · Data 9 · <b>Sammanvägt 7,6</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-GOOGL" ><summary><span class="chip sm w4">4</span><b>Alphabet</b> <span class="sub">GOOGL · 284,78 USD</span><span class="cs">7,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>(1) 2022 ≈83 → 207,05 (4 feb 2025). (2) → 140,53 (7 apr 2025). (3) → 408,61 (18 maj 2026). (4) pågår: botten 276,92 (30 okt), 49 %.</dd><dt>Alternativ</dt><dd>Det här är en våg A. Om marknaden ser kapitalutgifterna som värdeförstörande kan kursen gå mot 243 (61,8 %) eller lägre.</dd>
+<dt>Stöd</dt><dd>277 · 243</dd><dt>Motstånd</dt><dd>326 · 340 (200-dagars) · 409</dd>
+<dt>Köpzon</dt><dd>275–300</dd><dt>Bekräftelse</dt><dd>Stängning över 326 och därefter över 340.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 243. Absolut gräns 207 (toppen på våg 1).</dd>
+<dt>Nivåer</dt><dd>Mål 1: 408,61 (+43,5 %) · Ogiltig/stopp: 243,00 (−14,7 %) · R/R ≈ 3,0 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: omsättning 127,6 mdr USD (+25 %) och Cloud +103 %. Vinsten per aktie, 2,12 USD, missade konsensus 3,02 tydligt. Fritt kassaflöde var −9,1 mdr USD under kvartalet och kapitalutgifterna för 2026 väntas bli 195–205 mdr USD, med mer 2027. Framåtblickande P/E 18,5 och stor nettokassa.</dd><dt>Psykologi</dt><dd>Kursen föll ungefär 13 % på en dag. Rapporten var en verklig besvikelse, så det är inte bara en överreaktion. Läget blir intressant först om marknaden börjar se kapitalutgifterna som en investering och inte som en kostnad.</dd>
+<dt>Betyg</dt><dd>Timing 6 · Fundamenta 7 · Värdering 7 · R/R 7 · Data 9 · <b>Sammanvägt 7,2</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-PWR" ><summary><span class="chip sm w4">4</span><b>Quanta Services</b> <span class="sub">PWR · 540,90 USD</span><span class="cs">7,0</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>(1) okt 2023 ≈165 → 365,88 (22 jan 2025). (2) → 227,08 (7 apr 2025). (3) → 788,75 (6 maj 2026). (4) pågår: botten 502,04 (5 nov), 51 %. 61,8 %-nivån ligger på 441,6.</dd><dt>Alternativ</dt><dd>Uppgången 2025–26 var hela våg (5) och nu pågår en större korrektion.</dd>
+<dt>Stöd</dt><dd>502 · 442</dd><dt>Motstånd</dt><dd>657 · 629 (200-dagars) · 789</dd>
+<dt>Köpzon</dt><dd>505–545</dd><dt>Bekräftelse</dt><dd>Stängning över 657 (högsta nivån de senaste 10 dagarna).</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 441,6 (61,8 %). Absolut gräns 365,9 (toppen på våg 1).</dd>
+<dt>Nivåer</dt><dd>Mål 1: 788,75 (+45,8 %) · Ogiltig/stopp: 441,60 (−18,4 %) · R/R ≈ 2,5 : 1</dd>
+<dt>Fundamenta</dt><dd>Q3 2026: omsättning 12,0 mdr USD (+57 %), justerad vinst per aktie 6,06 USD mot 3,33 året innan och rekordstor orderstock på 63,7 mdr USD. En del av tillväxten kommer från förvärv. Framåtblickande P/E 25, rörelsemarginal 9 % och nettoskuld 5,2 mdr USD.</dd><dt>Psykologi</dt><dd>Aktien drabbas direkt av oron för datacenterbyggandet efter valet, trots en mycket stark rapport.</dd>
+<dt>Betyg</dt><dd>Timing 6 · Fundamenta 8 · Värdering 6 · R/R 7 · Data 8 · <b>Sammanvägt 7,0</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-ABBNSW" ><summary><span class="chip sm w4">4</span><b>ABB</b> <span class="sub">ABBN.SW · 66,98 CHF</span><span class="cs">6,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Botten 37,25 (7 apr 2025) → 89,14 (22 jun 2026). Rekyl → 66,08 (6 nov), 44 %.</dd><dt>Alternativ</dt><dd>Våg 2 av en ny impuls, med möjligt djupare fall mot 57 (61,8 %).</dd>
+<dt>Stöd</dt><dd>66 · 63</dd><dt>Motstånd</dt><dd>73 · 76,6 (200-dagars) · 89</dd>
+<dt>Köpzon</dt><dd>63–68</dd><dt>Bekräftelse</dt><dd>Stängning över 73,1.</dd><dt>Ogiltigförklaring</dt><dd>Veckostängning under 57.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 89,14 (+33,1 %) · Ogiltig/stopp: 57,00 (−14,9 %) · R/R ≈ 2,2 : 1</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 22,1, EV/EBITDA 16,8, vinsttillväxt −1 % och analytikernas snittbetyg 2,7 (behåll).</dd><dt>Psykologi</dt><dd>En lugn rekyl utan panik.</dd>
+<dt>Betyg</dt><dd>Timing 6 · Fundamenta 7 · Värdering 6 · R/R 6 · Data 8 · <b>Sammanvägt 6,6</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-NVDA" ><summary><span class="chip sm w5">5</span><b>NVIDIA</b> <span class="sub">NVDA · 186,64 USD</span><span class="cs">7,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>Från 2022: (3) → 2024, (4) → 86,62 (7 apr 2025), (5) pågår eller är klar vid 243,37 (6 okt 2026). Det breda intervallet kan vara en avslutande diagonal.</dd><dt>Alternativ</dt><dd>Intervallet 164–243 är en våg 4-triangel, och ett brott över 243 startar en ny våg 5.</dd>
+<dt>Stöd</dt><dd>181,5 · 164,3</dd><dt>Motstånd</dt><dd>205 (200-dagars) · 243</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>Veckostängning över 243.</dd><dt>Ogiltigförklaring</dt><dd>Under 164,3 är ABC-scenariot bekräftat.</dd>
+<dt>Nivåer</dt><dd>Mål 1: 243,37 (+30,4 %) · Ogiltig/stopp: 164,27 (−12,0 %) · R/R ≈ 2,5 : 1</dd>
+<dt>Fundamenta</dt><dd>Omsättningstillväxt +106 %, rörelsemarginal 66 %, framåtblickande P/E 11,7 och PEG 0,23. Marknaden ifrågasätter hur länge vinstnivån håller.</dd><dt>Psykologi</dt><dd>Rapporten blir avgörande för hela AI-sektorn.</dd>
+<dt>Betyg</dt><dd>Timing 5 · Fundamenta 9 · Värdering 8 · R/R 5 · Data 9 · <b>Sammanvägt 7,2</b> · Tillförlitlighet: Låg</dd>
+</dl></div></details><details class="an" id="a-AMD" ><summary><span class="chip sm w5">5</span><b>AMD</b> <span class="sub">AMD · 449,04 USD</span><span class="cs">5,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>76,48 (8 apr 2025) → 658,52 (6 okt 2026). Rekyl → 402,1 (5 nov).</dd><dt>Alternativ</dt><dd>Våg 4 med ytterligare en topp senare.</dd>
+<dt>Stöd</dt><dd>402 · 416 (200-dagars)</dd><dt>Motstånd</dt><dd>578 · 659</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>Under 402.</dd>
+<dt>Nivåer</dt><dd>Ogiltig/stopp: 402,10 (−10,5 %)</dd>
+<dt>Fundamenta</dt><dd>P/E 96 (historisk vinst), framåtblickande 25,4 och EV/EBITDA 65.</dd><dt>Psykologi</dt><dd>Typiskt girighetsmönster.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 7 · Värdering 3 · R/R 4 · Data 9 · <b>Sammanvägt 5,2</b> · Tillförlitlighet: Låg</dd>
+</dl></div></details><details class="an" id="a-VRT" ><summary><span class="chip sm wa">A</span><b>Vertiv</b> <span class="sub">VRT · 182,86 USD</span><span class="cs">6,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>53,6 (7 apr 2025) → 379,93 (14 maj 2026) → 170,8 (5 nov), 64 % retracement.</dd><dt>Alternativ</dt><dd>En djup våg 2 av en ny cykel.</dd>
+<dt>Stöd</dt><dd>171 · 148</dd><dt>Motstånd</dt><dd>271 (200-dagars)</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>Stängning över 254.</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Omsättningstillväxt +61 %, framåtblickande P/E 18,6, PEG 0,54 och nettokassa.</dd><dt>Psykologi</dt><dd>Aktien är i centrum för AI-oron.</dd>
+<dt>Betyg</dt><dd>Timing 4 · Fundamenta 8 · Värdering 6 · R/R 5 · Data 8 · <b>Sammanvägt 6,2</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-KLAC" ><summary><span class="chip sm wa">A</span><b>KLA</b> <span class="sub">KLAC · 138,49 USD</span><span class="cs">5,8</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>55,13 (7 apr 2025) → 307,37 (30 jun 2026) → 128,17 (5 nov).</dd><dt>Alternativ</dt><dd>En djup våg 2.</dd>
+<dt>Stöd</dt><dd>128 · 107</dd><dt>Motstånd</dt><dd>182 (200-dagars)</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 19,5, EV/EBITDA 27,6. Kursserien är splitjusterad (10:1, 2026).</dd><dt>Psykologi</dt><dd>Panikförsäljning.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 8 · Värdering 5 · R/R 4 · Data 9 · <b>Sammanvägt 5,8</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details><details class="an" id="a-MU" ><summary><span class="chip sm wa">A</span><b>Micron</b> <span class="sub">MU · 690,00 USD</span><span class="cs">5,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>61,54 (7 apr 2025) → 1255 (25 jun 2026). Våg A → 650 (5 nov), −48 %.</dd><dt>Alternativ</dt><dd>En våg 4 inom en fortsatt supercykel.</dd>
+<dt>Stöd</dt><dd>650 · 532</dd><dt>Motstånd</dt><dd>757 (200-dagars) · 1097</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Omsättningstillväxt +379 % och rörelsemarginal 81 %: toppmarginaler i cykeln.</dd><dt>Psykologi</dt><dd>Girigheten har vänt till rädsla.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 7 · Värdering 6 · R/R 4 · Data 8 · <b>Sammanvägt 5,6</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-CAT" ><summary><span class="chip sm wa">A</span><b>Caterpillar</b> <span class="sub">CAT · 558,63 USD</span><span class="cs">5,6</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>267,3 (7 apr 2025) → 1073,46 (30 jun 2026). Våg A → 550,81 (5 nov), 65 % retracement.</dd><dt>Alternativ</dt><dd>En djup våg 4.</dd>
+<dt>Stöd</dt><dd>551 · 537</dd><dt>Motstånd</dt><dd>808 (200-dagars)</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 17,3 och nettoskuld 38 mdr USD.</dd><dt>Psykologi</dt><dd>Kapitulationsliknande säljtryck.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 7 · Värdering 5 · R/R 4 · Data 9 · <b>Sammanvägt 5,6</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-000660KS" ><summary><span class="chip sm wa">A</span><b>SK hynix</b> <span class="sub">000660.KS · 1 136 000 KRW</span><span class="cs">5,2</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>162 700 (9 apr 2025) → 2 987 000 (25 jun 2026). Våg A → 1 089 000 (6 nov).</dd><dt>Alternativ</dt><dd>Våg 4.</dd>
+<dt>Stöd</dt><dd>1,09 mn · 0,96 mn</dd><dt>Motstånd</dt><dd>1,51 mn (200-dagars)</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>–</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 2,1. Historiskt P/E och fritt kassaflöde saknas hos Yahoo.</dd><dt>Psykologi</dt><dd>Koreaindexet KOSPI ligger 46 % under toppen.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 7 · Värdering 6 · R/R 4 · Data 6 · <b>Sammanvägt 5,2</b> · Tillförlitlighet: Medel</dd>
+</dl></div></details><details class="an" id="a-RHMDE" ><summary><span class="chip sm wc">C</span><b>Rheinmetall</b> <span class="sub">RHM.DE · 812,70 EUR</span><span class="cs">5,8</span></summary>
+<div class="ab"><dl class="lv">
+<dt>Huvudscenario</dt><dd>ATH 2008 (3 okt 2025). A → 1120 (maj 2026). B → 1293. C pågår → 792,6 (9 nov).</dd><dt>Alternativ</dt><dd>Kursen faller vidare om fredsoptimismen håller i sig.</dd>
+<dt>Stöd</dt><dd>793</dd><dt>Motstånd</dt><dd>1090 · 1241 (200-dagars)</dd>
+<dt>Köpzon</dt><dd>–</dd><dt>Bekräftelse</dt><dd>Stängning över 1090.</dd><dt>Ogiltigförklaring</dt><dd>–</dd>
+<dt>Nivåer</dt><dd>–</dd>
+<dt>Fundamenta</dt><dd>Framåtblickande P/E 16, PEG 0,32 och omsättningstillväxt +36 %.</dd><dt>Psykologi</dt><dd>Försvarssektorn har gått från eufori till likgiltighet.</dd>
+<dt>Betyg</dt><dd>Timing 3 · Fundamenta 7 · Värdering 7 · R/R 4 · Data 8 · <b>Sammanvägt 5,8</b> · Tillförlitlighet: Låg–medel</dd>
+</dl></div></details></div>
+</section>
+
+<section aria-labelledby="h-rank" class="rank-t">
+  <span class="eyebrow">Rankning</span>
+  <h2 id="h-rank">Betyg 1–10</h2>
+  <p class="small">Sammanvägt betyg = medelvärdet av de fem betygen. Ett högt sammanvägt betyg kan dölja en svag vågräkning, så läs alltid kolumnen för tillförlitlighet. NVIDIA får till exempel ett högt betyg på grund av värdering och kvalitet, trots att strukturen är en mogen våg 5.</p>
+  <div class="tbl"><table><thead><tr><th>#</th><th>Bolag</th><th>Våg</th><th>Timing</th><th>Fundamenta</th><th>Värdering</th><th>R/R</th><th>Data</th><th>Totalt</th><th>Tillförlitlighet</th></tr></thead><tbody><tr><td class="n">1</td><th scope="row"><a href="#a-TSM">TSMC (ADR)</a> <span class="sub">TSM</span></th><td><span class="chip sm w4">4</span></td><td class="n">8</td><td class="n">9</td><td class="n">8</td><td class="n">7</td><td class="n">9</td><td class="n"><b>8,2</b></td><td>Medel–hög</td></tr><tr><td class="n">2</td><th scope="row"><a href="#a-BKNG">Booking Holdings</a> <span class="sub">BKNG</span></th><td><span class="chip sm w2">2</span></td><td class="n">8</td><td class="n">8</td><td class="n">9</td><td class="n">8</td><td class="n">8</td><td class="n"><b>8,2</b></td><td>Medel</td></tr><tr><td class="n">3</td><th scope="row"><a href="#a-GS">Goldman Sachs</a> <span class="sub">GS</span></th><td><span class="chip sm w4">4</span></td><td class="n">7</td><td class="n">8</td><td class="n">8</td><td class="n">8</td><td class="n">9</td><td class="n"><b>8,0</b></td><td>Medel</td></tr><tr><td class="n">4</td><th scope="row"><a href="#a-ASMLAS">ASML Holding</a> <span class="sub">ASML.AS</span></th><td><span class="chip sm w4">4</span></td><td class="n">7</td><td class="n">9</td><td class="n">6</td><td class="n">7</td><td class="n">9</td><td class="n"><b>7,6</b></td><td>Medel</td></tr><tr><td class="n">5</td><th scope="row"><a href="#a-MYCRST">Mycronic</a> <span class="sub">MYCR.ST</span></th><td><span class="chip sm w2">2</span></td><td class="n">7</td><td class="n">8</td><td class="n">8</td><td class="n">8</td><td class="n">6</td><td class="n"><b>7,4</b></td><td>Medel</td></tr><tr><td class="n">6</td><th scope="row"><a href="#a-GOOGL">Alphabet</a> <span class="sub">GOOGL</span></th><td><span class="chip sm w4">4</span></td><td class="n">6</td><td class="n">7</td><td class="n">7</td><td class="n">7</td><td class="n">9</td><td class="n"><b>7,2</b></td><td>Låg–medel</td></tr><tr><td class="n">7</td><th scope="row"><a href="#a-NVDA">NVIDIA</a> <span class="sub">NVDA</span></th><td><span class="chip sm w5">5</span></td><td class="n">5</td><td class="n">9</td><td class="n">8</td><td class="n">5</td><td class="n">9</td><td class="n"><b>7,2</b></td><td>Låg</td></tr><tr><td class="n">8</td><th scope="row"><a href="#a-PWR">Quanta Services</a> <span class="sub">PWR</span></th><td><span class="chip sm w4">4</span></td><td class="n">6</td><td class="n">8</td><td class="n">6</td><td class="n">7</td><td class="n">8</td><td class="n"><b>7,0</b></td><td>Låg–medel</td></tr><tr><td class="n">9</td><th scope="row"><a href="#a-ETN">Eaton</a> <span class="sub">ETN</span></th><td><span class="chip sm w2">2</span></td><td class="n">6</td><td class="n">7</td><td class="n">6</td><td class="n">6</td><td class="n">8</td><td class="n"><b>6,6</b></td><td>Låg</td></tr><tr><td class="n">10</td><th scope="row"><a href="#a-ABBNSW">ABB</a> <span class="sub">ABBN.SW</span></th><td><span class="chip sm w4">4</span></td><td class="n">6</td><td class="n">7</td><td class="n">6</td><td class="n">6</td><td class="n">8</td><td class="n"><b>6,6</b></td><td>Låg–medel</td></tr><tr><td class="n">11</td><th scope="row"><a href="#a-SPGI">S&amp;P Global</a> <span class="sub">SPGI</span></th><td><span class="chip sm w3">3</span></td><td class="n">6</td><td class="n">8</td><td class="n">6</td><td class="n">4</td><td class="n">9</td><td class="n"><b>6,6</b></td><td>Låg–medel</td></tr><tr><td class="n">12</td><th scope="row"><a href="#a-ISRG">Intuitive Surgical</a> <span class="sub">ISRG</span></th><td><span class="chip sm w1">1</span></td><td class="n">4</td><td class="n">9</td><td class="n">4</td><td class="n">6</td><td class="n">9</td><td class="n"><b>6,4</b></td><td>Medel</td></tr><tr><td class="n">13</td><th scope="row"><a href="#a-MCO">Moody&#x27;s</a> <span class="sub">MCO</span></th><td><span class="chip sm w3">3</span></td><td class="n">5</td><td class="n">8</td><td class="n">5</td><td class="n">5</td><td class="n">9</td><td class="n"><b>6,4</b></td><td>Låg–medel</td></tr><tr><td class="n">14</td><th scope="row"><a href="#a-VRT">Vertiv</a> <span class="sub">VRT</span></th><td><span class="chip sm wa">A</span></td><td class="n">4</td><td class="n">8</td><td class="n">6</td><td class="n">5</td><td class="n">8</td><td class="n"><b>6,2</b></td><td>Låg–medel</td></tr><tr><td class="n">15</td><th scope="row"><a href="#a-LLY">Eli Lilly</a> <span class="sub">LLY</span></th><td><span class="chip sm w3">3</span></td><td class="n">3</td><td class="n">9</td><td class="n">5</td><td class="n">4</td><td class="n">9</td><td class="n"><b>6,0</b></td><td>Medel</td></tr><tr><td class="n">16</td><th scope="row"><a href="#a-RHMDE">Rheinmetall</a> <span class="sub">RHM.DE</span></th><td><span class="chip sm wc">C</span></td><td class="n">3</td><td class="n">7</td><td class="n">7</td><td class="n">4</td><td class="n">8</td><td class="n"><b>5,8</b></td><td>Låg–medel</td></tr><tr><td class="n">17</td><th scope="row"><a href="#a-KLAC">KLA</a> <span class="sub">KLAC</span></th><td><span class="chip sm wa">A</span></td><td class="n">3</td><td class="n">8</td><td class="n">5</td><td class="n">4</td><td class="n">9</td><td class="n"><b>5,8</b></td><td>Låg–medel</td></tr><tr><td class="n">18</td><th scope="row"><a href="#a-MU">Micron</a> <span class="sub">MU</span></th><td><span class="chip sm wa">A</span></td><td class="n">3</td><td class="n">7</td><td class="n">6</td><td class="n">4</td><td class="n">8</td><td class="n"><b>5,6</b></td><td>Medel</td></tr><tr><td class="n">19</td><th scope="row"><a href="#a-CAT">Caterpillar</a> <span class="sub">CAT</span></th><td><span class="chip sm wa">A</span></td><td class="n">3</td><td class="n">7</td><td class="n">5</td><td class="n">4</td><td class="n">9</td><td class="n"><b>5,6</b></td><td>Medel</td></tr><tr><td class="n">20</td><th scope="row"><a href="#a-AMD">AMD</a> <span class="sub">AMD</span></th><td><span class="chip sm w5">5</span></td><td class="n">3</td><td class="n">7</td><td class="n">3</td><td class="n">4</td><td class="n">9</td><td class="n"><b>5,2</b></td><td>Låg</td></tr><tr><td class="n">21</td><th scope="row"><a href="#a-000660KS">SK hynix</a> <span class="sub">000660.KS</span></th><td><span class="chip sm wa">A</span></td><td class="n">3</td><td class="n">7</td><td class="n">6</td><td class="n">4</td><td class="n">6</td><td class="n"><b>5,2</b></td><td>Medel</td></tr></tbody></table></div>
+</section>
+
+<section aria-labelledby="h-rej">
+  <span class="eyebrow">7 · Bortsorterade</span>
+  <h2 id="h-rej">Bolag som inte klarade kraven</h2>
+  <ul class="rej"><li><b>Samsung Electronics (005930.KS)</b> Minnescykeln: +575 % och sedan −46 %. A-våg och toppmarginaler, ingen köpsignal.</li><li><b>Lam Research, Applied Materials, Tokyo Electron, BE Semi, Disco</b> Rekylerna är 57–73 %, för djupa för en ren våg 4. Det kan vara början på en större korrektion. Strukturen är OKLAR.</li><li><b>ASM International (ASM.AS)</b> Rekyl på 58 % och vinsttillväxt −20 %. Varken struktur eller fundamenta är tydliga nog.</li><li><b>Broadcom (AVGO)</b> Stegvis lägre toppar sedan maj och kraftigt brott under 200-dagarssnittet (−20 %). Ingen tydlig vågräkning (OKLAR).</li><li><b>Advantest (6857.T)</b> Kursen sjudubblades på ett och ett halvt år: utsträckt våg 5. Hög risk för en större ABC-korrektion.</li><li><b>MediaTek (2454.TW)</b> P/E 61 på historisk vinst och en rörelse på +195 % senaste året.</li><li><b>Hitachi (6501.T)</b> Ny 52-veckorsbotten (4301) bara veckor efter rekordnivån, vilket bryter strukturen. Sidledes intervall sedan 2025 (OKLAR).</li><li><b>Oracle (ORCL)</b> −54 % från toppen och fortsatt nedåtgående. Oron gäller lånefinansierade AI-investeringar, alltså fundamenta.</li><li><b>Axon (AXON)</b> −60 % från toppen och trendbrott. Ingen korrektionsstruktur i en upptrend.</li><li><b>Palo Alto Networks (PANW)</b> P/E 785 på historisk vinst och EV/Sales 22: orimlig värdering.</li><li><b>Novo Nordisk (NOVO-B.CO)</b> En flerårig nedtrend med fundamentala orsaker. Ingen etablerad upptrend.</li><li><b>Southern Copper (SCCO)</b> EV/Sales 8,4 och analytikernas snittbetyg 3,8 (sälj).</li><li><b>Saab (SAAB-B.ST) och Kongsberg (KOG.OL)</b> Sidledes intervall och framåtblickande P/E 30–62. Inget tydligt köpläge.</li><li><b>NKT (NKT.CO)</b> Motstridiga nyckeltal hos Yahoo (börsvärde 0, EV/EBITDA 64). Datakraven är inte uppfyllda.</li><li><b>Howmet (HWM) och Safran (SAF.PA)</b> Djupa rekyler (57–58 %) efter värderingskompression. P/E 24–31 lämnar liten säkerhetsmarginal.</li><li><b>Roche (ROG.SW) och Schneider (SCHN)</b> Kursdata kunde inte hämtas (fel ticker eller ingen data). Datakraven är inte uppfyllda.</li></ul>
+</section>
+
+<section aria-labelledby="h-src">
+  <span class="eyebrow">6 · Källor och metod</span>
+  <h2 id="h-src">Källor, datum och begränsningar</h2>
+  <div class="method">
+    <div><h4>Marknadsdata</h4><ul>
+      <li>Yahoo Finance chart-API (query1.finance.yahoo.com/v8/finance/chart): månadsserier för hela historiken, veckoserier för 10 år och dagsserier för 2 år, med split- och utdelningshändelser. Hämtat 9 nov 2026, 11:05–11:25 UTC.</li>
+      <li>Yahoo Finance quoteSummary via yfinance: P/E, EV-mått, marginaler, kassaflöde, skuld och konsensus. Hämtat 9 nov 2026, ≈11:20 UTC. Senaste rapporterade kvartal är 30 sep 2026.</li>
+      <li>Universum: 270 aktier från USA, Europa, Norden, Japan, Korea, Taiwan, Kina/Hongkong, Indien och Kanada, plus 12 index.</li>
+    </ul></div>
+    <div><h4>Nyheter och rapporter</h4><ul>
+      <li><a href="https://www.bloomberg.com/news/articles/2026-11-05/chips-selloff-worsens-as-fears-about-ai-trade-grip-stock-market">Bloomberg 5 nov: chip-raset efter valet</a> · <a href="https://www.forbes.com/sites/fionariley/2026/11/05/chipmaker-selloff-deepens-amid-post-election-concerns-for-future-of-data-centers/">Forbes 5 nov</a> · <a href="https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/">24/7 Wall St 6 nov</a> · <a href="https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html">CNBC 6 nov</a></li>
+      <li>TSMC: <a href="https://investor.tsmc.com/english/quarterly-results/2026/q3">IR Q3 2026</a> · <a href="https://xenospectrum.com/en/tsmc-q3-2026-gross-margin-capex/">Xenospectrum</a></li>
+      <li>ASML: <a href="https://www.sec.gov/Archives/edgar/data/0000937966/000162828026065813/pressreleasefinancialresul.htm">6-K Q3 2026</a> · <a href="https://vestedfinance.com/blog/us-stocks/asml-q3-earnings-2026/">Vested Finance</a></li>
+      <li>Booking: <a href="https://finviz.com/news/415037/booking-holdings-clears-the-whisper-on-broad-q3-acceleration-but-a-steep-q4-slowdown-and-fading-margin-ambitions-dominate">Finviz/Earnings Whispers</a> · <a href="https://www.tikr.com/blog/booking-holdings-bkng-stock-jumps-q3-earnings-forward-pe">TIKR</a> · <a href="https://www.tikr.com/blog/booking-holdings-is-down-27-this-year-four-of-five-recent-analyst-calls-still-say-buy">TIKR (före rapport)</a></li>
+      <li>Goldman Sachs: <a href="https://www.sec.gov/Archives/edgar/data/0000886982/000088698226000529/a3q26gsearningsresults.htm">8-K Q3 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/0000886982/000088698226000532/gs-20260930.htm">10-Q</a></li>
+      <li>Mycronic: <a href="https://borsvarlden.com/finwire/FWM00F7C48">Börsvärlden/Finwire</a> · <a href="https://www.marketmate.se/mycronic-rusar-pa-rekordkvartal-hojer-prognosen/">Marketmate (Q2)</a></li>
+      <li>Alphabet: <a href="https://www.heygotrade.com/en/news/alphabet-q3-earnings-miss-sinks-stock-reignites-ai-capex-fears-googl-nasdaq-futures/">HeyGoTrade</a> · <a href="https://www.webull.com/news/15834433804575744">Webull</a></li>
+      <li>Quanta: <a href="https://www.sec.gov/Archives/edgar/data/0001050915/000119312526436949/d77812dex991.htm">8-K Q3 2026</a> · <a href="https://www.marketbeat.com/instant-alerts/transcript-quanta-services-q3-earnings-call-highlights-2026-10-30/">MarketBeat</a></li>
+      <li>Intuitive: <a href="https://www.sec.gov/Archives/edgar/data/0001035267/000103526726000067/q326ex-991earningsrelease.htm">8-K Q3 2026</a></li>
+      <li>Howmet: <a href="https://www.earningswhispers.com/article/HWM/r834">Earnings Whispers</a> · <a href="https://www.quiverquant.com/news/Why+Howmet+Aerospace+(HWM)+Stock+Is+Down+Today">Quiver Quant</a></li>
+    </ul></div>
+    <div><h4>Begränsningar</h4><ul>
+      <li>Yahoos fundamentala nyckeltal är leverantörens egna beräkningar och kan innehålla fel. Avvikande värden är markerade, till exempel TSMC:s EV/EBITDA, Bookings omsättningstillväxt och NKT.</li>
+      <li>Jämförelsen med bolagens egen värderingshistorik är begränsad. Yahoo ger bara aktuella multiplar, så historiska P/E-nivåer har inte kunnat verifieras.</li>
+      <li>Mycronics Q3-siffror bygger på en sekundärkälla. Kontrollera mot bolagets egen rapport.</li>
+      <li>NVIDIA:s rapport väntas runt 17 nov och kan flytta hela halvledarsektorn.</li>
+      <li>Elliott-räkningar är sannolikhetsbedömningar, inte prognoser. Det här är analys och ingen personlig investeringsrådgivning.</li>
+    </ul></div>
+  </div>
+</section>
+</div>

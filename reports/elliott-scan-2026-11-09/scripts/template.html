@@ -1,0 +1,191 @@
+<title>Elliott-scanner november 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: chart-desk report. A wide wave map on top, then buy cards, a data table and the analyses. Wave colours come from the brief. */
+:root{
+  --bg:#f2f4f6; --paper:#ffffff; --ink:#15212c; --ink2:#4a5866; --rule:#d7dde3; --accent:#1d3a5f;
+  --up:#1f7a46; --dn:#b3372c;
+  --w1:#2e9e5b; --w2:#d4a106; --w3:#2f6fdb; --w4:#139aa0; --w5:#8a4fd8; --wa:#d64545; --wb:#e8892b; --wc:#c4402f;
+  --tint:.14;
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif; --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f151b; --paper:#161e26; --ink:#e4eaf0; --ink2:#9aa8b6; --rule:#2a3540; --accent:#8fb4e3; --up:#55c387; --dn:#f07a6e;
+  --w1:#4cc27c; --w2:#e8bd2c; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ac82ec; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f; --tint:.22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f151b; --paper:#161e26; --ink:#e4eaf0; --ink2:#9aa8b6; --rule:#2a3540; --accent:#8fb4e3; --up:#55c387; --dn:#f07a6e;
+  --w1:#4cc27c; --w2:#e8bd2c; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ac82ec; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f; --tint:.22; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+h1,h2,h3,h4{font-family:var(--f-disp);font-stretch:85%;letter-spacing:-.01em;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(30px,5vw,52px);font-weight:800}
+h2{font-size:clamp(22px,3vw,30px);font-weight:750}
+h3{font-size:20px;font-weight:700} h4{font-size:17px;font-weight:700}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+p{margin:0;max-width:72ch}
+a{color:var(--accent)} a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small,.sub{font-size:12.5px;color:var(--ink2)}
+.sub{display:block;font-weight:400}
+.n,.px,.pt1,.pt2,td{font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .dn{color:var(--dn)} .na{color:var(--ink2)}
+section{display:grid;gap:16px;min-width:0}
+.hero{display:grid;gap:14px}
+.stamp{font:500 13px/1.5 var(--f-mono);color:var(--ink2)}
+.ctx{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.ctx div{background:var(--paper);padding:10px 12px;display:grid;gap:2px}
+.ctx b{font:600 18px/1.2 var(--f-mono)} .ctx span{font-size:12px;color:var(--ink2)}
+.lead{font-size:16.5px;max-width:78ch}
+.mapbox{background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow-x:auto}
+.map{display:block;width:100%;min-width:900px;height:auto}
+.mapbg{fill:var(--paper)} .grid line{stroke:var(--rule);stroke-width:1}
+.axis{fill:var(--ink2);font:500 12px var(--f-mono)}
+.seg{stroke-width:7;stroke-linecap:round}
+.sw1{stroke:var(--w1)}.sw2{stroke:var(--w2)}.sw3{stroke:var(--w3)}.sw4{stroke:var(--w4)}.sw5{stroke:var(--w5)}.swa{stroke:var(--wa)}.swb{stroke:var(--wb)}.swc{stroke:var(--wc)}
+.nd{stroke:var(--paper);stroke-width:3} .ndt{fill:#fff;font:700 15px var(--f-disp);text-anchor:middle}
+.nd.w1{fill:var(--w1)}.nd.w2{fill:var(--w2)}.nd.w3{fill:var(--w3)}.nd.w4{fill:var(--w4)}.nd.w5{fill:var(--w5)}.nd.wa{fill:var(--wa)}.nd.wb{fill:var(--wb)}.nd.wc{fill:var(--wc)}
+.pr{fill:var(--paper);stroke-width:2}
+.pill.w1 .pr{stroke:var(--w1)}.pill.w2 .pr{stroke:var(--w2)}.pill.w3 .pr{stroke:var(--w3)}.pill.w4 .pr{stroke:var(--w4)}.pill.w5 .pr{stroke:var(--w5)}.pill.wa .pr{stroke:var(--wa)}.pill.wc .pr{stroke:var(--wc)}
+.pt1{fill:var(--ink);font:700 13px var(--f-body)} .pt1b{fill:var(--ink);font:500 12.5px var(--f-mono)} .pt2{fill:var(--ink2);font:400 11.5px var(--f-mono)}
+.pill-a:hover .pr,.pill-a:focus .pr{stroke-width:3.5}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--ink2)}
+.chip{display:inline-flex;align-items:center;gap:4px;font:600 12px/1 var(--f-mono);padding:5px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.chip.sm{padding:3px 7px;font-size:11px}
+.chip.w1{background:var(--w1)}.chip.w2{background:var(--w2);color:#2a2100}.chip.w3{background:var(--w3)}.chip.w4{background:var(--w4)}.chip.w5{background:var(--w5)}.chip.wa{background:var(--wa)}.chip.wb{background:var(--wb)}.chip.wc{background:var(--wc)}
+.buy{background:var(--paper);border:2px solid var(--accent);border-radius:12px;padding:22px clamp(14px,2.5vw,26px);display:grid;gap:18px}
+.tops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:16px}
+.top{border:1px solid var(--rule);border-radius:10px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0;background:var(--bg)}
+.top header{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.rank{font:800 30px/1 var(--f-disp);color:var(--accent);font-stretch:75%}
+.meta{font-size:12.5px;color:var(--ink2)}
+.pxrow{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.px{font:600 24px/1 var(--f-mono)} .px small{font-size:13px;color:var(--ink2)} .pd,.intr{font-size:12px;color:var(--ink2)}
+.why{font-weight:500}
+.lv{display:grid;grid-template-columns:minmax(96px,auto) 1fr;gap:6px 12px;margin:0;font-size:14px}
+.lv dt{color:var(--ink2);font-size:12.5px;padding-top:2px} .lv dd{margin:0;min-width:0}
+.scores{display:grid;gap:4px;font-size:12.5px}
+.sc{display:grid;grid-template-columns:130px 1fr 22px;gap:8px;align-items:center}
+.bar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.sc b{font-family:var(--f-mono);text-align:right} .sc.tot{border-top:1px solid var(--rule);padding-top:4px;font-weight:600}
+.conf{font-size:13px}
+.watch{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.wcard{border:1px dashed var(--rule);border-radius:10px;padding:14px;display:grid;gap:8px;align-content:start}
+.wcard .chip{justify-self:start}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:1500px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+thead th{font:600 11.5px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);position:sticky;top:0;background:var(--paper)}
+td.n{text-align:right;white-space:nowrap}
+tbody th{font-weight:600;white-space:nowrap}
+.rank-t table{min-width:760px}
+.an{background:var(--paper);border:1px solid var(--rule);border-radius:10px}
+.an summary{cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.an summary .sub{display:inline}
+.an .cs{margin-left:auto;font:600 14px var(--f-mono)}
+.ab{padding:0 14px 16px}
+.anl{display:grid;gap:8px}
+ul.rej{margin:0;padding-left:18px;display:grid;gap:6px;max-width:90ch}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.method ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px}
+.note{border-left:3px solid var(--wb);padding:10px 14px;background:var(--paper);border-radius:0 8px 8px 0;font-size:14px;max-width:90ch}
+@media (max-width:560px){.lv{grid-template-columns:1fr}.lv dt{padding-top:6px}.sc{grid-template-columns:110px 1fr 22px}}
+@media (prefers-reduced-motion:no-preference){.pill-a .pr{transition:stroke-width .15s}}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Global Elliott Wave-scanner · 270 aktier · 12 index</span>
+  <h1>Elliott-scanner november 2026</h1>
+  <p class="stamp">Datahämtning: måndag 9 nov 2026, 11:05–11:25 UTC (12:05–12:25 CET). Kursstängningar: USA 6 nov (fredag), Europa 6 nov (fredag, intradag 9 nov anges separat för topplistan), Asien 9 nov. Källa: Yahoo Finance (split- och utdelningsjusterade serier).</p>
+  <div class="ctx" aria-label="Marknadsläge">
+    <div><span>SOX halvledare</span><b class="dn">−35,9 %</b><span>från 52-v-topp · −25,6 % 1 mån</span></div>
+    <div><span>Nasdaq-100</span><b class="dn">−13,9 %</b><span>från 52-v-topp</span></div>
+    <div><span>S&amp;P 500</span><b class="dn">−6,0 %</b><span>7 377 · +9,8 % 1 år</span></div>
+    <div><span>STOXX 600</span><b>−1,5 %</b><span>nära rekord</span></div>
+    <div><span>OMXS30</span><b>−1,6 %</b><span>nära rekord</span></div>
+    <div><span>Nikkei 225</span><b class="dn">−19,3 %</b><span>från 52-v-topp</span></div>
+    <div><span>KOSPI</span><b class="dn">−46,5 %</b><span>minnesaktiernas krasch</span></div>
+    <div><span>VIX</span><b>23,6</b><span>+59 % på 1 mån</span></div>
+  </div>
+  <p class="lead">Den 5 november föll halvledarindex SOX 12,2 % på en dag, efter mellanårsvalet i USA, Qualcomms miss och flera veckors hedgefondförsäljning. Europa och Norden ligger samtidigt nära rekord. Det är alltså en kraftig rotation ut ur AI-infrastruktur, inte en bred björnmarknad. Därför finns de flesta rekyler i upptrender just nu i AI-värdekedjan och elnätsbolagen. Undantagen är Booking och Goldman Sachs, som har egna orsaker.</p>
+</header>
+
+<section aria-labelledby="h-map">
+  <span class="eyebrow">1 · Elliott-karta</span>
+  <h2 id="h-map">Var de godkända bolagen står i cykeln</h2>
+  <p class="small">Varje bricka visar ticker, senaste stängningskurs, kursutveckling 1 månad och tillförlitlighet i vågräkningen. ★ betyder topplistan. Klicka på en bricka för analysen. Placeringen avser den våg kursen sannolikt befinner sig i nu: en aktie under våg 4-punkten är alltså i en pågående eller nyss avslutad våg 4-rekyl.</p>
+  <div class="mapbox">{{SVG}}</div>
+  <div class="legend"><span class="chip w1">Våg 1</span><span class="chip w2">Våg 2</span><span class="chip w3">Våg 3</span><span class="chip w4">Våg 4</span><span class="chip w5">Våg 5</span><span class="chip wa">Våg A</span><span class="chip wb">Våg B</span><span class="chip wc">Våg C</span></div>
+</section>
+
+<section class="buy" aria-labelledby="h-buy">
+  <span class="eyebrow">2 · Topplista</span>
+  <h2 id="h-buy">Bästa potentiella köplägen just nu</h2>
+  <p>Inget av lägena är bekräftat än. Alla fem är <b>nära en potentiell vändpunkt</b>, och bekräftelsenivån anger när en ny uppgång kan räknas som startad. Risk/reward beräknas från stängningskursen till mål 1 och till ogiltignivån.</p>
+  <div class="tops">{{TOPS}}</div>
+  <h3>Bevakning: nästa nivå</h3>
+  <div class="watch">{{WATCH}}</div>
+</section>
+
+<section aria-labelledby="h-tbl">
+  <span class="eyebrow">3 · Kurs, värdering och kursutveckling</span>
+  <h2 id="h-tbl">Alla godkända bolag</h2>
+  <p class="small">Värderingsmått från Yahoo Finance, senaste rapport Q3 2026 (kvartal till 30 sep). Tillväxt avser senaste kvartal jämfört med samma kvartal året innan. Fritt kassaflöde och nettoskuld anges i rapportvalutan. Negativ nettoskuld betyder nettokassa. För TSMC visas EV/EBITDA och EV/Sales från noteringen 2330.TW. För Goldman Sachs är nettoskuld inte ett relevant mått. Konsensus: 1 = köp, 5 = sälj.</p>
+  <div class="tbl"><table>
+  <thead><tr><th>Bolag</th><th>Våg</th><th>Kurs</th><th>1 v</th><th>1 m</th><th>3 m</th><th>6 m</th><th>12 m</th><th>Börsvärde</th><th>P/E</th><th>P/E fwd</th><th>EV/EBITDA</th><th>EV/Sales</th><th>PEG</th><th>Oms.tillv.</th><th>Vinsttillv.</th><th>Bruttomarg.</th><th>Rörelsemarg.</th><th>FCF (12 m)</th><th>Nettoskuld</th><th>Konsensus</th><th>Historik från</th></tr></thead>
+  <tbody>{{TABLE}}</tbody></table></div>
+</section>
+
+<section aria-labelledby="h-an">
+  <span class="eyebrow">4–5 · Teknisk analys, alternativ och ogiltigförklaring</span>
+  <h2 id="h-an">Analys per bolag</h2>
+  <p class="small">Vågräkningen bygger på månads-, vecko- och dagsserier. Swingpunkter identifieras med zigzag-filter på 30 % (månad), 14 % (vecka) och 7 % (dag) och kontrolleras sedan mot dagliga högsta och lägsta kurser. Fibonacci-nivåerna räknas på intradagsextremer.</p>
+  <div class="anl">{{ANALYSES}}</div>
+</section>
+
+<section aria-labelledby="h-rank" class="rank-t">
+  <span class="eyebrow">Rankning</span>
+  <h2 id="h-rank">Betyg 1–10</h2>
+  <p class="small">Sammanvägt betyg = medelvärdet av de fem betygen. Ett högt sammanvägt betyg kan dölja en svag vågräkning, så läs alltid kolumnen för tillförlitlighet. NVIDIA får till exempel ett högt betyg på grund av värdering och kvalitet, trots att strukturen är en mogen våg 5.</p>
+  <div class="tbl"><table><thead><tr><th>#</th><th>Bolag</th><th>Våg</th><th>Timing</th><th>Fundamenta</th><th>Värdering</th><th>R/R</th><th>Data</th><th>Totalt</th><th>Tillförlitlighet</th></tr></thead><tbody>{{RANK}}</tbody></table></div>
+</section>
+
+<section aria-labelledby="h-rej">
+  <span class="eyebrow">7 · Bortsorterade</span>
+  <h2 id="h-rej">Bolag som inte klarade kraven</h2>
+  <ul class="rej">{{REJECTED}}</ul>
+</section>
+
+<section aria-labelledby="h-src">
+  <span class="eyebrow">6 · Källor och metod</span>
+  <h2 id="h-src">Källor, datum och begränsningar</h2>
+  <div class="method">
+    <div><h4>Marknadsdata</h4><ul>
+      <li>Yahoo Finance chart-API (query1.finance.yahoo.com/v8/finance/chart): månadsserier för hela historiken, veckoserier för 10 år och dagsserier för 2 år, med split- och utdelningshändelser. Hämtat 9 nov 2026, 11:05–11:25 UTC.</li>
+      <li>Yahoo Finance quoteSummary via yfinance: P/E, EV-mått, marginaler, kassaflöde, skuld och konsensus. Hämtat 9 nov 2026, ≈11:20 UTC. Senaste rapporterade kvartal är 30 sep 2026.</li>
+      <li>Universum: 270 aktier från USA, Europa, Norden, Japan, Korea, Taiwan, Kina/Hongkong, Indien och Kanada, plus 12 index.</li>
+    </ul></div>
+    <div><h4>Nyheter och rapporter</h4><ul>
+      <li><a href="https://www.bloomberg.com/news/articles/2026-11-05/chips-selloff-worsens-as-fears-about-ai-trade-grip-stock-market">Bloomberg 5 nov: chip-raset efter valet</a> · <a href="https://www.forbes.com/sites/fionariley/2026/11/05/chipmaker-selloff-deepens-amid-post-election-concerns-for-future-of-data-centers/">Forbes 5 nov</a> · <a href="https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/">24/7 Wall St 6 nov</a> · <a href="https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html">CNBC 6 nov</a></li>
+      <li>TSMC: <a href="https://investor.tsmc.com/english/quarterly-results/2026/q3">IR Q3 2026</a> · <a href="https://xenospectrum.com/en/tsmc-q3-2026-gross-margin-capex/">Xenospectrum</a></li>
+      <li>ASML: <a href="https://www.sec.gov/Archives/edgar/data/0000937966/000162828026065813/pressreleasefinancialresul.htm">6-K Q3 2026</a> · <a href="https://vestedfinance.com/blog/us-stocks/asml-q3-earnings-2026/">Vested Finance</a></li>
+      <li>Booking: <a href="https://finviz.com/news/415037/booking-holdings-clears-the-whisper-on-broad-q3-acceleration-but-a-steep-q4-slowdown-and-fading-margin-ambitions-dominate">Finviz/Earnings Whispers</a> · <a href="https://www.tikr.com/blog/booking-holdings-bkng-stock-jumps-q3-earnings-forward-pe">TIKR</a> · <a href="https://www.tikr.com/blog/booking-holdings-is-down-27-this-year-four-of-five-recent-analyst-calls-still-say-buy">TIKR (före rapport)</a></li>
+      <li>Goldman Sachs: <a href="https://www.sec.gov/Archives/edgar/data/0000886982/000088698226000529/a3q26gsearningsresults.htm">8-K Q3 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/0000886982/000088698226000532/gs-20260930.htm">10-Q</a></li>
+      <li>Mycronic: <a href="https://borsvarlden.com/finwire/FWM00F7C48">Börsvärlden/Finwire</a> · <a href="https://www.marketmate.se/mycronic-rusar-pa-rekordkvartal-hojer-prognosen/">Marketmate (Q2)</a></li>
+      <li>Alphabet: <a href="https://www.heygotrade.com/en/news/alphabet-q3-earnings-miss-sinks-stock-reignites-ai-capex-fears-googl-nasdaq-futures/">HeyGoTrade</a> · <a href="https://www.webull.com/news/15834433804575744">Webull</a></li>
+      <li>Quanta: <a href="https://www.sec.gov/Archives/edgar/data/0001050915/000119312526436949/d77812dex991.htm">8-K Q3 2026</a> · <a href="https://www.marketbeat.com/instant-alerts/transcript-quanta-services-q3-earnings-call-highlights-2026-10-30/">MarketBeat</a></li>
+      <li>Intuitive: <a href="https://www.sec.gov/Archives/edgar/data/0001035267/000103526726000067/q326ex-991earningsrelease.htm">8-K Q3 2026</a></li>
+      <li>Howmet: <a href="https://www.earningswhispers.com/article/HWM/r834">Earnings Whispers</a> · <a href="https://www.quiverquant.com/news/Why+Howmet+Aerospace+(HWM)+Stock+Is+Down+Today">Quiver Quant</a></li>
+    </ul></div>
+    <div><h4>Begränsningar</h4><ul>
+      <li>Yahoos fundamentala nyckeltal är leverantörens egna beräkningar och kan innehålla fel. Avvikande värden är markerade, till exempel TSMC:s EV/EBITDA, Bookings omsättningstillväxt och NKT.</li>
+      <li>Jämförelsen med bolagens egen värderingshistorik är begränsad. Yahoo ger bara aktuella multiplar, så historiska P/E-nivåer har inte kunnat verifieras.</li>
+      <li>Mycronics Q3-siffror bygger på en sekundärkälla. Kontrollera mot bolagets egen rapport.</li>
+      <li>NVIDIA:s rapport väntas runt 17 nov och kan flytta hela halvledarsektorn.</li>
+      <li>Elliott-räkningar är sannolikhetsbedömningar, inte prognoser. Det här är analys och ingen personlig investeringsrådgivning.</li>
+    </ul></div>
+  </div>
+</section>
+</div>
