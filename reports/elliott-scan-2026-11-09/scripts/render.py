@@ -1,5 +1,6 @@
 import json, html, re
-from content import S, TOP, WATCH, REJECTED
+from content import S, TOP, WATCH, REJECTED, WATCHLIST
+from lib import load
 D = json.load(open('mapdata.json'))
 E = html.escape
 
@@ -39,7 +40,7 @@ def rr(t):
 def up(t, k): v = S[t].get(k); return None if v is None else (v / D[t]['px'] - 1) * 100
 
 # ---------- SVG map ----------
-P = {'0':(40,560),'1':(190,400),'2':(290,500),'3':(560,170),'4':(680,320),'5':(850,110),'A':(980,380),'B':(1060,290),'C':(1190,515)}
+P = {'0':(40,560),'1':(190,400),'2':(290,500),'3':(560,170),'4':(680,320),'5':(850,110),'A':(980,380),'B':(1060,290),'C':(1190,540)}
 seq = ['0','1','2','3','4','5','A','B','C']
 segs = []
 for a, b in zip(seq, seq[1:]):
@@ -51,7 +52,7 @@ for k in seq[1:]:
     dy = -26 if k in '135B' else 30
     labels.append(f'<g class="node"><circle cx="{x}" cy="{y}" r="15" class="nd {WCOL[k]}"/><text x="{x}" y="{y+5}" class="ndt">{k}</text></g>')
 place = {  # wave -> (x, y0) for pill stacks
-  '1': (20, 300), '2': (200, 528), '3': (240, 150), '4': (590, 348), '5': (610, 18), 'A': (826, 408), 'C': (1034, 548)}
+  '1': (16, 220), '2': (200, 528), '3': (226, 112), '4': (590, 348), '5': (610, 18), 'A': (826, 408), 'C': (1034, 572)}
 bywave = {}
 for t, s in S.items(): bywave.setdefault(s['wave'], []).append(t)
 for w in bywave: bywave[w].sort(key=lambda t: -comp(t))
@@ -64,13 +65,13 @@ for w, ts in bywave.items():
         pills.append(
           f'<a href="#{sid(t)}" class="pill-a"><g class="pill {WCOL[w]}"><rect x="{x0}" y="{y}" width="200" height="40" rx="6" class="pr"/>'
           f'<text x="{x0+10}" y="{y+16}" class="pt1">{E(t)}{star}<tspan class="pt1b" dx="6">{pxf(t)} {E(d["cur"])}</tspan></text>'
-          f'<text x="{x0+10}" y="{y+32}" class="pt2">1 mån {sv(d["m1"],1,True)} % · {E(s["conf"])}</text></g></a>')
-svg = f'''<svg viewBox="0 0 1240 720" role="img" aria-labelledby="maptitle mapdesc" class="map">
+          f'<text x="{x0+10}" y="{y+32}" class="pt2">i dag {sv(d["d1"],1,True)} % · 1 mån {sv(d["m1"],0,True)} %</text></g></a>')
+svg = f'''<svg viewBox="0 0 1240 800" role="img" aria-labelledby="maptitle mapdesc" class="map">
 <title id="maptitle">Elliott-karta</title><desc id="mapdesc">Elliott-cykeln våg 1 till 5 och A till C med varje godkänd aktie placerad vid sin bedömda våg.</desc>
-<rect x="0" y="0" width="1240" height="720" class="mapbg"/>
-<g class="grid">{''.join(f'<line x1="0" y1="{y}" x2="1240" y2="{y}"/>' for y in range(80,720,80))}</g>
-<text x="20" y="708" class="axis">Tid →</text>
-<text x="1220" y="708" class="axis" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text>
+<rect x="0" y="0" width="1240" height="800" class="mapbg"/>
+<g class="grid">{''.join(f'<line x1="0" y1="{y}" x2="1240" y2="{y}"/>' for y in range(80,800,80))}</g>
+<text x="20" y="788" class="axis">Tid →</text>
+<text x="1220" y="788" class="axis" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text>
 {''.join(segs)}
 <line x1="{P['0'][0]}" y1="{P['0'][1]}" x2="{P['0'][0]}" y2="{P['0'][1]}" />
 {''.join(labels)}
@@ -96,7 +97,7 @@ def card(t, rank):
     return f'''<article class="top" id="top-{sid(t)}">
 <header><span class="rank">{rank}</span><div class="tt"><h3>{E(s["name"])}</h3><p class="meta">{E(t)} · {E(s["exch"])} · {E(s["sector"])}</p></div>
 <span class="chip {WCOL[w]}">{WNAME[w]}</span></header>
-<div class="pxrow"><span class="px">{pxf(t)} <small>{E(d["cur"])}</small></span><span class="pd">Stängning {d["date"]}</span>{intr}</div>
+<div class="pxrow"><span class="px">{pxf(t)} <small>{E(d["cur"])}</small></span><span class="pd">Kurs 9 nov kl. 21:48 (USA: under handel; Europa/Asien: stängning)</span>{intr}</div>
 <p class="why">{E(s["why"])}</p>
 <dl class="lv">{''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a,b in rows)}</dl>
 <div class="scores">{''.join(scorebar(l,v) for l,v in zip(SC,s["scores"]))}<div class="sc tot"><span>Sammanvägt</span><span></span><b>{sv(comp(t),1)}</b></div></div>
@@ -150,8 +151,26 @@ rank_rows = ''.join(f'<tr><td class="n">{i+1}</td><th scope="row"><a href="#{sid
     + ''.join(f'<td class="n">{v}</td>' for v in S[t]['scores']) + f'<td class="n"><b>{sv(comp(t),1)}</b></td><td>{E(S[t]["conf"])}</td></tr>' for i, t in enumerate(rk))
 rejected = ''.join(f'<li><b>{E(a)}</b> {E(b)}</li>' for a, b in REJECTED)
 
+# ---------- today / watchlist ----------
+def quick(t):
+    d,m=load(t,'d'); c=d.c; p=float(c.iloc[-1]); last=c.index[-1]
+    ref=c[c.index<=last-pd.Timedelta(days=7)]
+    return p, (p/float(c.iloc[-2])-1)*100, (p/float(ref.iloc[-1])-1)*100, (p/float(d.h.iloc[-252:].max())-1)*100, m.get('currency'), str(last.date())
+import pandas as pd
+wl=[]
+for t,txt in sorted(WATCHLIST, key=lambda x: -quick(x[0])[1]):
+    p,d1,w1,hi,cur,dt=quick(t)
+    w=S[t]['wave'] if t in S else None
+    chip=f'<span class="chip sm {WCOL[w]}">{w}</span>' if w else '<span class="chip sm na-c">–</span>'
+    name=f'<a href="#{sid(t)}">{E(t)}</a>' if t in S else E(t)
+    wl.append(f'<tr><th scope="row">{name}</th><td class="n">{sv(p,2)} <span class="sub">{cur}</span></td><td class="n">{pct(d1)}</td><td class="n">{pct(w1)}</td><td class="n">{pct(hi)}</td><td>{chip}</td><td>{E(txt)}</td></tr>')
+IDXN=[('^SOX','SOX halvledare'),('^NDX','Nasdaq-100'),('^GSPC','S&P 500'),('^STOXX','STOXX 600'),('^OMX','OMXS30'),('^N225','Nikkei 225'),('^TWII','Taiwan'),('^KS11','KOSPI'),('^VIX','VIX')]
+ctx=[]
+for t,n in IDXN:
+    p,d1,w1,hi,cur,dt=quick(t)
+    ctx.append(f'<div><span>{n}</span><b class="{"up" if d1>0 else "dn"}">{sv(d1,1,True)} %</b><span>i dag · {sv(hi,1,True)} % från 52-v-topp</span></div>')
 tpl = open('template.html').read()
 out = (tpl.replace('{{SVG}}', svg).replace('{{TOPS}}', tops).replace('{{WATCH}}', watch).replace('{{TABLE}}', table)
-          .replace('{{ANALYSES}}', analyses).replace('{{RANK}}', rank_rows).replace('{{REJECTED}}', rejected))
+          .replace('{{ANALYSES}}', analyses).replace('{{RANK}}', rank_rows).replace('{{REJECTED}}', rejected).replace('{{WL}}', ''.join(wl)).replace('{{CTX}}', ''.join(ctx)))
 open('elliott-scan.html', 'w').write(out)
 print('ok', len(out))

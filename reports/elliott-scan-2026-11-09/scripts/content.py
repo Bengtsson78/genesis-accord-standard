@@ -4,7 +4,7 @@ S = {}
 
 S['TSM'] = dict(
   name='TSMC (ADR)', exch='NYSE', wave='4', conf='Medel–hög', sector='Halvledare / foundry',
-  why='Våg (4) har nått exakt 38,2 % av våg (3) på kapitulationsvolym. Värderingen är låg för bolagets tillväxt.',
+  why='Våg (4) nådde exakt 38,2 % av våg (3) på kapitulationsvolym den 5 nov. I dag +4,5 % till 392, men bekräftelsen (stängning över 405) saknas fortfarande. Värderingen är låg för tillväxten.',
   count='(1) okt 2022 ≈59 → 226,4 (24 jan 2025). (2) → 134,25 (7 apr 2025), 55 % retracement. (3) → 487,47 (5 okt 2026), 2,1 × våg (1). (4) pågår: botten hittills 351,19 (5 nov), vilket är 38,2 % av våg (3) (352,5).',
   alt='Toppen 487 avslutade hela uppgången från 2022 och fallet är en våg A. Det blir troligare om kursen stänger en vecka under 50 %-nivån 311.',
   support='351–353 (38,2 % och botten 5 nov)', resist='405 · 441 · 487', zone='352–380',
@@ -14,12 +14,12 @@ S['TSM'] = dict(
   t2txt='518 (våg 5 lika lång som våg 1)',
   fund='Q3 2026: omsättning 46,7 mdr USD, över guidningen, med bruttomarginal 66,4 %. Q4-guidning 52,3–54,3 mdr USD. Väntad omsättningstillväxt för helåret ca +44 % i USD. Framåtblickande P/E 16,1 och PEG 0,68. Stor nettokassa. EV/EBITDA är hämtat från den taiwanesiska noteringen 2330.TW (14,4), eftersom ADR-värdet blandar valutor.',
   psych='SOX föll 12,2 % den 5 nov, näst värsta dagen någonsin. TSM föll 10,8 % samma dag på 3,7 gånger normal volym. Fallet drevs av hedgefonders försäljning och oro för AI-investeringarna efter mellanårsvalet, inte av nyheter från bolaget. Mönstret liknar kapitulation i en intakt trend.',
-  scores=(8,9,8,7,9))
+  scores=(7,9,8,5,9))
 
 S['BKNG'] = dict(
   name='Booking Holdings', exch='NASDAQ', wave='2', conf='Medel', sector='Konsument / resor',
-  why='ABC-korrektionen ser avslutad ut nära 50 % av uppgången 2022–25. En första impulsvåg är gjord och kursen står nu i en våg 2-rekyl på 50 %. Lägst framåtblickande P/E bland kvalitetsbolagen i urvalet.',
-  count='Uppgången 2022 → ATH 233,58 (8 jul 2025). A → 150,62 (23 feb 2026). B → 217,32 (25 aug). C → 146,28 (28 okt), där C ≈ 0,86 × A och botten ligger nära 50 % av uppgången 2022–25. Ny våg 1: 146,28 → 174,30 (5 nov, efter Q3). Våg 2 pågår: 160,67 motsvarar 49 % av våg 1. 61,8 %-nivån ligger på 157,0.',
+  why='ABC-korrektionen ser avslutad ut nära 50 % av uppgången 2022–25. En första impulsvåg är gjord och kursen står nu i en våg 2-rekyl som hittills har hållit vid 49 %. Lägst framåtblickande P/E bland kvalitetsbolagen i urvalet.',
+  count='Uppgången 2022 → ATH 233,58 (8 jul 2025). A → 150,62 (23 feb 2026). B → 217,32 (25 aug). C → 146,28 (28 okt), där C ≈ 0,86 × A och botten ligger nära 50 % av uppgången 2022–25. Ny våg 1: 146,28 → 174,30 (5 nov, efter Q3). Våg 2: rekylen gick till 160,67 den 6 nov, 49 % av våg 1. I dag 163,51 (+1,8 %), så den bottnen håller hittills. 61,8 %-nivån ligger på 157,0.',
   alt='Studsen är bara en B-våg inom en större korrektion, och C fortsätter mot 61,8 % av uppgången 2022–25 (≈130).',
   support='157 · 146,3', resist='174,3 · 217', zone='155–161',
   confirm='Stängning över 174,30 (toppen på våg 1). Det bekräftar att våg 3 har startat.',
@@ -28,21 +28,21 @@ S['BKNG'] = dict(
   t2txt='217 (B-toppen)', t1txt='202 (våg 3 = 1,618 × våg 1)',
   fund='Q3 2026: justerad vinst per aktie 4,66 USD mot förväntade 4,48. Rumsnätter +7 % mot väntade 3–5 %. Guidningen för Q4 är svag: rumsnätter +1–3 %. Framåtblickande P/E 13,1, EV/EBITDA 12,7 och PEG 0,59. Rörelsemarginal 39 % och fritt kassaflöde 7,6 mdr USD. Yahoo anger omsättningstillväxten till −1 %, vilket inte går ihop med rumsnattstillväxten, så den siffran är inte verifierad. Kursserien är splitjusterad.',
   psych='Kursen föll 35 % på rädsla för att AI-agenter ska ta bort resesajternas roll som mellanhand. Q3-rapporten slog förväntningarna och analytikerkåren är fortfarande positiv. Pessimismen verkar redan prisad, men AI-risken är en verklig fundamental fråga och inte bara känslor.',
-  scores=(8,8,9,8,8))
+  scores=(8,8,9,7,8))
 
 S['GS'] = dict(
   name='Goldman Sachs', exch='NYSE', wave='4', conf='Medel', sector='Finans / investmentbank',
-  why='Våg (4) står vid 38–42 % av en kraftig våg (3), samtidigt som vinsten per aktie växer 39 % och P/E är 12. Stoppnivån ligger nära, vilket ger god risk/reward.',
+  why='Våg (4) bottnade vid 42 % av en kraftig våg (3), och i dag steg aktien 5 % till 909. Vinsten per aktie växer 39 % och P/E är 12. Efter dagens uppgång är risk/reward lägre än i fredags.',
   count='(1) okt 2023 ≈290 → 672,19 (18 feb 2025). (2) → 439,38 (7 apr 2025), 61 % retracement. (3) → 1153,99 (15 jul 2026), 1,87 × våg (1). (4) pågår: botten hittills 854,45 (5 nov), 41,9 % av våg (3). 38,2 %-nivån ligger på 881 och 50 %-nivån på 797.',
   alt='Toppen i juli var en cykeltopp för hela finanssektorn och fallet är en våg A, till exempel på grund av hårdare reglering efter valet.',
-  support='854 · 797', resist='940 · 956 (200-dagars) · 1154', zone='800–880',
+  support='854 · 797', resist='940 · 956 (200-dagars) · 1154', zone='855–910',
   confirm='Stängning över 940 och sedan över 200-dagarssnittet 956.',
   inval='Veckostängning under 790. Absolut gräns 672 (toppen på våg 1).',
   t1=1153.99, t2=1235, stop=790,
   t2txt='≈1235 (våg 5 lika lång som våg 1)',
   fund='Q3 2026: vinst per aktie 17,01 USD mot 12,25 året innan. Nettointäkter 18,7 mdr USD och avkastning på eget kapital 18,7 %. Global Banking & Markets växte 32 %. P/E 12,4, framåtblickande 11,7. Kvartalsutdelning 5,00 USD. EV-baserade nyckeltal är inte meningsfulla för en bank.',
   psych='Aktien föll trots en stark rapport. Det tyder på sektorrotation och politisk oro snarare än svagare fundamenta. Säljvolymen har inte varit extrem, så kapitulation är ännu inte synlig.',
-  scores=(7,8,8,8,9))
+  scores=(7,8,8,6,9))
 
 S['ASML.AS'] = dict(
   name='ASML Holding', exch='Euronext Amsterdam', wave='4', conf='Medel', sector='Halvledarutrustning',
@@ -56,7 +56,7 @@ S['ASML.AS'] = dict(
   t2txt='≈1815 (våg 5 lika lång som våg 1)',
   fund='Q3 2026: omsättning 11,7 mdr EUR och bruttomarginal 57,5 %. Q4-guidning 14,2–15,2 mdr EUR och helår 44–45 mdr EUR. Planerad kapacitet räcker inte för efterfrågan 2027 och 2028. Framåtblickande P/E 23,2, PEG 0,75 och EV/EBITDA 29,7. Nettokassa ≈10,8 mdr EUR. Värderingen är rimlig för tillväxten men inte låg.',
   psych='Aktien har fallit på samma AI- och valoro som resten av halvledarsektorn, medan bolagets egna besked var positiva. Kursen ligger strax under 200-dagarssnittet. Hela halvledarsektorn ligger nu i ett läge av rädsla.',
-  scores=(7,9,6,7,9))
+  scores=(7,9,6,5,9))
 
 S['MYCR.ST'] = dict(
   name='Mycronic', exch='Nasdaq Stockholm', wave='2', conf='Medel', sector='Industriteknik / maskritare',
@@ -70,7 +70,7 @@ S['MYCR.ST'] = dict(
   t2txt='≈451 (våg iii lika lång som våg i)',
   fund='Q3 2026 enligt en sekundärkälla (Börsvärlden): orderingång 2 667 MSEK (+10 %), rekordstor orderstock 5 566 MSEK och omsättning 2 356 MSEK. Q2-rapporten innehöll höjd prognos. Framåtblickande P/E 17,2, EV/EBITDA 17,4, rörelsemarginal 26 %, nettokassa ≈2,9 mdr SEK och fritt kassaflöde 1,9 mdr SEK. Bara 4 analytiker följer aktien, med neutralt snittbetyg.',
   psych='Aktien har fallit med halvledarsektorn trots att orderingången växer. Få analytiker följer den, vilket ger utrymme för omvärdering. Det betyder också sämre likviditet och mer osäker information.',
-  scores=(7,8,8,8,6))
+  scores=(7,8,8,7,6))
 
 S['GOOGL'] = dict(
   name='Alphabet', exch='NASDAQ', wave='4', conf='Låg–medel', sector='Internet / moln',
@@ -162,7 +162,7 @@ S['LLY'] = dict(
 
 S['NVDA'] = dict(
   name='NVIDIA', exch='NASDAQ', wave='5', conf='Låg', sector='AI-halvledare',
-  why='Mycket lågt framåtblickande P/E (11,7), men vågstrukturen ser mogen ut. Aktien har rört sig sidledes mellan 164 och 243 i ett år. Rapporten väntas runt 17 nov.',
+  why='Mycket lågt framåtblickande P/E (11,7), men vågstrukturen ser mogen ut. I dag föll aktien 4,4 % medan resten av sektorn steg 7 %, och den bröt under botten från 5 nov (181,46) med ett dagslägsta på 170,24. Rapporten väntas runt 17 nov.',
   count='Från 2022: (3) → 2024, (4) → 86,62 (7 apr 2025), (5) pågår eller är klar vid 243,37 (6 okt 2026). Det breda intervallet kan vara en avslutande diagonal.',
   alt='Intervallet 164–243 är en våg 4-triangel, och ett brott över 243 startar en ny våg 5.',
   support='181,5 · 164,3', resist='205 (200-dagars) · 243', zone='–',
@@ -171,7 +171,7 @@ S['NVDA'] = dict(
 
 S['AMD'] = dict(
   name='AMD', exch='NASDAQ', wave='5', conf='Låg', sector='AI-halvledare',
-  why='En utsträckt våg 5: +760 % från 2025 års botten, och P/E 96 på historisk vinst.',
+  why='En utsträckt våg 5: +570 % från 2025 års botten. I dag +14,2 % efter en uppgradering från Oppenheimer, men P/E är 96–110 på historisk vinst.',
   count='76,48 (8 apr 2025) → 658,52 (6 okt 2026). Rekyl → 402,1 (5 nov).',
   alt='Våg 4 med ytterligare en topp senare.', support='402 · 416 (200-dagars)', resist='578 · 659', zone='–',
   confirm='–', inval='Under 402.', t1=None, t2=None, stop=402.1,
@@ -221,8 +221,8 @@ S['KLAC'] = dict(
   alt='En djup våg 2.', support='128 · 107', resist='182 (200-dagars)', zone='–', confirm='–', inval='–', t1=None, t2=None, stop=None,
   fund='Framåtblickande P/E 19,5, EV/EBITDA 27,6. Kursserien är splitjusterad (10:1, 2026).', psych='Panikförsäljning.', scores=(3,8,5,4,9))
 
-TOP = ['TSM','BKNG','GS','ASML.AS','MYCR.ST']
-WATCH = ['GOOGL','PWR','ISRG']
+TOP = ['BKNG','NFLX','TSM','GS','MYCR.ST']
+WATCH = ['ASML.AS','UBER','GOOGL','ISRG']
 
 REJECTED = [
  ('Samsung Electronics (005930.KS)','Minnescykeln: +575 % och sedan −46 %. A-våg och toppmarginaler, ingen köpsignal.'),
@@ -241,4 +241,126 @@ REJECTED = [
  ('NKT (NKT.CO)','Motstridiga nyckeltal hos Yahoo (börsvärde 0, EV/EBITDA 64). Datakraven är inte uppfyllda.'),
  ('Howmet (HWM) och Safran (SAF.PA)','Djupa rekyler (57–58 %) efter värderingskompression. P/E 24–31 lämnar liten säkerhetsmarginal.'),
  ('Roche (ROG.SW) och Schneider (SCHN)','Kursdata kunde inte hämtas (fel ticker eller ingen data). Datakraven är inte uppfyllda.'),
+]
+
+# ---- Nya bolag från användarens bevakningslista (9 nov kväll) ----
+S['NFLX'] = dict(
+  name='Netflix', exch='NASDAQ', wave='C', conf='Medel', sector='Media / streaming',
+  why='En ABC-korrektion har nått exakt 61,8 % av uppgången 2022–25, samtidigt som framåtblickande P/E är 17 och det fria kassaflödet 25 mdr USD. Marknaden har blivit mycket pessimistisk, men ingen vändning är bekräftad än.',
+  count='Uppgången 2022 ≈16,3 → ATH 134,12 (30 jun 2025). A → 75,01 (23 feb 2026). B → 108,95 (16 apr). C → 61,39 (29 okt), där C ≈ 0,8 × A. 61,8 % av uppgången 2022–25 ligger på 61,3, alltså precis vid botten.',
+  alt='C-vågen förlängs mot 1,0 × A (≈50) eller ännu lägre om tillväxten fortsätter att besvika.',
+  support='61,4 · 58', resist='66,4 · 72,6 · 81 (200-dagars)', zone='61–66',
+  confirm='Stängning över 72,6 (toppen 15 okt). Det bryter serien av lägre toppar.',
+  inval='Stängning under 58, alltså tydligt under 61,8 %-nivån.',
+  t1=81, t2=108.95, stop=58, t1txt='81 (200-dagarssnittet)', t2txt='109 (B-toppen)',
+  fund='Framåtblickande P/E 16,9, EV/EBITDA 16,9, rörelsemarginal 35 % och fritt kassaflöde 25,5 mdr USD (12 mån). Omsättningstillväxt +12 % och vinsttillväxt +48 %. Under 2026 har aktien fallit på alla fyra rapporterna och på ett misslyckat bud på Warner Bros. Kursserien är splitjusterad (10:1).',
+  psych='Ett kvalitetsbolag har värderats ned från tillväxtpremie till P/E 17. Det är just den typ av pessimism som kan vara överdriven. Säljtrycket har ännu inte vänt.',
+  scores=(6,8,9,7,8))
+
+S['UBER'] = dict(
+  name='Uber', exch='NYSE', wave='1', conf='Låg–medel', sector='Transport / plattform',
+  why='En ABC-korrektion på 37 % verkar avslutad med en trippelbotten runt 64–65. Kursen har stigit 9 % på en vecka. En möjlig våg 1 har startat men är obekräftad.',
+  count='ATH 101,99 (22 sep 2025). A → 65,41 (27 jul 2026). B → 82,36 (26 aug). C → 64,04 (29 okt), en flat där C slutar strax under A. Ny våg 1 pågår från 64,04.',
+  alt='Ett sidledes intervall mellan 60 och 100 sedan 2024 som kan pågå ett år till.',
+  support='66 · 64,0', resist='72,9 (200-dagars) · 82,4 · 102', zone='66–71',
+  confirm='Stängning över 72,9 och därefter över 82,36 (B-toppen).',
+  inval='Stängning under 64,04.', t1=82.36, t2=101.99, stop=64.04, t1txt='82,4 (B-toppen)', t2txt='102 (ATH)',
+  fund='Framåtblickande P/E 16,2 (Avanza visar P/E 41,9 på historisk vinst, som påverkas av en engångsskatteeffekt året innan). Fritt kassaflöde 7,4 mdr USD och nettoskuld 7,7 mdr USD.',
+  psych='Oron för robotaxi som ska göra plattformen överflödig har pressat aktien. Trippelbotten är ett tecken på att säljarna börjar ta slut.',
+  scores=(6,7,8,6,9))
+
+S['NIBE-B.ST'] = dict(
+  name='NIBE', exch='Nasdaq Stockholm', wave='2', conf='Låg–medel', sector='Värmepumpar / klimat',
+  why='En ny upptrend efter en björnmarknad på 77 %. Bottnarna stiger (31,2 → 31,9 → 34,5) och kursen står precis under utbrottsnivån 46,5. Ett utbrott skulle bekräfta våg 3.',
+  count='Björnmarknad 136,8 (2021) → 31,21 (21 nov 2025). Dubbelbotten 31,93 (19 mar 2026). Våg 1 → 42,7 (maj). Våg 2 → 34,53 (23 jun). Våg 3 testar nu toppen 46,47 (4 nov).',
+  alt='Uppgången är bara en B-våg i en längre bottenbildning, och kursen faller tillbaka mot 35.',
+  support='42,7 · 39,7 (200-dagars) · 34,5', resist='46,5', zone='42–45',
+  confirm='Veckostängning över 46,5.', inval='Stängning under 34,53.',
+  t1=52, t2=71.5, stop=34.53, t1txt='52 (våg 3 = 1,618 × våg 1)', t2txt='71,5 (38,2 % av björnmarknaden)',
+  fund='Framåtblickande P/E 26,5, EV/EBITDA 19,2, rörelsemarginal 11 % och vinsttillväxt +53 % från låg nivå. Nettoskuld ≈18 mdr SEK. Värderingen förutsätter fortsatt återhämtning.',
+  psych='Ett tidigare favoritbolag som de flesta har gett upp. Vändningen sker i stillhet utan hype.',
+  scores=(6,6,5,6,8))
+
+S['OKTA'] = dict(
+  name='Okta', exch='NASDAQ', wave='2', conf='Medel', sector='Cybersäkerhet / identitet',
+  why='En kraftig ny våg 1 (+275 %) följd av en våg 2 på 41 % efter inkluderingen i S&P 500. Strukturen är tydlig, men värderingen är hög.',
+  count='Botten 62,66 (10 apr 2026), våg 1 → 235,00 (12 okt). Våg 2 pågår: botten 164,18 (6 nov) = 41 %. 50 %-nivån ligger på 148,8 och 61,8 %-nivån på 128,5.',
+  alt='Uppgången var en hel spekulativ impuls, nu följd av en djupare ABC mot 128–149.',
+  support='164 · 149 · 128', resist='187 · 226 · 235', zone='149–175',
+  confirm='Stängning över 187 och därefter över 226.', inval='Stängning under 128,5 (61,8 %).',
+  t1=235, t2=336, stop=128.5, t1txt='235 (toppen på våg 1)', t2txt='≈336 (våg 3 lika lång som våg 1)',
+  fund='P/E 107 på historisk vinst och 40,5 framåtblickande. Omsättningstillväxt bara +11 %, rörelsemarginal 13 %, nettokassa 2,2 mdr USD. Inkluderades i S&P 500 den 4 nov, och rekylen kom efter att indexköpen var klara.',
+  psych='Hype kring säkerhet för AI-agenter och indexköp drev uppgången. När köpen var klara kom vinsthemtagning.',
+  scores=(6,7,3,6,9))
+
+S['SPOT'] = dict(
+  name='Spotify', exch='NYSE', wave='3', conf='Medel', sector='Media / ljud',
+  why='En våg 3 har startat efter en dubbelbotten (405/411). Kursen ligger över toppen på våg 1 men 20 % under ATH.',
+  count='ATH 785 (27 jun 2025). Korrektion → 405 (5 feb 2026). Våg 1 → 570,64. Våg 2 → 411,24 (6 maj, dubbelbotten). Våg 3 → 635 (5 nov).',
+  alt='Uppgången är en B-våg och toppen bildas nära 640.', support='571 · 538 · 500 (200-dagars)', resist='635 · 785',
+  zone='Rekyl mot 571', confirm='Bekräftad över 570,6.', inval='Under 538 försvagas bilden.', t1=785, t2=None, stop=538,
+  fund='Framåtblickande P/E 35, nettokassa 6,6 mdr EUR, omsättningstillväxt +16 %.', psych='Förtroendet har kommit tillbaka.', scores=(6,8,4,5,9))
+
+S['CEG'] = dict(
+  name='Constellation Energy', exch='NASDAQ', wave='C', conf='Låg–medel', sector='Kärnkraft / el',
+  why='En flat-korrektion med dubbelbotten (228,6/231,3) efter ett fall på 45 %. Kursen steg 10,7 % i dag. Analysen kräver bekräftelse eftersom det fria kassaflödet är negativt.',
+  count='ATH 412,7 (15 okt 2025). A → 228,63 (1 jul 2026). B → 309,8 (6 okt). C → 231,3 (5 nov), dubbelbotten med A.',
+  alt='Ett brott under 228 öppnar för en förlängd C-våg.', support='231 · 228,6', resist='279 (200-dagars) · 309,8 · 412,7',
+  zone='240–270', confirm='Stängning över 309,8.', inval='Stängning under 228,6.', t1=309.8, t2=412.7, stop=228.63,
+  t1txt='309,8 (B-toppen)', t2txt='412,7 (ATH)',
+  fund='Framåtblickande P/E 20,6 och EV/EBITDA 14,2. Fritt kassaflöde −6,6 mdr USD och nettoskuld 24 mdr USD.', psych='Aktien är i centrum för oron kring elförsörjningen till datacenter.', scores=(5,6,6,6,8))
+
+S['BE'] = dict(
+  name='Bloom Energy', exch='NYSE', wave='A', conf='Låg', sector='Bränsleceller',
+  why='Kursen steg 23 gånger på 14 månader och har sedan fallit 56 %. Fallet är för djupt och värderingen för hög för en ren våg 4.',
+  count='15,15 (9 apr 2025) → 351,28 (25 jun 2026) → 156,0 (5 nov), 58 % retracement.',
+  alt='En djup våg 4 som har avslutats vid 156.', support='156', resist='223 (200-dagars) · 296', zone='–', confirm='–', inval='–',
+  t1=None, t2=None, stop=None, fund='P/E 118, EV/Sales 13,5, omsättningstillväxt +138 %.', psych='Spekulativt, med stora svängningar. Kursen steg 12,4 % i dag.', scores=(3,6,2,3,7))
+
+S['MRVL'] = dict(
+  name='Marvell', exch='NASDAQ', wave='A', conf='Låg–medel', sector='AI-halvledare',
+  why='Rekylen är 70 % av uppgången 2025–26, och aktien föll 43 % på en månad på köpet av Lumentum, som betalas med egna aktier.',
+  count='47,09 (7 apr 2025) → 329,88 (18 jun 2026) → 132,54 (5 nov).',
+  alt='En mycket djup våg 2.', support='132,5', resist='185 (200-dagars)', zone='–', confirm='Stängning över 185.', inval='–',
+  t1=None, t2=None, stop=None, fund='Framåtblickande P/E 21, EV/Sales 13. Köpet av Lumentum späder ut ägandet.', psych='Kursen steg 10 % i dag efter kapitulationen.', scores=(3,7,6,4,8))
+
+REJECTED += [
+ ('CoreWeave (CRWV), Nebius (NBIS), SoundHound (SOUN), NIO','Nedåtgående trender med lägre toppar och lägre bottnar (−53 till −73 % från toppen). CoreWeave och Nebius har negativt fritt kassaflöde (−9 till −10 mdr USD) och CoreWeave en nettoskuld på 46 mdr USD.'),
+ ('Cerebras (CBRS)','Börsnoterades i maj 2026, så historiken är för kort för en vågräkning (krav: minst 2–3 år). Kursen ligger 75 % under toppen.'),
+ ('Robinhood (HOOD), DoorDash (DASH), Take-Two (TTWO), Addtech (ADDT B), Rusta, Svolder, Caledonia (CMCL)','Sidledes intervall utan tydlig impuls eller avslutad korrektion (OKLAR). Take-Two: dubbelbotten 190 som kan bli intressant. Addtech: möjlig våg 4-triangel mellan 280 och 358.'),
+ ('Nike (NKE)','En möjlig C-botten vid 31,97, men omsättningen minskar (−4 %), analytikernas snittbetyg är 2,9 och kursmålet ligger under kursen. Fallet har fundamentala orsaker.'),
+ ('ARKG, TQQQ, IWM (fonder)','Fonder och hävstångsprodukter ingår inte i bolagsanalysen. TQQQ är tredubbelt hävstångad, och dess värde krymper när marknaden svänger utan riktning.'),
+]
+
+WATCHLIST = [  # (ticker, kort bedömning) – användarens sökningar
+ ('AMD','Våg 5, eller en studs i våg 4. P/E 96–110 på historisk vinst. Inget köpläge.'),
+ ('MRVL','Våg A. Studsen kom efter kapitulation och köpet av Lumentum späder ut ägandet. Vänta.'),
+ ('LRCX','Rekylen är 57 % av uppgången, för djupt för en ren våg 4. OKLAR, och studsen är inte en bekräftelse.'),
+ ('MU','Våg A efter en uppgång på 20 gånger. Framåtblickande P/E 3,3 är ett tecken på toppen i vinstcykeln.'),
+ ('SKHY','Samma struktur som SK hynix i Seoul: våg A.'),
+ ('TSM','Topplistan, nr 1. Våg 4 vid 38,2 %. Bekräftelse kräver stängning över 405.'),
+ ('ORCL','Nedtrend, −52 % från toppen. Oron gäller lånefinansierade AI-investeringar. Bortsorterad.'),
+ ('CEG','Möjlig avslutad C-våg (dubbelbotten 229/231). Bekräftas över 309,8.'),
+ ('BE','Parabolisk uppgång (23 gånger) och sedan −56 %. Våg A. Spekulativ.'),
+ ('NBIS','Rekyl 82 %, negativt fritt kassaflöde. Bortsorterad.'),
+ ('CRWV','Nedtrend och nettoskuld 46 mdr USD. Bortsorterad.'),
+ ('CBRS','För kort historik (börsnoterad maj 2026). Bortsorterad.'),
+ ('UBER','Möjlig avslutad ABC och ny våg 1. Bekräftas över 82,4.'),
+ ('HOOD','Sidledes, med lägre toppar. OKLAR.'),
+ ('OKTA','Våg 2 efter en kraftig våg 1. Dyr värdering.'),
+ ('SPOT','Våg 3 har startat, dubbelbotten 405/411.'),
+ ('NFLX','C-vågen kan vara slut vid 61,8 % och P/E är 17. Bevakning med hög potential.'),
+ ('LLY','Våg 3, ny rekordnivå i dag. Inget rekylläge.'),
+ ('NOVO-B.CO','Flerårig nedtrend. Bortsorterad.'),
+ ('NKE','Möjlig C-botten, men fundamenta försämras. Vänta.'),
+ ('DASH','Sidledes intervall. OKLAR.'),
+ ('TTWO','Dubbelbotten vid 190, i övrigt sidledes. OKLAR.'),
+ ('SOUN','Nedtrend. Bortsorterad.'),
+ ('NIO','Nedtrend. Bortsorterad.'),
+ ('CMCL','Sidledes. OKLAR.'),
+ ('BESI.AS','Rekyl 73 %. OKLAR.'),
+ ('NIBE-B.ST','Ny upptrend. Våg 3 bekräftas vid veckostängning över 46,5.'),
+ ('ADDT-B.ST','Intervall 280–358, möjlig triangel. OKLAR.'),
+ ('SVOL-B.ST','Investmentbolag nära toppen. Analyseras via innehaven.'),
+ ('RUSTA.ST','Sidledes. OKLAR.'),
 ]

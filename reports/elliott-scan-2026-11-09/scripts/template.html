@@ -75,6 +75,8 @@ section{display:grid;gap:16px;min-width:0}
 .wcard .chip{justify-self:start}
 .tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper)}
 table{border-collapse:collapse;width:100%;font-size:13px;min-width:1500px}
+table.wl{min-width:820px}
+.chip.na-c{background:var(--rule);color:var(--ink2)}
 th,td{padding:8px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
 thead th{font:600 11.5px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);position:sticky;top:0;background:var(--paper)}
 td.n{text-align:right;white-space:nowrap}
@@ -96,20 +98,11 @@ ul.rej{margin:0;padding-left:18px;display:grid;gap:6px;max-width:90ch}
 
 <div class="wrap">
 <header class="hero">
-  <span class="eyebrow">Global Elliott Wave-scanner · 270 aktier · 12 index</span>
+  <span class="eyebrow">Global Elliott Wave-scanner · 293 aktier · 12 index · uppdaterad efter stängning 9 nov</span>
   <h1>Elliott-scanner november 2026</h1>
-  <p class="stamp">Datahämtning: måndag 9 nov 2026, 11:05–11:25 UTC (12:05–12:25 CET). Kursstängningar: USA 6 nov (fredag), Europa 6 nov (fredag, intradag 9 nov anges separat för topplistan), Asien 9 nov. Källa: Yahoo Finance (split- och utdelningsjusterade serier).</p>
-  <div class="ctx" aria-label="Marknadsläge">
-    <div><span>SOX halvledare</span><b class="dn">−35,9 %</b><span>från 52-v-topp · −25,6 % 1 mån</span></div>
-    <div><span>Nasdaq-100</span><b class="dn">−13,9 %</b><span>från 52-v-topp</span></div>
-    <div><span>S&amp;P 500</span><b class="dn">−6,0 %</b><span>7 377 · +9,8 % 1 år</span></div>
-    <div><span>STOXX 600</span><b>−1,5 %</b><span>nära rekord</span></div>
-    <div><span>OMXS30</span><b>−1,6 %</b><span>nära rekord</span></div>
-    <div><span>Nikkei 225</span><b class="dn">−19,3 %</b><span>från 52-v-topp</span></div>
-    <div><span>KOSPI</span><b class="dn">−46,5 %</b><span>minnesaktiernas krasch</span></div>
-    <div><span>VIX</span><b>23,6</b><span>+59 % på 1 mån</span></div>
-  </div>
-  <p class="lead">Den 5 november föll halvledarindex SOX 12,2 % på en dag, efter mellanårsvalet i USA, Qualcomms miss och flera veckors hedgefondförsäljning. Europa och Norden ligger samtidigt nära rekord. Det är alltså en kraftig rotation ut ur AI-infrastruktur, inte en bred björnmarknad. Därför finns de flesta rekyler i upptrender just nu i AI-värdekedjan och elnätsbolagen. Undantagen är Booking och Goldman Sachs, som har egna orsaker.</p>
+  <p class="stamp">Datahämtning: måndag 9 nov 2026 kl. 21:48 svensk tid (20:48 UTC). Asien och Europa: stängningskurser 9 nov. USA: senaste kurs under pågående handel, ca 12 minuter före stängning. Källa: Yahoo Finance (split- och utdelningsjusterade serier). Kursutveckling 1 v, 1 m osv räknas mot stängningskurser.</p>
+  <div class="ctx" aria-label="Marknadsläge">{{CTX}}</div>
+  <p class="lead">I dag kom en bred studs efter förra veckans ras: SOX steg drygt 7 %, Nasdaq-100 nästan 4 % och VIX föll drygt 20 %. AMD, Lam Research, Marvell, KLA, Bloom Energy och Constellation steg 10–14 %. Studsen ändrar inte vågräkningen än. En dag med stor uppgång inne i en korrektion kan vara början på en ny impuls, men också en B-våg eller en mindre våg (b). Därför gäller samma bekräftelsenivåer som i förra versionen. NVIDIA föll 4,4 % mot strömmen och bröt under botten från 5 nov, vilket är en varningssignal för AI-sektorn inför rapporten runt 17 nov. Topplistan är omviktad: aktier som redan har studsat långt från sitt stöd har sämre risk/reward nu, och Netflix kommer in som nytt läge från din bevakningslista.</p>
 </header>
 
 <section aria-labelledby="h-map">
@@ -127,6 +120,13 @@ ul.rej{margin:0;padding-left:18px;display:grid;gap:6px;max-width:90ch}
   <div class="tops">{{TOPS}}</div>
   <h3>Bevakning: nästa nivå</h3>
   <div class="watch">{{WATCH}}</div>
+</section>
+
+<section aria-labelledby="h-wl">
+  <span class="eyebrow">Din bevakningslista</span>
+  <h2 id="h-wl">Aktierna du har sökt på</h2>
+  <p class="small">Sorterat efter dagens kursutveckling. Våg-brickan visar bolag som klarade kraven och finns på kartan. Ett streck betyder bortsorterad eller OKLAR.</p>
+  <div class="tbl"><table class="wl"><thead><tr><th>Ticker</th><th>Kurs</th><th>I dag</th><th>1 v</th><th>Från 52-v-topp</th><th>Våg</th><th>Bedömning</th></tr></thead><tbody>{{WL}}</tbody></table></div>
 </section>
 
 <section aria-labelledby="h-tbl">

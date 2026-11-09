@@ -4,7 +4,12 @@ def load(t,suf):
     q=j['indicators']['quote'][0]
     adj=j['indicators'].get('adjclose',[{}])[0].get('adjclose', q['close'])
     df=pd.DataFrame({'o':q['open'],'h':q['high'],'l':q['low'],'c':q['close'],'a':adj,'v':q['volume']},
-        index=pd.to_datetime(j['timestamp'],unit='s')).dropna(subset=['c'])
+        index=pd.to_datetime(j['timestamp'],unit='s'))
+    m=j['meta']
+    if suf=='d' and len(df) and pd.isna(df['c'].iloc[-1]) and m.get('regularMarketPrice'):
+        i=df.index[-1]; df.loc[i,['c','a']]=m['regularMarketPrice']
+        df.loc[i,'h']=m.get('regularMarketDayHigh') or m['regularMarketPrice']; df.loc[i,'l']=m.get('regularMarketDayLow') or m['regularMarketPrice']
+    df=df.dropna(subset=['c'])
     # split-adjusted high/low via ratio a/c (also div-adjusts) -> use close-ratio only for splits: yahoo c is split-adjusted already
     if suf in ('w','m') and len(df)>2 and (df.index[-1]-df.index[-2]).days<6: df=df.iloc[:-1]
     return df, j['meta']
