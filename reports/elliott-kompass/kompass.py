@@ -10,21 +10,21 @@ def pt(seg,t):
 SIG={'buy':('Köpläge','sig-buy'),'hold':('Behåll','sig-hold'),'wait':('Avvakta','sig-wait'),'avoid':('Undvik','sig-avoid')}
 # name, ticker, price, wave, seg, t, prob, signal, action, levels, why
 S=[
- ('Uber','UBER','70,68 USD (förh. 69,80)','Slut C / tidig 1','1',0.10,45,'wait','Avvakta','Bekräftelse > 72,9 · stopp < 64','Trippelbotten 64–65 efter ABC. Ingen ny uppgång bekräftad.'),
- ('Booking','BKNG','160,21 USD (förh. 161,79)','Slut våg 2','2',0.86,60,'buy','Köpläge','Bekräftelse > 174,30 · mål 184 / 200–202 · varning < 152,3 · stopp < 146,28','Våg 1 146,28–174,30. Våg 2 till 156,30 (64 %) på låg volym. Mål 200–202: 1,618 × våg 1 och 61,8 % av fallet sammanfaller.'),
- ('Elekta','EKTA B','61,50 kr','Slut våg 2','2',0.93,55,'buy','Köp vid utbrott','Köp > 63,25 · utbrott > 66,70 · stopp < 59 · rapport 25 nov','Book-to-bill 1,11. Ordrarna i Kina har ökat tre kvartal i rad. Högre volym 10–11 nov. Toppen på våg 1 är 66,70.'),
- ('Munters','MTRS','134,60 kr','Våg 2 (alt. C)','2',0.78,50,'hold','Behåll, köp ej fler','Bekräftelse > 143,9 · stopp < 123,7','Djup våg 2 mellan 61,8 och 78,6 %. Om det i stället är en C-våg kan kursen falla mot 111.'),
- ('Hansa Biopharma','HNSA','47,92 kr (+7 % i dag)','Start våg 3','3',0.10,55,'buy','Köpläge, hög risk','Utbrottet gäller först vid stängning > 46,7 i dag · stopp < 44,7 · FDA 19 dec','Bryter toppen på våg 1 (46,68) i dag. Kräver stängning över den nivån. Binärt FDA-beslut före nyår.'),
- ('Mycronic','MYCR','296,80 kr','Tidig våg 3','3',0.16,55,'wait','Avvakta rekyl','Köp ≤ 285 eller > 313 · stopp < 250','Våg 2 bottnade exakt på 50 %, men kursen har redan stigit 10 % från botten.'),
- ('Beijer Ref','BEIJ B','163,20 kr','Mitt i våg 3','3',0.45,65,'hold','Behåll','Mål 173,6–178,6 · stopp < 155,3','Bottnarna stiger och toppen 159,6 är bruten. Blankningen är 8,3 %.'),
- ('Sobi','SOBI','486,20 kr','Våg 3, nära rekordnivå','3',0.62,65,'buy','Köpläge (trend)','Mål 520–540 · stopp < 469','Utbrott till ny rekordnivå 498,2 efter en Q3 som slog förväntningarna och en höjd prognos.'),
- ('Alphabet','GOOGL','293,45 USD (förh. 291,15)','Våg 4','4',0.72,50,'hold','Behåll','Bekräftelse > 340 · stopp < 243','Rekylen ligger nära 50 % av våg 3. Svagt kassaflöde.'),
- ('Volvo B','VOLV B','322,70 kr','Slut våg 4','4',0.82,55,'buy','Köpläge','Bekräftelse > 329,2 · stopp < 300','Våg 4 bottnade exakt på 50 %. P/E 13 på nästa års vinst.'),
- ('Prysmian','PRY','109,75 EUR','Slut våg 4','4',0.87,60,'buy','Köpläge','Bekräftelse > 114,9 · stopp < 97','Dubbelbotten på 50 % trots rekordrapport och höjd prognos.'),
- ('Morgan Stanley','MS','190,61 USD (förh. 190,40)','Slut våg 4','4',0.92,60,'wait','Köp vid > 194','Köp vid stängning > 194 · stopp < 172','Dubbelbotten på 38,2 %. P/E 13,6 på nästa års vinst.'),
- ('TSMC','TSM','413,35 USD (förh. 399,75)','Tidig våg 5','5',0.15,55,'wait','Avvakta, för dyr per aktie','Måste hålla > 405 · stopp < 352','Stängde över 405 i går, men ligger under den nivån i förhandeln (NVIDIA). Bekräftelsen är i fara.'),
- ('NVIDIA','NVDA','173,73 USD (förh. 158,74)','Våg A nedåt','A',0.55,60,'avoid','Undvik','Under 164,27 bekräftas en större korrektion','Oro kring vd:n, −8,6 % i förhandeln. Rapport 17 nov.'),
- ('Netflix','NFLX','64,54 USD (förh. 64,41)','Slut våg C','C',0.9,50,'buy','Köpläge, nära stopp','Bekräftelse > 66,4, sedan > 72,6 · stopp < 58','C slutade exakt på 61,8 %. Ny högre botten och P/E 17.'),
+ ('Uber','UBER','69,46 USD (−1,7 % i dag)','Slut C / tidig 1','1',0.10,45,'wait','Avvakta','Bekräftelse > 72,9 · stopp < 64','Trippelbotten 64–65 efter ABC. Ingen ny uppgång bekräftad.'),
+ ('Booking','BKNG','164,09 USD (+2,4 % i dag)','Slut våg 2','2',0.86,60,'buy','Köpläge','Bekräftelse > 174,30 · mål 184 / 200–202 · varning < 152,3 · stopp < 146,28','Våg 1 146,28–174,30. Våg 2 till 156,30 (64 %) på låg volym. Mål 200–202: 1,618 × våg 1 och 61,8 % av fallet sammanfaller.'),
+ ('Elekta','EKTA B','61,25 kr (−1,1 % i dag)','Slut våg 2','2',0.93,55,'buy','Köp vid utbrott','Köp > 63,25 · utbrott > 66,70 · stopp < 59 · rapport 25 nov','Book-to-bill 1,11. Ordrarna i Kina har ökat tre kvartal i rad. Högre volym 10–11 nov. Toppen på våg 1 är 66,70.'),
+ ('Munters','MTRS','136,25 kr (−0,3 % i dag)','Våg 2 (alt. C)','2',0.78,50,'hold','Behåll, köp ej fler','Bekräftelse > 143,9 · stopp < 123,7','Djup våg 2 mellan 61,8 och 78,6 %. Om det i stället är en C-våg kan kursen falla mot 111.'),
+ ('Hansa Biopharma','HNSA','47,04 kr (+5,0 % i dag)','Start våg 3','3',0.10,55,'buy','Köpläge, hög risk','Utbrottet gäller först vid stängning > 46,7 i dag · stopp < 44,7 · FDA 19 dec','Bröt toppen på våg 1 (46,68) efter Q3-rapporten 11 nov, kassa 1 337 MSEK. Kräver stängning över 46,7. Binärt FDA-beslut 19 dec.'),
+ ('Mycronic','MYCR','295,20 kr (−2,3 % i dag)','Tidig våg 3','3',0.16,55,'wait','Avvakta rekyl','Köp ≤ 285 eller > 313 · stopp < 250','Våg 2 bottnade exakt på 50 %, men kursen har redan stigit 10 % från botten.'),
+ ('Beijer Ref','BEIJ B','162,90 kr (+0,9 % i dag)','Mitt i våg 3','3',0.45,65,'hold','Behåll','Mål 173,6–178,6 · stopp < 155,3','Bottnarna stiger och toppen 159,6 är bruten. Blankningen är 8,3 %.'),
+ ('Sobi','SOBI','484,80 kr (−0,1 % i dag)','Våg 3, nära rekordnivå','3',0.62,65,'buy','Köpläge (trend)','Mål 520–540 · stopp < 469','Utbrott till ny rekordnivå 498,2 efter en Q3 som slog förväntningarna och en höjd prognos.'),
+ ('Alphabet','GOOGL','294,68 USD (+0,4 % i dag)','Våg 4','4',0.72,50,'hold','Behåll','Bekräftelse > 340 · stopp < 243','Rekylen ligger nära 50 % av våg 3. Svagt kassaflöde.'),
+ ('Volvo B','VOLV B','322,30 kr (−0,2 % i dag)','Slut våg 4','4',0.82,55,'buy','Köpläge','Bekräftelse > 329,2 · stopp < 300','Våg 4 bottnade exakt på 50 %. P/E 13 på nästa års vinst.'),
+ ('Prysmian','PRY','110,70 EUR (−0,9 % i dag)','Slut våg 4','4',0.87,60,'buy','Köpläge','Bekräftelse > 114,9 · stopp < 97','Dubbelbotten på 50 % trots rekordrapport och höjd prognos.'),
+ ('Morgan Stanley','MS','189,58 USD (−0,5 % i dag)','Slut våg 4','4',0.92,60,'wait','Köp vid > 194','Köp vid stängning > 194 · stopp < 172','Dubbelbotten på 38,2 %. P/E 13,6 på nästa års vinst.'),
+ ('TSMC','TSM','402,50 USD (−2,6 % i dag)','Tidig våg 5','5',0.15,55,'wait','Avvakta, för dyr per aktie','Måste hålla > 405 · stopp < 352','Stängde över 405 i går men handlas under den nivån i dag. Bekräftelsen av våg 5 är i fara.'),
+ ('NVIDIA','NVDA','160,77 USD (−7,4 % i dag)','Våg A nedåt','A',0.55,60,'avoid','Undvik','Under 164,27 bekräftas en större korrektion','Oro kring vd:n. Dagslägsta 148,80, under den kritiska nivån 164,27. Rapport 17 nov.'),
+ ('Netflix','NFLX','63,16 USD (−2,1 % i dag)','Slut våg C','C',0.9,50,'buy','Köpläge, nära stopp','Bekräftelse > 66,4, sedan > 72,6 · stopp < 58','C slutade exakt på 61,8 %. Ny högre botten och P/E 17.'),
 ]
 # clusters -> callout box position
 CL=[

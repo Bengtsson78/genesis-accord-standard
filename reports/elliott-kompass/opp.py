@@ -47,12 +47,12 @@ svg=''.join(s)
 tr=''.join(f'''<tr id="k-opp-{i}"><th scope="row">{E(r["n"])}</th><td class="n">{sv(r["p"],2)} {r["cur"]}<span class="sub">kl. {r["ts"]} UTC</span></td><td><span class="chip {r["wc"]}">{E(r["wl"])}</span></td><td class="n">{r["pr"]} %</td>
 <td class="n">{E(r["tgl"])}<span class="sub up">{sv(r["up"],1,True)} %</span></td><td class="n">{sv(r["st"],2)}<span class="sub dn">{sv(r["dn"],1,True)} %</span></td><td class="n"><b>{sv(r["rr"],1)}</b></td><td class="n">{sv(r["cost"],0)} kr</td><td>{E(r["trig"])}</td></tr>''' for i,r in enumerate(rows))
 sec=f'''<section aria-labelledby="h-opp">
-  <span class="eyebrow">Uppdaterat 12 nov kl. 15:00</span>
+  <span class="eyebrow">Uppdaterat 12 nov kl. 16:07</span>
   <h2 id="h-opp">Möjligheter just nu</h2>
   <p>Varje stapel visar hur mycket aktien kan stiga till sitt Elliott-mål (grönt) och hur mycket den kan falla till stoppnivån (rött). Längst upp: aktier i köpläge nu, sorterade efter risk/reward. Längre ned: aktier som väntar på en köpsignal. Klicka på ett namn för detaljerna.</p>
   <div class="mapbox">{svg}</div>
   <div class="tbl"><table class="ot"><thead><tr><th>Aktie</th><th>Kurs</th><th>Våg</th><th>Sannolikhet</th><th>Mål</th><th>Stopp</th><th>R/R</th><th>10 aktier</th><th>Gör</th></tr></thead><tbody>{tr}</tbody></table></div>
-  <p class="small">Kurser hämtade 12 nov 2026 kl. 15:00 svensk tid. USA: förhandel, börsen öppnar 15:30. Stockholm och Milano: pågående handel. Valuta: 1 USD = {sv(usd,2)} kr, 1 EUR = {sv(eur,2)} kr. R/R = uppsida delat med nedsida. Mål och stopp kommer enbart från vågstrukturen, inte från analytiker. Procenttalet anger hur sannolikt det är att vågplaceringen stämmer, inte chansen att tjäna pengar.</p>
+  <p class="small">Kurser hämtade 12 nov 2026 kl. 16:07 svensk tid, under pågående handel. Valuta: 1 USD = {sv(usd,2)} kr, 1 EUR = {sv(eur,2)} kr. R/R = uppsida delat med nedsida. Mål och stopp kommer enbart från vågstrukturen, inte från analytiker. Procenttalet anger hur sannolikt det är att vågplaceringen stämmer, inte chansen att tjäna pengar.</p>
 </section>'''
 open('opp_section.html','w').write(sec)
 for r in rows: print(r['n'],round(r['p'],2),round(r['up'],1),round(r['dn'],1),round(r['rr'],1),round(r['cost']))
