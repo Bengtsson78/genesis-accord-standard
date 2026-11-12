@@ -1,0 +1,116 @@
+<title>Elliott-kompassen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one wide wave map as the hero, then a field guide to the eight waves, then the table of named stocks. Wave colours follow the user's brief. */
+:root{
+  --bg:#f3f5f8; --paper:#ffffff; --ink:#142030; --ink2:#526173; --rule:#d9dfe7; --accent:#1f4f8a;
+  --w1:#2e9e5b; --w2:#d6a200; --w3:#2f6fdb; --w4:#119aa0; --w5:#8a4fd8; --wa:#d64545; --wb:#e8892b; --wc:#c4402f;
+  --buy:#1f8a4c; --hold:#2f6fdb; --wait:#b7791f; --avoid:#c23b3b;
+  --zbuy:rgba(31,138,76,.10); --zsell:rgba(138,79,216,.10); --zavoid:rgba(214,69,69,.08);
+  --f-disp:"Space Grotesk",system-ui,sans-serif; --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e141b; --paper:#151d27; --ink:#e6ecf2; --ink2:#9aa9b9; --rule:#283442; --accent:#8db6ec;
+  --w1:#4cc27c; --w2:#ebc02f; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ad83ee; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f;
+  --buy:#4cc27c; --hold:#6a9cf0; --wait:#e0a84a; --avoid:#ef6b6b;
+  --zbuy:rgba(76,194,124,.13); --zsell:rgba(173,131,238,.14); --zavoid:rgba(239,107,107,.11); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --paper:#151d27; --ink:#e6ecf2; --ink2:#9aa9b9; --rule:#283442; --accent:#8db6ec;
+  --w1:#4cc27c; --w2:#ebc02f; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ad83ee; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f;
+  --buy:#4cc27c; --hold:#6a9cf0; --wait:#e0a84a; --avoid:#ef6b6b;
+  --zbuy:rgba(76,194,124,.13); --zsell:rgba(173,131,238,.14); --zavoid:rgba(239,107,107,.11); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(30px,5vw,50px);font-weight:700} h2{font-size:clamp(21px,3vw,28px);font-weight:700} h3{font-size:17px;font-weight:600}
+p{margin:0;max-width:72ch}
+.eyebrow{font:600 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.stamp{font:500 13px/1.5 var(--f-mono);color:var(--ink2)}
+section{display:grid;gap:16px;min-width:0}
+.hero{display:grid;gap:12px}
+.lead{font-size:16.5px}
+.mapbox{background:var(--paper);border:1px solid var(--rule);border-radius:14px;overflow-x:auto}
+.map{display:block;width:100%;min-width:760px;height:auto}
+.bg{fill:var(--paper)} .grid{stroke:var(--rule);stroke-width:1}
+.ax{fill:var(--ink2);font:500 12px var(--f-mono)}
+.seg{stroke-width:8;stroke-linecap:round}
+.sw1{stroke:var(--w1)}.sw2{stroke:var(--w2)}.sw3{stroke:var(--w3)}.sw4{stroke:var(--w4)}.sw5{stroke:var(--w5)}.swa{stroke:var(--wa)}.swb{stroke:var(--wb)}.swc{stroke:var(--wc)}
+.nd{stroke:var(--paper);stroke-width:3}.ndt{fill:#fff;font:700 16px var(--f-disp);text-anchor:middle}
+.nd.w1{fill:var(--w1)}.nd.w2{fill:var(--w2)}.nd.w3{fill:var(--w3)}.nd.w4{fill:var(--w4)}.nd.w5{fill:var(--w5)}.nd.wa{fill:var(--wa)}.nd.wb{fill:var(--wb)}.nd.wc{fill:var(--wc)}
+.zone{stroke:none}.zbuy{fill:var(--zbuy)}.zsell{fill:var(--zsell)}.zavoid{fill:var(--zavoid)}
+.zl{font:700 11px var(--f-mono);letter-spacing:.08em}.zbuy-t{fill:var(--buy)}.zsell-t{fill:var(--w5)}.zavoid-t{fill:var(--avoid)}
+.dot{stroke:var(--paper);stroke-width:2.5}
+.sig-buy{fill:var(--buy)}.sig-hold{fill:var(--hold)}.sig-wait{fill:var(--wait)}.sig-avoid{fill:var(--avoid)}
+.lead{stroke:var(--ink2);stroke-width:1;stroke-dasharray:3 3;fill:none}
+line.lead{opacity:.7}
+.box{fill:var(--paper);stroke-width:2}
+.bw1{stroke:var(--w1)}.bw2{stroke:var(--w2)}.bw3{stroke:var(--w3)}.bw4{stroke:var(--w4)}.bw5{stroke:var(--w5)}.bwa{stroke:var(--wa)}.bwc{stroke:var(--wc)}
+.bn{fill:var(--ink);font:600 14px var(--f-body)} .bp{fill:var(--ink);font:600 14px var(--f-mono)}
+svg a:hover .bn,svg a:focus .bn{text-decoration:underline}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.ldot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.ldot.sig-buy{background:var(--buy)}.ldot.sig-hold{background:var(--hold)}.ldot.sig-wait{background:var(--wait)}.ldot.sig-avoid{background:var(--avoid)}
+.note{border-left:3px solid var(--accent);background:var(--paper);padding:12px 16px;border-radius:0 10px 10px 0;font-size:14px;max-width:none}
+.waves{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px}
+.wcard{background:var(--paper);border:1px solid var(--rule);border-top:5px solid var(--rule);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start;font-size:14px}
+.wcard.w1{border-top-color:var(--w1)}.wcard.w2{border-top-color:var(--w2)}.wcard.w3{border-top-color:var(--w3)}.wcard.w4{border-top-color:var(--w4)}.wcard.w5{border-top-color:var(--w5)}.wcard.wa{border-top-color:var(--wa)}.wcard.wb{border-top-color:var(--wb)}.wcard.wc{border-top-color:var(--wc)}
+.wcard header{display:flex;gap:10px;align-items:center}
+.wn{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 16px var(--f-disp)}
+.wn.w1{background:var(--w1)}.wn.w2{background:var(--w2)}.wn.w3{background:var(--w3)}.wn.w4{background:var(--w4)}.wn.w5{background:var(--w5)}.wn.wa{background:var(--wa)}.wn.wb{background:var(--wb)}.wn.wc{background:var(--wc)}
+.rule{color:var(--ink2)}
+.act{border-radius:8px;padding:8px 10px;background:var(--bg)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:1000px;font-size:13.5px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+thead th{font:600 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);background:var(--paper)}
+tbody th{font-weight:600;white-space:nowrap}
+.sub{display:block;font:500 12px var(--f-mono);color:var(--ink2)}
+.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;padding:4px 9px;border-radius:999px;color:#fff;font:600 12px var(--f-body);white-space:nowrap}
+.chip.w1{background:var(--w1)}.chip.w2{background:var(--w2);color:#2a2100}.chip.w3{background:var(--w3)}.chip.w4{background:var(--w4)}.chip.w5{background:var(--w5)}.chip.wa{background:var(--wa)}.chip.wc{background:var(--wc)}
+.prob{display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--rule);overflow:hidden;vertical-align:middle;margin-right:8px}.prob i{display:block;height:100%;background:var(--accent)}
+.sig{display:inline-block;padding:4px 9px;border-radius:6px;font:600 12px var(--f-body);border:1.5px solid currentColor;white-space:nowrap}
+.sig.sig-buy{color:var(--buy)}.sig.sig-hold{color:var(--hold)}.sig.sig-wait{color:var(--wait)}.sig.sig-avoid{color:var(--avoid)}
+.why{color:var(--ink2);min-width:220px}
+tr:target{background:var(--bg)}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:12.5px;color:var(--ink2)}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Elliott Wave · dina aktier på kartan</span>
+  <h1>Elliott-kompassen</h1>
+  <p class="lead">Varje aktie vi har pratat om står på den plats i vågcykeln där jag bedömer att den befinner sig. Procenttalet är min bedömning av hur sannolikt det är att placeringen stämmer.</p>
+  <p class="stamp">Kurser: torsdag 12 nov 2026 kl. 13:45 svensk tid. Stockholm och Milano: pågående handel. USA: stängning 11 nov (börsen öppnar 15:30). Källa: Yahoo Finance.</p>
+</header>
+
+<section aria-labelledby="h-map">
+  <h2 id="h-map">Var aktierna står i cykeln</h2>
+  <div class="legend">
+    <span><i class="ldot sig-buy"></i>Köpläge</span><span><i class="ldot sig-hold"></i>Behåll</span><span><i class="ldot sig-wait"></i>Avvakta signal</span><span><i class="ldot sig-avoid"></i>Undvik</span>
+    <span>Gröna fält = köpzoner · lila = ta hem vinst · rött = undvik</span>
+  </div>
+  <div class="mapbox">{{SVG}}</div>
+  <p class="note"><b>Så läser du procenten.</b> 60 % betyder att jag tror att aktien med 60 % sannolikhet befinner sig i den våg den är placerad i. I övriga fall gäller den alternativa tolkningen, som står i tabellen nedan. Procenten är <b>inte</b> chansen att tjäna pengar. Under 50 % betyder att jag är osäker. Ingen placering får över 65 %, eftersom Elliott alltid har mer än en möjlig tolkning.</p>
+</section>
+
+<section aria-labelledby="h-waves">
+  <h2 id="h-waves">Vad varje våg betyder</h2>
+  <p>En hel cykel består av fem vågor upp (1–5) och tre vågor ned (A–B–C). Lägst risk finns i slutet av våg 2, slutet av våg 4 och slutet av våg C. Högst risk finns i våg 5 och i A–B.</p>
+  <div class="waves">{{WAVES}}</div>
+</section>
+
+<section aria-labelledby="h-tbl">
+  <h2 id="h-tbl">Aktierna i detalj</h2>
+  <p class="small">Sorterade i den ordning de kommer i cykeln. Stopp betyder stängningskurs. Bekräftelse är nivån där vågräkningen blir tydligt rätt. Ingen bedömning bygger på analytikernas riktkurser.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Aktie</th><th>Kurs</th><th>Våg</th><th>Sannolikhet</th><th>Signal</th><th>Nivåer</th><th>Varför</th></tr></thead>
+    <tbody>{{ROWS}}</tbody>
+  </table></div>
+  <p class="small">Sannolikhetsbedömningar, inte prognoser och inte personlig rådgivning. Hansa Biopharma har ett binärt FDA-beslut 19 december, där kursen kan röra sig ±40–60 % på en dag.</p>
+</section>
+</div>

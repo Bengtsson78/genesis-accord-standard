@@ -1,0 +1,154 @@
+<title>Elliott-kompassen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one wide wave map as the hero, then a field guide to the eight waves, then the table of named stocks. Wave colours follow the user's brief. */
+:root{
+  --bg:#f3f5f8; --paper:#ffffff; --ink:#142030; --ink2:#526173; --rule:#d9dfe7; --accent:#1f4f8a;
+  --w1:#2e9e5b; --w2:#d6a200; --w3:#2f6fdb; --w4:#119aa0; --w5:#8a4fd8; --wa:#d64545; --wb:#e8892b; --wc:#c4402f;
+  --buy:#1f8a4c; --hold:#2f6fdb; --wait:#b7791f; --avoid:#c23b3b;
+  --zbuy:rgba(31,138,76,.10); --zsell:rgba(138,79,216,.10); --zavoid:rgba(214,69,69,.08);
+  --f-disp:"Space Grotesk",system-ui,sans-serif; --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e141b; --paper:#151d27; --ink:#e6ecf2; --ink2:#9aa9b9; --rule:#283442; --accent:#8db6ec;
+  --w1:#4cc27c; --w2:#ebc02f; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ad83ee; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f;
+  --buy:#4cc27c; --hold:#6a9cf0; --wait:#e0a84a; --avoid:#ef6b6b;
+  --zbuy:rgba(76,194,124,.13); --zsell:rgba(173,131,238,.14); --zavoid:rgba(239,107,107,.11); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --paper:#151d27; --ink:#e6ecf2; --ink2:#9aa9b9; --rule:#283442; --accent:#8db6ec;
+  --w1:#4cc27c; --w2:#ebc02f; --w3:#6a9cf0; --w4:#3cc4c9; --w5:#ad83ee; --wa:#ef6b6b; --wb:#f2a35a; --wc:#e2624f;
+  --buy:#4cc27c; --hold:#6a9cf0; --wait:#e0a84a; --avoid:#ef6b6b;
+  --zbuy:rgba(76,194,124,.13); --zsell:rgba(173,131,238,.14); --zavoid:rgba(239,107,107,.11); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(30px,5vw,50px);font-weight:700} h2{font-size:clamp(21px,3vw,28px);font-weight:700} h3{font-size:17px;font-weight:600}
+p{margin:0;max-width:72ch}
+.eyebrow{font:600 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.stamp{font:500 13px/1.5 var(--f-mono);color:var(--ink2)}
+section{display:grid;gap:16px;min-width:0}
+.hero{display:grid;gap:12px}
+.lead{font-size:16.5px}
+.mapbox{background:var(--paper);border:1px solid var(--rule);border-radius:14px;overflow-x:auto}
+.map{display:block;width:100%;min-width:760px;height:auto}
+.bg{fill:var(--paper)} .grid{stroke:var(--rule);stroke-width:1}
+.ax{fill:var(--ink2);font:500 12px var(--f-mono)}
+.seg{stroke-width:8;stroke-linecap:round}
+.sw1{stroke:var(--w1)}.sw2{stroke:var(--w2)}.sw3{stroke:var(--w3)}.sw4{stroke:var(--w4)}.sw5{stroke:var(--w5)}.swa{stroke:var(--wa)}.swb{stroke:var(--wb)}.swc{stroke:var(--wc)}
+.nd{stroke:var(--paper);stroke-width:3}.ndt{fill:#fff;font:700 16px var(--f-disp);text-anchor:middle}
+.nd.w1{fill:var(--w1)}.nd.w2{fill:var(--w2)}.nd.w3{fill:var(--w3)}.nd.w4{fill:var(--w4)}.nd.w5{fill:var(--w5)}.nd.wa{fill:var(--wa)}.nd.wb{fill:var(--wb)}.nd.wc{fill:var(--wc)}
+.zone{stroke:none}.zbuy{fill:var(--zbuy)}.zsell{fill:var(--zsell)}.zavoid{fill:var(--zavoid)}
+.zl{font:700 11px var(--f-mono);letter-spacing:.08em}.zbuy-t{fill:var(--buy)}.zsell-t{fill:var(--w5)}.zavoid-t{fill:var(--avoid)}
+.dot{stroke:var(--paper);stroke-width:2.5}
+.sig-buy{fill:var(--buy)}.sig-hold{fill:var(--hold)}.sig-wait{fill:var(--wait)}.sig-avoid{fill:var(--avoid)}
+.lead{stroke:var(--ink2);stroke-width:1;stroke-dasharray:3 3;fill:none}
+line.lead{opacity:.7}
+.box{fill:var(--paper);stroke-width:2}
+.bw1{stroke:var(--w1)}.bw2{stroke:var(--w2)}.bw3{stroke:var(--w3)}.bw4{stroke:var(--w4)}.bw5{stroke:var(--w5)}.bwa{stroke:var(--wa)}.bwc{stroke:var(--wc)}
+.bn{fill:var(--ink);font:600 14px var(--f-body)} .bp{fill:var(--ink);font:600 14px var(--f-mono)}
+svg a:hover .bn,svg a:focus .bn{text-decoration:underline}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.ldot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.ldot.sig-buy{background:var(--buy)}.ldot.sig-hold{background:var(--hold)}.ldot.sig-wait{background:var(--wait)}.ldot.sig-avoid{background:var(--avoid)}
+.note{border-left:3px solid var(--accent);background:var(--paper);padding:12px 16px;border-radius:0 10px 10px 0;font-size:14px;max-width:none}
+.waves{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px}
+.wcard{background:var(--paper);border:1px solid var(--rule);border-top:5px solid var(--rule);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start;font-size:14px}
+.wcard.w1{border-top-color:var(--w1)}.wcard.w2{border-top-color:var(--w2)}.wcard.w3{border-top-color:var(--w3)}.wcard.w4{border-top-color:var(--w4)}.wcard.w5{border-top-color:var(--w5)}.wcard.wa{border-top-color:var(--wa)}.wcard.wb{border-top-color:var(--wb)}.wcard.wc{border-top-color:var(--wc)}
+.wcard header{display:flex;gap:10px;align-items:center}
+.wn{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 16px var(--f-disp)}
+.wn.w1{background:var(--w1)}.wn.w2{background:var(--w2)}.wn.w3{background:var(--w3)}.wn.w4{background:var(--w4)}.wn.w5{background:var(--w5)}.wn.wa{background:var(--wa)}.wn.wb{background:var(--wb)}.wn.wc{background:var(--wc)}
+.rule{color:var(--ink2)}
+.act{border-radius:8px;padding:8px 10px;background:var(--bg)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:1000px;font-size:13.5px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+thead th{font:600 11.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);background:var(--paper)}
+tbody th{font-weight:600;white-space:nowrap}
+.sub{display:block;font:500 12px var(--f-mono);color:var(--ink2)}
+.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;padding:4px 9px;border-radius:999px;color:#fff;font:600 12px var(--f-body);white-space:nowrap}
+.chip.w1{background:var(--w1)}.chip.w2{background:var(--w2);color:#2a2100}.chip.w3{background:var(--w3)}.chip.w4{background:var(--w4)}.chip.w5{background:var(--w5)}.chip.wa{background:var(--wa)}.chip.wc{background:var(--wc)}
+.prob{display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--rule);overflow:hidden;vertical-align:middle;margin-right:8px}.prob i{display:block;height:100%;background:var(--accent)}
+.sig{display:inline-block;padding:4px 9px;border-radius:6px;font:600 12px var(--f-body);border:1.5px solid currentColor;white-space:nowrap}
+.sig.sig-buy{color:var(--buy)}.sig.sig-hold{color:var(--hold)}.sig.sig-wait{color:var(--wait)}.sig.sig-avoid{color:var(--avoid)}
+.why{color:var(--ink2);min-width:220px}
+tr:target{background:var(--bg)}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.small{font-size:12.5px;color:var(--ink2)}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Elliott Wave · dina aktier på kartan</span>
+  <h1>Elliott-kompassen</h1>
+  <p class="lead">Varje aktie vi har pratat om står på den plats i vågcykeln där jag bedömer att den befinner sig. Procenttalet är min bedömning av hur sannolikt det är att placeringen stämmer.</p>
+  <p class="stamp">Kurser: torsdag 12 nov 2026 kl. 13:45 svensk tid. Stockholm och Milano: pågående handel. USA: stängning 11 nov (börsen öppnar 15:30). Källa: Yahoo Finance.</p>
+</header>
+
+<section aria-labelledby="h-map">
+  <h2 id="h-map">Var aktierna står i cykeln</h2>
+  <div class="legend">
+    <span><i class="ldot sig-buy"></i>Köpläge</span><span><i class="ldot sig-hold"></i>Behåll</span><span><i class="ldot sig-wait"></i>Avvakta signal</span><span><i class="ldot sig-avoid"></i>Undvik</span>
+    <span>Gröna fält = köpzoner · lila = ta hem vinst · rött = undvik</span>
+  </div>
+  <div class="mapbox"><svg viewBox="0 0 1340 690" class="map" role="img" aria-labelledby="mt md"><title id="mt">Elliott-kartan med föreslagna aktier</title><desc id="md">Vågorna 1 till 5 och A till C med varje aktie markerad där den bedöms ligga, med sannolikhet i procent.</desc><rect width="1340" height="690" class="bg"/><line x1="0" x2="1340" y1="90" y2="90" class="grid"/><line x1="0" x2="1340" y1="190" y2="190" class="grid"/><line x1="0" x2="1340" y1="290" y2="290" class="grid"/><line x1="0" x2="1340" y1="390" y2="390" class="grid"/><line x1="0" x2="1340" y1="490" y2="490" class="grid"/><line x1="0" x2="1340" y1="590" y2="590" class="grid"/><rect x="300" y="430" width="120" height="80" rx="14" class="zone zbuy"/><text x="236" y="476" class="zl zbuy-t">KÖPZON</text><rect x="740" y="250" width="120" height="80" rx="14" class="zone zbuy"/><text x="868" y="300" class="zl zbuy-t">KÖPZON</text><rect x="1235" y="455" width="100" height="80" rx="14" class="zone zbuy"/><text x="1250" y="552" class="zl zbuy-t">KÖPZON</text><rect x="925" y="40" width="110" height="80" rx="14" class="zone zsell"/><text x="922" y="35" class="zl zsell-t">TA HEM VINST</text><rect x="1035" y="200" width="165" height="190" rx="14" class="zone zavoid"/><text x="1050" y="195" class="zl zavoid-t">UNDVIK</text><line x1="70" y1="560" x2="250" y2="360" class="seg sw1"/><line x1="250" y1="360" x2="360" y2="470" class="seg sw2"/><line x1="360" y1="470" x2="680" y2="120" class="seg sw3"/><line x1="680" y1="120" x2="800" y2="290" class="seg sw4"/><line x1="800" y1="290" x2="980" y2="80" class="seg sw5"/><line x1="980" y1="80" x2="1100" y2="340" class="seg swa"/><line x1="1100" y1="340" x2="1170" y2="260" class="seg swb"/><line x1="1170" y1="260" x2="1290" y2="500" class="seg swc"/><circle cx="88" cy="540" r="7" class="dot sig-wait"/><circle cx="345" cy="455" r="7" class="dot sig-buy"/><circle cx="352" cy="462" r="7" class="dot sig-buy"/><circle cx="336" cy="446" r="7" class="dot sig-hold"/><circle cx="392" cy="435" r="7" class="dot sig-buy"/><circle cx="411" cy="414" r="7" class="dot sig-wait"/><circle cx="504" cy="312" r="7" class="dot sig-hold"/><circle cx="558" cy="253" r="7" class="dot sig-buy"/><circle cx="766" cy="242" r="7" class="dot sig-hold"/><circle cx="778" cy="259" r="7" class="dot sig-buy"/><circle cx="784" cy="268" r="7" class="dot sig-buy"/><circle cx="790" cy="276" r="7" class="dot sig-wait"/><circle cx="827" cy="258" r="7" class="dot sig-wait"/><circle cx="1046" cy="223" r="7" class="dot sig-avoid"/><circle cx="1278" cy="476" r="7" class="dot sig-buy"/><circle cx="250" cy="360" r="17" class="nd w1"/><text x="250" y="366" class="ndt">1</text><circle cx="360" cy="470" r="17" class="nd w2"/><text x="360" y="476" class="ndt">2</text><circle cx="680" cy="120" r="17" class="nd w3"/><text x="680" y="126" class="ndt">3</text><circle cx="800" cy="290" r="17" class="nd w4"/><text x="800" y="296" class="ndt">4</text><circle cx="980" cy="80" r="17" class="nd w5"/><text x="980" y="86" class="ndt">5</text><circle cx="1100" cy="340" r="17" class="nd wa"/><text x="1100" y="346" class="ndt">A</text><circle cx="1170" cy="260" r="17" class="nd wb"/><text x="1170" y="266" class="ndt">B</text><circle cx="1290" cy="500" r="17" class="nd wc"/><text x="1290" y="506" class="ndt">C</text><line x1="88" y1="540" x2="175" y2="300" class="lead"/><rect x="40" y="250" width="270" height="50" rx="10" class="box bw1"/><a href="#k-UBER"><circle cx="58" cy="275" r="6" class="dot sig-wait"/><text x="72" y="280" class="bn">Uber</text><text x="296" y="280" class="bp" text-anchor="end">45 %</text></a><line x1="345" y1="455" x2="465" y2="520" class="lead"/><line x1="352" y1="462" x2="465" y2="520" class="lead"/><line x1="336" y1="446" x2="465" y2="520" class="lead"/><rect x="330" y="520" width="270" height="118" rx="10" class="box bw2"/><a href="#k-BKNG"><circle cx="348" cy="545" r="6" class="dot sig-buy"/><text x="362" y="550" class="bn">Booking</text><text x="586" y="550" class="bp" text-anchor="end">60 %</text></a><a href="#k-EKTAB"><circle cx="348" cy="579" r="6" class="dot sig-buy"/><text x="362" y="584" class="bn">Elekta</text><text x="586" y="584" class="bp" text-anchor="end">55 %</text></a><a href="#k-MTRS"><circle cx="348" cy="613" r="6" class="dot sig-hold"/><text x="362" y="618" class="bn">Munters</text><text x="586" y="618" class="bp" text-anchor="end">50 %</text></a><line x1="392" y1="435" x2="420" y2="414" class="lead"/><line x1="411" y1="414" x2="420" y2="414" class="lead"/><rect x="420" y="330" width="270" height="84" rx="10" class="box bw3"/><a href="#k-HNSA"><circle cx="438" cy="355" r="6" class="dot sig-buy"/><text x="452" y="360" class="bn">Hansa Biopharma</text><text x="676" y="360" class="bp" text-anchor="end">55 %</text></a><a href="#k-MYCR"><circle cx="438" cy="389" r="6" class="dot sig-wait"/><text x="452" y="394" class="bn">Mycronic</text><text x="676" y="394" class="bp" text-anchor="end">55 %</text></a><line x1="504" y1="312" x2="490" y2="234" class="lead"/><line x1="558" y1="253" x2="490" y2="234" class="lead"/><rect x="355" y="150" width="270" height="84" rx="10" class="box bw3"/><a href="#k-BEIJB"><circle cx="373" cy="175" r="6" class="dot sig-hold"/><text x="387" y="180" class="bn">Beijer Ref</text><text x="611" y="180" class="bp" text-anchor="end">65 %</text></a><a href="#k-SOBI"><circle cx="373" cy="209" r="6" class="dot sig-buy"/><text x="387" y="214" class="bn">Sobi</text><text x="611" y="214" class="bp" text-anchor="end">65 %</text></a><line x1="766" y1="242" x2="835" y2="365" class="lead"/><line x1="778" y1="259" x2="835" y2="365" class="lead"/><line x1="784" y1="268" x2="835" y2="365" class="lead"/><line x1="790" y1="276" x2="835" y2="365" class="lead"/><rect x="700" y="365" width="270" height="152" rx="10" class="box bw4"/><a href="#k-GOOGL"><circle cx="718" cy="390" r="6" class="dot sig-hold"/><text x="732" y="395" class="bn">Alphabet</text><text x="956" y="395" class="bp" text-anchor="end">50 %</text></a><a href="#k-VOLVB"><circle cx="718" cy="424" r="6" class="dot sig-buy"/><text x="732" y="429" class="bn">Volvo B</text><text x="956" y="429" class="bp" text-anchor="end">55 %</text></a><a href="#k-PRY"><circle cx="718" cy="458" r="6" class="dot sig-buy"/><text x="732" y="463" class="bn">Prysmian</text><text x="956" y="463" class="bp" text-anchor="end">60 %</text></a><a href="#k-MS"><circle cx="718" cy="492" r="6" class="dot sig-wait"/><text x="732" y="497" class="bn">Morgan Stanley</text><text x="956" y="497" class="bp" text-anchor="end">60 %</text></a><line x1="827" y1="258" x2="835" y2="90" class="lead"/><rect x="700" y="40" width="270" height="50" rx="10" class="box bw5"/><a href="#k-TSM"><circle cx="718" cy="65" r="6" class="dot sig-wait"/><text x="732" y="70" class="bn">TSMC</text><text x="956" y="70" class="bp" text-anchor="end">60 %</text></a><line x1="1046" y1="223" x2="1120" y2="505" class="lead"/><rect x="985" y="505" width="270" height="50" rx="10" class="box bwa"/><a href="#k-NVDA"><circle cx="1003" cy="530" r="6" class="dot sig-avoid"/><text x="1017" y="535" class="bn">NVIDIA</text><text x="1241" y="535" class="bp" text-anchor="end">55 %</text></a><line x1="1278" y1="476" x2="1165" y2="585" class="lead"/><rect x="1030" y="585" width="270" height="50" rx="10" class="box bwc"/><a href="#k-NFLX"><circle cx="1048" cy="610" r="6" class="dot sig-buy"/><text x="1062" y="615" class="bn">Netflix</text><text x="1286" y="615" class="bp" text-anchor="end">50 %</text></a><text x="20" y="676" class="ax">Tid →</text><text x="1320" y="676" class="ax" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text></svg></div>
+  <p class="note"><b>Så läser du procenten.</b> 60 % betyder att jag tror att aktien med 60 % sannolikhet befinner sig i den våg den är placerad i. I övriga fall gäller den alternativa tolkningen, som står i tabellen nedan. Procenten är <b>inte</b> chansen att tjäna pengar. Under 50 % betyder att jag är osäker. Ingen placering får över 65 %, eftersom Elliott alltid har mer än en möjlig tolkning.</p>
+</section>
+
+<section aria-labelledby="h-waves">
+  <h2 id="h-waves">Vad varje våg betyder</h2>
+  <p>En hel cykel består av fem vågor upp (1–5) och tre vågor ned (A–B–C). Lägst risk finns i slutet av våg 2, slutet av våg 4 och slutet av våg C. Högst risk finns i våg 5 och i A–B.</p>
+  <div class="waves"><article class="wcard w1"><header><span class="wn w1">1</span><h3>Våg 1: den första uppgången</h3></header>
+<p>Kursen vänder upp efter en lång nedgång. De flesta tror fortfarande att det bara är en tillfällig studs.</p><p class="rule"><b>Kännetecken:</b> Svår att se i förväg. Kursen bryter en fallande trend, ofta på hög volym.</p><p class="act w1"><b>Gör:</b> Bevaka. Köp gärna först i våg 2.</p></article><article class="wcard w2"><header><span class="wn w2">2</span><h3>Våg 2: rekylen som skrämmer</h3></header>
+<p>Kursen tar tillbaka en stor del av våg 1, ofta 50–61,8 %. Pessimismen kommer tillbaka.</p><p class="rule"><b>Kännetecken:</b> Går aldrig under starten på våg 1. Det är den viktigaste regeln och därmed din stoppnivå.</p><p class="act w2"><b>Gör:</b> Köpzon. Lägst risk i hela cykeln.</p></article><article class="wcard w3"><header><span class="wn w3">3</span><h3>Våg 3: den starka vågen</h3></header>
+<p>Den längsta och snabbaste vågen. Nyheterna blir bättre och alla vill köpa.</p><p class="rule"><b>Kännetecken:</b> Ofta 1,618 gånger våg 1 eller mer. Får aldrig vara den kortaste av vågorna 1, 3 och 5.</p><p class="act w3"><b>Gör:</b> Köp när utbrottet bekräftas. Behåll.</p></article><article class="wcard w4"><header><span class="wn w4">4</span><h3>Våg 4: andningspausen</h3></header>
+<p>Kursen vilar eller går sidledes efter den kraftiga uppgången. Många säljer för tidigt.</p><p class="rule"><b>Kännetecken:</b> Tar oftast tillbaka 23,6–50 % av våg 3. Ska inte gå ned i våg 1:s kursområde.</p><p class="act w4"><b>Gör:</b> Köpzon inför våg 5, med en nära stoppnivå.</p></article><article class="wcard w5"><header><span class="wn w5">5</span><h3>Våg 5: den sista uppgången</h3></header>
+<p>Optimismen är som störst och kursen når ny topp, men med allt mindre kraft. Det syns som att RSI sjunker trots nya toppar.</p><p class="rule"><b>Kännetecken:</b> Ofta lika lång som våg 1, eller 0,618 gånger våg 1 + våg 3.</p><p class="act w5"><b>Gör:</b> Ta hem vinst. Köp inte nytt.</p></article><article class="wcard wa"><header><span class="wn wa">A</span><h3>Våg A: första fallet</h3></header>
+<p>Det första fallet efter toppen. Marknaden tror att det är en vanlig rekyl.</p><p class="rule"><b>Kännetecken:</b> Bryter oftast trendlinjen och 200-dagarssnittet.</p><p class="act wa"><b>Gör:</b> Undvik. Sälj det du har kvar.</p></article><article class="wcard wb"><header><span class="wn wb">B</span><h3>Våg B: falskt hopp</h3></header>
+<p>En studs som lurar många att köpa igen. Den slår sällan den förra toppen.</p><p class="rule"><b>Kännetecken:</b> Ofta 50–78,6 % av våg A.</p><p class="act wb"><b>Gör:</b> Undvik. Studsen är ett tillfälle att sälja.</p></article><article class="wcard wc"><header><span class="wn wc">C</span><h3>Våg C: den sista nedgången</h3></header>
+<p>Ett brett fall med rädsla och kapitulation. Den bästa köpzonen kommer i slutet av C.</p><p class="rule"><b>Kännetecken:</b> Ofta lika lång som A, eller slutar vid 50–61,8 % av hela förra uppgången.</p><p class="act wc"><b>Gör:</b> Köpzon när C är slut och en ny våg 1 startar.</p></article></div>
+</section>
+
+<section aria-labelledby="h-tbl">
+  <h2 id="h-tbl">Aktierna i detalj</h2>
+  <p class="small">Sorterade i den ordning de kommer i cykeln. Stopp betyder stängningskurs. Bekräftelse är nivån där vågräkningen blir tydligt rätt. Ingen bedömning bygger på analytikernas riktkurser.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Aktie</th><th>Kurs</th><th>Våg</th><th>Sannolikhet</th><th>Signal</th><th>Nivåer</th><th>Varför</th></tr></thead>
+    <tbody><tr id="k-UBER"><th scope="row">Uber<span class="sub">UBER</span></th><td class="n">70,68 USD</td>
+<td><span class="chip w1">Slut C / tidig 1</span></td><td class="n"><span class="prob"><i style="width:45%"></i></span><b>45 %</b></td>
+<td><span class="sig sig-wait">Avvakta</span></td><td>Bekräftelse &gt; 72,9 · stopp &lt; 64</td><td class="why">Trippelbotten 64–65 efter ABC. Ingen ny uppgång bekräftad.</td></tr><tr id="k-BKNG"><th scope="row">Booking<span class="sub">BKNG</span></th><td class="n">160,21 USD</td>
+<td><span class="chip w2">Slut våg 2</span></td><td class="n"><span class="prob"><i style="width:60%"></i></span><b>60 %</b></td>
+<td><span class="sig sig-buy">Köpläge</span></td><td>Bekräftelse &gt; 174,30 · stopp &lt; 146,28</td><td class="why">ABC klar nära 50 %. Första våg 1 gjord och rekylen håller.</td></tr><tr id="k-EKTAB"><th scope="row">Elekta<span class="sub">EKTA B</span></th><td class="n">61,85 kr</td>
+<td><span class="chip w2">Slut våg 2</span></td><td class="n"><span class="prob"><i style="width:55%"></i></span><b>55 %</b></td>
+<td><span class="sig sig-buy">Köp vid utbrott</span></td><td>Köp vid stängning &gt; 63,25 · stopp &lt; 59</td><td class="why">Våg 2 klar vid 76 %. Kursen står 2 % under utbrottet till våg 3.</td></tr><tr id="k-MTRS"><th scope="row">Munters<span class="sub">MTRS</span></th><td class="n">136,00 kr</td>
+<td><span class="chip w2">Våg 2 (alt. C)</span></td><td class="n"><span class="prob"><i style="width:50%"></i></span><b>50 %</b></td>
+<td><span class="sig sig-hold">Behåll, köp ej fler</span></td><td>Bekräftelse &gt; 143,9 · stopp &lt; 123,7</td><td class="why">Djup våg 2 mellan 61,8 och 78,6 %. Om det i stället är en C-våg kan kursen falla mot 111.</td></tr><tr id="k-HNSA"><th scope="row">Hansa Biopharma<span class="sub">HNSA</span></th><td class="n">48,24 kr</td>
+<td><span class="chip w3">Start våg 3</span></td><td class="n"><span class="prob"><i style="width:55%"></i></span><b>55 %</b></td>
+<td><span class="sig sig-buy">Köpläge, hög risk</span></td><td>Stopp &lt; 44,7 · FDA-beslut 19 dec</td><td class="why">Bröt toppen på våg 1 på hög volym. Binärt FDA-beslut före nyår.</td></tr><tr id="k-MYCR"><th scope="row">Mycronic<span class="sub">MYCR</span></th><td class="n">298,20 kr</td>
+<td><span class="chip w3">Tidig våg 3</span></td><td class="n"><span class="prob"><i style="width:55%"></i></span><b>55 %</b></td>
+<td><span class="sig sig-wait">Avvakta rekyl</span></td><td>Köp ≤ 285 eller &gt; 313 · stopp &lt; 250</td><td class="why">Våg 2 bottnade exakt på 50 %, men kursen har redan stigit 11 % från botten.</td></tr><tr id="k-BEIJB"><th scope="row">Beijer Ref<span class="sub">BEIJ B</span></th><td class="n">163,50 kr</td>
+<td><span class="chip w3">Mitt i våg 3</span></td><td class="n"><span class="prob"><i style="width:65%"></i></span><b>65 %</b></td>
+<td><span class="sig sig-hold">Behåll</span></td><td>Mål 173,6–178,6 · stopp &lt; 155,3</td><td class="why">Bottnarna stiger och toppen 159,6 är bruten. Blankningen är 8,3 %.</td></tr><tr id="k-SOBI"><th scope="row">Sobi<span class="sub">SOBI</span></th><td class="n">487,60 kr</td>
+<td><span class="chip w3">Våg 3, ny rekordnivå</span></td><td class="n"><span class="prob"><i style="width:65%"></i></span><b>65 %</b></td>
+<td><span class="sig sig-buy">Köpläge (trend)</span></td><td>Mål 520–540 · stopp &lt; 469</td><td class="why">Utbrott till ny rekordnivå efter en Q3 som slog förväntningarna och en höjd prognos.</td></tr><tr id="k-GOOGL"><th scope="row">Alphabet<span class="sub">GOOGL</span></th><td class="n">293,45 USD</td>
+<td><span class="chip w4">Våg 4</span></td><td class="n"><span class="prob"><i style="width:50%"></i></span><b>50 %</b></td>
+<td><span class="sig sig-hold">Behåll</span></td><td>Bekräftelse &gt; 340 · stopp &lt; 243</td><td class="why">Rekylen ligger nära 50 % av våg 3. Svagt kassaflöde.</td></tr><tr id="k-VOLVB"><th scope="row">Volvo B<span class="sub">VOLV B</span></th><td class="n">324,00 kr</td>
+<td><span class="chip w4">Slut våg 4</span></td><td class="n"><span class="prob"><i style="width:55%"></i></span><b>55 %</b></td>
+<td><span class="sig sig-buy">Köpläge</span></td><td>Bekräftelse &gt; 329,2 · stopp &lt; 300</td><td class="why">Våg 4 bottnade exakt på 50 %. P/E 13 på nästa års vinst.</td></tr><tr id="k-PRY"><th scope="row">Prysmian<span class="sub">PRY</span></th><td class="n">110,80 EUR</td>
+<td><span class="chip w4">Slut våg 4</span></td><td class="n"><span class="prob"><i style="width:60%"></i></span><b>60 %</b></td>
+<td><span class="sig sig-buy">Köpläge</span></td><td>Bekräftelse &gt; 114,9 · stopp &lt; 97</td><td class="why">Dubbelbotten på 50 % trots rekordrapport och höjd prognos.</td></tr><tr id="k-MS"><th scope="row">Morgan Stanley<span class="sub">MS</span></th><td class="n">190,61 USD</td>
+<td><span class="chip w4">Slut våg 4</span></td><td class="n"><span class="prob"><i style="width:60%"></i></span><b>60 %</b></td>
+<td><span class="sig sig-wait">Köp vid &gt; 194</span></td><td>Köp vid stängning &gt; 194 · stopp &lt; 172</td><td class="why">Dubbelbotten på 38,2 %. P/E 13,6 på nästa års vinst.</td></tr><tr id="k-TSM"><th scope="row">TSMC<span class="sub">TSM</span></th><td class="n">413,35 USD</td>
+<td><span class="chip w5">Tidig våg 5</span></td><td class="n"><span class="prob"><i style="width:60%"></i></span><b>60 %</b></td>
+<td><span class="sig sig-wait">Bekräftad, men dyr per aktie</span></td><td>Stopp &lt; 352 · mål 487</td><td class="why">Stängde över 405, så våg 5 är bekräftad. Faller i förhandeln med NVIDIA.</td></tr><tr id="k-NVDA"><th scope="row">NVIDIA<span class="sub">NVDA</span></th><td class="n">173,73 USD (förhandel 160,20)</td>
+<td><span class="chip wa">Våg A nedåt</span></td><td class="n"><span class="prob"><i style="width:55%"></i></span><b>55 %</b></td>
+<td><span class="sig sig-avoid">Undvik</span></td><td>Under 164,27 bekräftas en större korrektion</td><td class="why">Oro kring vd:n. Rapport 17 nov.</td></tr><tr id="k-NFLX"><th scope="row">Netflix<span class="sub">NFLX</span></th><td class="n">64,54 USD</td>
+<td><span class="chip wc">Slut våg C</span></td><td class="n"><span class="prob"><i style="width:50%"></i></span><b>50 %</b></td>
+<td><span class="sig sig-buy">Köpläge, nära stopp</span></td><td>Bekräftelse &gt; 66,4, sedan &gt; 72,6 · stopp &lt; 58</td><td class="why">C slutade exakt på 61,8 %. Ny högre botten och P/E 17.</td></tr></tbody>
+  </table></div>
+  <p class="small">Sannolikhetsbedömningar, inte prognoser och inte personlig rådgivning. Hansa Biopharma har ett binärt FDA-beslut 19 december, där kursen kan röra sig ±40–60 % på en dag.</p>
+</section>
+</div>
