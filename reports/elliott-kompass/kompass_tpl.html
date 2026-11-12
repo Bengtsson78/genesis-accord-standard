@@ -76,6 +76,13 @@ tbody th{font-weight:600;white-space:nowrap}
 .sig.sig-buy{color:var(--buy)}.sig.sig-hold{color:var(--hold)}.sig.sig-wait{color:var(--wait)}.sig.sig-avoid{color:var(--avoid)}
 .why{color:var(--ink2);min-width:220px}
 tr:target{background:var(--bg)}
+.opp{display:block;width:100%;min-width:760px;height:auto}
+.opp .zero{stroke:var(--ink2);stroke-width:1.5}.opp .grid{stroke:var(--rule)}
+.on{fill:var(--ink);font:600 14px var(--f-body)}.opp a:hover .on{text-decoration:underline}.os{fill:var(--ink2);font:500 11.5px var(--f-mono)}
+.bdn{fill:var(--avoid);opacity:.85}.bup{fill:var(--buy)}.bup.trigger{fill:var(--wait)}.bup.hold{fill:var(--hold)}
+.bv{fill:var(--ink);font:600 12.5px var(--f-mono)}.rr{fill:var(--ink);font:700 13px var(--f-mono)}
+table.ot{min-width:960px}.sub.up{color:var(--buy)}.sub.dn{color:var(--avoid)}
+
 a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .small{font-size:12.5px;color:var(--ink2)}
 </style>
@@ -87,6 +94,8 @@ a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-o
   <p class="lead">Varje aktie vi har pratat om står på den plats i vågcykeln där jag bedömer att den befinner sig. Procenttalet är min bedömning av hur sannolikt det är att placeringen stämmer.</p>
   <p class="stamp">Kurser: torsdag 12 nov 2026 kl. 14:27 svensk tid. Stockholm och Milano: pågående handel. USA: stängning 11 nov, med förhandelskurs inom parentes (börsen öppnar 15:30). Källa: Yahoo Finance. Stängningskurserna för USA är kontrollerade mot Alpha Vantage (Booking 160,21, Netflix 64,54) och stämmer exakt.</p>
 </header>
+
+{{OPP}}
 
 <section aria-labelledby="h-map">
   <h2 id="h-map">Var aktierna står i cykeln</h2>
