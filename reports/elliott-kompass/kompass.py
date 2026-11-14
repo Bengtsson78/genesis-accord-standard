@@ -9,39 +9,14 @@ def pt(seg,t):
     return (a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t)
 SIG={'buy':('Köpläge','sig-buy'),'hold':('Behåll','sig-hold'),'wait':('Avvakta','sig-wait'),'avoid':('Undvik','sig-avoid')}
 # name, ticker, price, wave, seg, t, prob, signal, action, levels, why
-S=[
- ('Uber','UBER','69,46 USD (−1,7 % i dag)','Slut C / tidig 1','1',0.10,45,'wait','Avvakta','Bekräftelse > 72,9 · stopp < 64','Trippelbotten 64–65 efter ABC. Ingen ny uppgång bekräftad.'),
- ('Booking','BKNG','164,09 USD (+2,4 % i dag)','Slut våg 2','2',0.86,60,'buy','Köpläge','Bekräftelse > 174,30 · mål 184 / 200–202 · varning < 152,3 · stopp < 146,28','Våg 1 146,28–174,30. Våg 2 till 156,30 (64 %) på låg volym. Mål 200–202: 1,618 × våg 1 och 61,8 % av fallet sammanfaller.'),
- ('Elekta','EKTA B','61,25 kr (−1,1 % i dag)','Slut våg 2','2',0.93,55,'buy','Köp vid utbrott','Köp > 63,25 · utbrott > 66,70 · stopp < 59 · rapport 25 nov','Book-to-bill 1,11. Ordrarna i Kina har ökat tre kvartal i rad. Högre volym 10–11 nov. Toppen på våg 1 är 66,70.'),
- ('Munters','MTRS','136,25 kr (−0,3 % i dag)','Våg 2 (alt. C)','2',0.78,50,'hold','Behåll, köp ej fler','Bekräftelse > 143,9 · stopp < 123,7','Djup våg 2 mellan 61,8 och 78,6 %. Om det i stället är en C-våg kan kursen falla mot 111.'),
- ('Hansa Biopharma','HNSA','47,04 kr (+5,0 % i dag)','Start våg 3','3',0.10,55,'buy','Köpläge, hög risk','Utbrottet gäller först vid stängning > 46,7 i dag · stopp < 44,7 · FDA 19 dec','Bröt toppen på våg 1 (46,68) efter Q3-rapporten 11 nov, kassa 1 337 MSEK. Kräver stängning över 46,7. Binärt FDA-beslut 19 dec.'),
- ('Mycronic','MYCR','295,20 kr (−2,3 % i dag)','Tidig våg 3','3',0.16,55,'wait','Avvakta rekyl','Köp ≤ 285 eller > 313 · stopp < 250','Våg 2 bottnade exakt på 50 %, men kursen har redan stigit 10 % från botten.'),
- ('Beijer Ref','BEIJ B','162,90 kr (+0,9 % i dag)','Mitt i våg 3','3',0.45,65,'hold','Behåll','Mål 173,6–178,6 · stopp < 155,3','Bottnarna stiger och toppen 159,6 är bruten. Blankningen är 8,3 %.'),
- ('Sobi','SOBI','484,80 kr (−0,1 % i dag)','Våg 3, nära rekordnivå','3',0.62,65,'buy','Köpläge (trend)','Mål 520–540 · stopp < 469','Utbrott till ny rekordnivå 498,2 efter en Q3 som slog förväntningarna och en höjd prognos.'),
- ('Alphabet','GOOGL','294,68 USD (+0,4 % i dag)','Våg 4','4',0.72,50,'hold','Behåll','Bekräftelse > 340 · stopp < 243','Rekylen ligger nära 50 % av våg 3. Svagt kassaflöde.'),
- ('Volvo B','VOLV B','322,30 kr (−0,2 % i dag)','Slut våg 4','4',0.82,55,'buy','Köpläge','Bekräftelse > 329,2 · stopp < 300','Våg 4 bottnade exakt på 50 %. P/E 13 på nästa års vinst.'),
- ('Prysmian','PRY','110,70 EUR (−0,9 % i dag)','Slut våg 4','4',0.87,60,'buy','Köpläge','Bekräftelse > 114,9 · stopp < 97','Dubbelbotten på 50 % trots rekordrapport och höjd prognos.'),
- ('Morgan Stanley','MS','189,58 USD (−0,5 % i dag)','Slut våg 4','4',0.92,60,'wait','Köp vid > 194','Köp vid stängning > 194 · stopp < 172','Dubbelbotten på 38,2 %. P/E 13,6 på nästa års vinst.'),
- ('TSMC','TSM','402,50 USD (−2,6 % i dag)','Tidig våg 5','5',0.15,55,'wait','Avvakta, för dyr per aktie','Måste hålla > 405 · stopp < 352','Stängde över 405 i går men handlas under den nivån i dag. Bekräftelsen av våg 5 är i fara.'),
- ('NVIDIA','NVDA','160,77 USD (−7,4 % i dag)','Våg A nedåt','A',0.55,60,'avoid','Undvik','Under 164,27 bekräftas en större korrektion','Oro kring vd:n. Dagslägsta 148,80, under den kritiska nivån 164,27. Rapport 17 nov.'),
- ('Netflix','NFLX','63,16 USD (−2,1 % i dag)','Slut våg C','C',0.9,50,'buy','Köpläge, nära stopp','Bekräftelse > 66,4, sedan > 72,6 · stopp < 58','C slutade exakt på 61,8 %. Ny högre botten och P/E 17.'),
-]
+S=[('Uber', 'UBER', '69,69 USD (+0,8 % fre)', 'Slut C / tidig 1', '1', 0.1, 45, 'wait', 'Avvakta', 'Bekräftelse > 72,9 · stopp < 64', 'Trippelbotten 64–65 efter ABC. Ingen ny uppgång bekräftad.'), ('Constellation', 'CEG', '280,20 USD (−0,8 % fre)', 'Slut C / tidig 1', '1', 0.2, 50, 'wait', 'Avvakta', 'Bekräftelse > 309,8 · stopp < 228,6', 'Dubbelbotten 229/231 och en stark Q3 med höjd prognos. Negativt fritt kassaflöde.'), ('Okta', 'OKTA', '182,87 USD (+0,2 % fre)', 'Våg 2', '2', 0.68, 55, 'wait', 'Avvakta', 'Köpzon 149–175 · bekräftelse > 187 · stopp < 128,5', 'Rekyl efter en våg 1 på +275 %. Dyr: P/E 40 på nästa års vinst.'), ('Munters', 'MTRS', '136,80 kr (−0,2 % fre)', 'Våg 2 (alt. C)', '2', 0.76, 50, 'hold', 'Behåll, köp ej fler', 'Bekräftelse > 143,9 · stopp < 123,7', 'Djup våg 2. Vände ned från 142,8 i veckan, strax under bekräftelsenivån.'), ('Booking', 'BKNG', '159,58 USD (−1,0 % fre)', 'Slut våg 2', '2', 0.84, 60, 'buy', 'Köpläge', 'Bekräftelse > 174,30 · mål 184 / 200–202 · varning < 152,3 · stopp < 146,28', 'Våg 2 håller över 156,30 för tredje dagen på låg volym. Mål 200–202: 1,618 × våg 1 och 61,8 % av fallet sammanfaller.'), ('Elekta', 'EKTA B', '62,40 kr (+1,4 % fre)', 'Slut våg 2', '2', 0.91, 55, 'buy', 'Köp vid utbrott', 'Köp > 63,25 · utbrott > 66,70 · stopp < 59 · rapport 25 nov', 'Book-to-bill 1,11 och ordrarna i Kina har ökat tre kvartal i rad. Stängde 62,40, strax under köpsignalen.'), ('NIBE', 'NIBE B', '46,19 kr (+2,2 % fre)', 'Slut våg 2', '2', 0.97, 50, 'buy', 'Köp vid utbrott', 'Köp vid stängning > 46,5 · stopp < 43,1 · rapport 17 nov', 'Stigande bottnar sedan nov 2025. Kursen står 0,6 % under utbrottet, och rapporten kommer på tisdag.'), ('Hansa Biopharma', 'HNSA', '46,84 kr (+1,2 % fre)', 'Start våg 3', '3', 0.07, 55, 'hold', 'Du äger: behåll', 'Stopp: stängning < 44,6 · mål 53,8 / 67,1 · FDA 19 dec', 'Stängde 46,84, precis över toppen på våg 1 (46,68). Fredagens lägsta var 42,74, så utbrottet är ännu svagt.'), ('Mycronic', 'MYCR', '290,00 kr (−2,3 % fre)', 'Tidig våg 3', '3', 0.14, 55, 'wait', 'Nära köpzon', 'Köp ≤ 285 eller > 313 · stopp < 250', 'Rekylerar mot köpnivån 285 efter studsen från 50 %-nivån.'), ('Spotify', 'SPOT', '612,63 USD (+2,4 % fre)', 'Våg 3', '3', 0.36, 60, 'wait', 'Köp på rekyl', 'Rekyl mot 571 · stopp < 538 · mål 785', 'Våg 3 efter dubbelbotten 405/411. Framåtblickande P/E 35.'), ('Beijer Ref', 'BEIJ B', '164,70 kr (+0,9 % fre)', 'Mitt i våg 3', '3', 0.47, 65, 'hold', 'Behåll', 'Sälj en del 173,6–178,6 · stopp < 155,3', 'Ny högsta stängning i uppgången. Blankningen är 8,3 %.'), ('Sobi', 'SOBI', '474,20 kr (−2,6 % fre)', 'Våg 3, rekyl', '3', 0.58, 60, 'buy', 'Köpläge (trend)', 'Mål 520–540 · stopp < 469', 'Föll 2,6 % i fredags och står nära stoppnivån. Köp bara om 469 håller.'), ('Alphabet', 'GOOGL', '295,77 USD (−1,0 % fre)', 'Våg 4', '4', 0.7, 50, 'hold', 'Behåll', 'Bekräftelse > 340 · stopp < 243', 'Rekylen ligger nära 50 % av våg 3. Svagt kassaflöde.'), ('TSMC', 'TSM', '398,73 USD (−1,7 % fre)', 'Slut våg 4', '4', 0.76, 50, 'wait', 'Avvakta', 'Våg 5 bekräftas > 413 · stopp < 352', 'Föll tillbaka under 405 efter NVIDIA-nyheten. Bekräftelsen från 11 nov höll inte.'), ('Volvo B', 'VOLV B', '323,40 kr (−0,2 % fre)', 'Slut våg 4', '4', 0.82, 55, 'buy', 'Köpläge', 'Bekräftelse > 329,2 · stopp < 300', 'Våg 4 bottnade exakt på 50 %. P/E 13 på nästa års vinst.'), ('Prysmian', 'PRY', '107,65 EUR (−2,6 % fre)', 'Slut våg 4', '4', 0.87, 60, 'buy', 'Köpläge', 'Bekräftelse > 114,9 · varning < 105,6 · stopp < 97', 'Dubbelbotten på 50 % trots rekordrapport. Rekyl 2,6 % i fredags, fortfarande över stödet 105,6.'), ('Goldman Sachs', 'GS', '916,56 USD (+0,3 % fre)', 'Slut våg 4', '4', 0.92, 60, 'wait', 'Dyr per aktie', 'Bekräftelse > 940 · stopp < 790', 'Botten på 38,2–42 %. P/E 12. En aktie kostar cirka 9 200 kr.'), ('Morgan Stanley', 'MS', '190,65 USD (+0,8 % fre)', 'Slut våg 4', '4', 0.96, 60, 'wait', 'Köp vid > 194', 'Köp vid stängning > 194 · stopp < 172', 'Dubbelbotten på 38,2 %. P/E 13,6 på nästa års vinst.'), ('NVIDIA', 'NVDA', '162,85 USD (−2,0 % fre)', 'Våg A nedåt', 'A', 0.55, 65, 'avoid', 'Undvik', 'Stängde under 164,27: större korrektion bekräftad', 'Oro kring vd:n. Dagslägsta 148,80 den 12 nov. Rapport tisdag 17 nov.'), ('Netflix', 'NFLX', '62,15 USD (−0,9 % fre)', 'Slut våg C', 'C', 0.9, 50, 'buy', 'Köpläge, nära stopp', 'Stöd 61,4 · bekräftelse > 66,4 · stopp < 58', 'Tillbaka nära botten 61,39 efter tre dagars fall. Hög volym utan ny botten.')]
 # clusters -> callout box position
-CL=[
- (['UBER'],(40,250),'1'),
- (['BKNG','EKTA B','MTRS'],(330,520),'2'),
- (['HNSA','MYCR'],(420,330),'3'),
- (['BEIJ B','SOBI'],(355,150),'3'),
- (['GOOGL','VOLV B','PRY','MS'],(700,365),'4'),
- (['TSM'],(700,40),'5'),
- (['NVDA'],(985,505),'A'),
- (['NFLX'],(1030,585),'C'),
-]
+CL=[(['UBER', 'CEG'], (30, 235), '1'), (['OKTA', 'MTRS', 'BKNG', 'EKTA B', 'NIBE B'], (300, 520), '2'), (['HNSA', 'MYCR'], (470, 400), '3'), (['SPOT', 'BEIJ B', 'SOBI'], (310, 95), '3'), (['GOOGL', 'TSM', 'VOLV B', 'PRY', 'GS', 'MS'], (765, 350), '4'), (['NVDA'], (1050, 572), 'A'), (['NFLX'], (1050, 640), 'C')]
 by={s[1]:s for s in S}
 svg=[]
-svg.append('<svg viewBox="0 0 1340 690" class="map" role="img" aria-labelledby="mt md"><title id="mt">Elliott-kartan med föreslagna aktier</title><desc id="md">Vågorna 1 till 5 och A till C med varje aktie markerad där den bedöms ligga, med sannolikhet i procent.</desc>')
-svg.append('<rect width="1340" height="690" class="bg"/>')
-for y in range(90,690,100): svg.append(f'<line x1="0" x2="1340" y1="{y}" y2="{y}" class="grid"/>')
+svg.append('<svg viewBox="0 0 1340 730" class="map" role="img" aria-labelledby="mt md"><title id="mt">Elliott-kartan med föreslagna aktier</title><desc id="md">Vågorna 1 till 5 och A till C med varje aktie markerad där den bedöms ligga, med sannolikhet i procent.</desc>')
+svg.append('<rect width="1340" height="730" class="bg"/>')
+for y in range(90,730,100): svg.append(f'<line x1="0" x2="1340" y1="{y}" y2="{y}" class="grid"/>')
 # zones
 def zone(x,y,w,h,cls,label,lx,ly):
     svg.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="14" class="zone {cls}"/><text x="{lx}" y="{ly}" class="zl {cls}-t">{label}</text>')
@@ -75,7 +50,7 @@ for ticks,(bx,by_),w in CL:
         svg.append(f'<a href="#k-{t.replace(" ","")}"><circle cx="{bx+18}" cy="{yy-5}" r="6" class="dot {sigc}"/>'
                    f'<text x="{bx+32}" y="{yy}" class="bn">{E(s[0])}</text>'
                    f'<text x="{bx+bw-14}" y="{yy}" class="bp" text-anchor="end">{s[6]} %</text></a>')
-svg.append('<text x="20" y="676" class="ax">Tid →</text><text x="1320" y="676" class="ax" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text>')
+svg.append('<text x="20" y="716" class="ax">Tid →</text><text x="1320" y="716" class="ax" text-anchor="end">Impuls 1–5 · korrektion A–B–C</text>')
 svg.append('</svg>')
 
 WAVES=[
