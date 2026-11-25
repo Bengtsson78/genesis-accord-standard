@@ -8,3 +8,9 @@ date,ticker,name,group,entry_price,currency,stop,target,note
 2026-11-25,META,Meta,B_elliott_only,589.82,USD,561,627,zone 579-584 not yet reached
 2026-11-25,TSM,TSMC,B_elliott_only,349.20,USD,319,383,zone 341-347 not yet reached
 2026-11-25,MYCR.ST,Mycronic,B_elliott_only,284.00,SEK,250,364,buy zone <=285; semis-adjacent tape weak
+2026-11-25,GTLB,GitLab,A_100-1000SEK,44.96,USD,41.9,57.97,38% retrace; RS6m +74; earnings 1 Dec; bull ext 84
+2026-11-25,CTSH,Cognizant,A_100-1000SEK,60.98,USD,54.6,73.7,38% retrace; fwdPE 9.7; bull ext 101 unlikely
+2026-11-25,APA,APA Corp,A_100-1000SEK_wait,44.91,USD,42.2,52.8,38% retrace; oil falling - wait; bull ext 70
+2026-11-25,HPQ,HP Inc,A_100-1000SEK_wait,27.94,USD,27.0,35.5,50% zone; tight stop; reported 24 Nov
+2026-11-25,ABN.AS,ABN AMRO,watch_poor_RR,37.79,EUR,30.2,43.95,at lows since high; stop 20% away
+2026-11-25,MCOV-B.ST,Medicover,watch_poor_RR,249.00,SEK,203.9,283.5,at lows since high; stop 18% away
