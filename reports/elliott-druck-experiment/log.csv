@@ -1,0 +1,10 @@
+date,ticker,name,group,entry_price,currency,stop,target,note
+2026-11-25,LMT,Lockheed Martin,A_both,586.63,USD,554,643.6,38% retrace; RS6m +15 vs S&P
+2026-11-25,ISRG,Intuitive Surgical,A_both,434.46,USD,400,482,38% retrace; healthcare inflow
+2026-11-25,SEB-A.ST,SEB A,A_both,210.60,SEK,195.5,235.9,38% retrace; RS6m +20 vs S&P
+2026-11-25,DE,Deere,A_both,613.76,USD,598,709.5,50% retrace zone; RS6m +20
+2026-11-25,NET,Cloudflare,A_both_wait,287.29,USD,272.8,318.5,38-50% zone; tech tape weak - wait for stabilisation
+2026-11-25,ASML,ASML,B_elliott_only,1336.06,USD,1266,1542,waiting zone 1325-1339; semis tape broken
+2026-11-25,META,Meta,B_elliott_only,589.82,USD,561,627,zone 579-584 not yet reached
+2026-11-25,TSM,TSMC,B_elliott_only,349.20,USD,319,383,zone 341-347 not yet reached
+2026-11-25,MYCR.ST,Mycronic,B_elliott_only,284.00,SEK,250,364,buy zone <=285; semis-adjacent tape weak
